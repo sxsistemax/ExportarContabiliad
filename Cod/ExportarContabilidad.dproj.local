@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/11/13 15:52:37.978.pas,C:\Users\Edwin\Documents\RAD Studio\Projects\Unit1.pas=C:\Prj\ExportarContabiliad\Cod\uPrincipal.pas</Transaction>
+    <Transaction>2013/11/13 15:52:37.979.dfm,C:\Users\Edwin\Documents\RAD Studio\Projects\Unit1.dfm=C:\Prj\ExportarContabiliad\Cod\uPrincipal.dfm</Transaction>
+    <Transaction>2013/11/13 15:59:17.227.dproj,C:\Users\Edwin\Documents\RAD Studio\Projects\Project1.dproj=C:\Prj\ExportarContabiliad\Cod\ExportarContabilidad.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
