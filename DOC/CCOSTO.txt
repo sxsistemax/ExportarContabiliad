@@ -1,0 +1,33 @@
+01    ADMINISTRACION                S
+0101  DIRECCION GENERAL             S
+0102  RECURSOS HUMANOS              S
+0103  CONTABILIDAD Y FINANCIERA     S
+0104  MANTENIMIENTO                 S
+0105  ADMINISTRACION GENERAL        S
+02    LAURELES                      S
+0201  ADMINISTRACION                S
+0202  SERVICIOS                     S
+0203  PRODUCCION                    S
+03    MOTA                          S
+0301  ADMINISTRACION                S
+0302  SERVICIOS                     S
+0303  PRODUCCION                    S
+04    RIONEGRO                      S
+0401  ADMINISTRACION                S
+0402  SERVICIOS                     S
+0403  PRODUCCION                    S
+05    POBLADO                       S
+0501  ADMINISTRACIÓN                S
+0502  SERVICIOS                     S
+0503  PRODUCCIÓN                    S
+06    TESORO                        S
+0601  ADMINISTRACIÓN                S
+0602  SERVICIOS                     S
+0603  PRODUCCIÓN                    S
+07    BODEGA                        S
+0701  ADMINISTRACION                S
+0703  PRODUCCION                    S
+09    DESAYUNOS                     S
+0901  ADMINISTRACION                S
+0902  SERVICIOS                     S
+0903  PRODUCCION                    S

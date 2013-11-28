@@ -1,0 +1,168 @@
+object frGenerarMovimientoContable: TfrGenerarMovimientoContable
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'Generar Movimiento Contable'
+  ClientHeight = 196
+  ClientWidth = 333
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 333
+    Height = 161
+    Align = alClient
+    BevelInner = bvLowered
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 16
+      Top = 16
+      Width = 88
+      Height = 13
+      Caption = 'Tipo Comprobante'
+    end
+    object Label2: TLabel
+      Left = 16
+      Top = 64
+      Width = 88
+      Height = 13
+      Caption = 'Tipo Comprobante'
+    end
+    object eTipoComprobante: TDBLookupComboBox
+      Left = 16
+      Top = 35
+      Width = 297
+      Height = 21
+      KeyField = 'IdTipoComprobante'
+      ListField = 'TipoComprobante'
+      ListSource = dsTiposComprobantes
+      TabOrder = 0
+    end
+    object eTipoTransaccion: TDBLookupComboBox
+      Left = 16
+      Top = 83
+      Width = 297
+      Height = 21
+      KeyField = 'IdTipoTransaccion'
+      ListField = 'TipoTransaccion'
+      ListSource = dsTipoTransaccion
+      TabOrder = 1
+    end
+    object pProgreso: TPanel
+      Left = 2
+      Top = 118
+      Width = 329
+      Height = 41
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 2
+      object lMensaje: TLabel
+        Left = 16
+        Top = -3
+        Width = 295
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+      end
+      object Progreso: TJvProgressBar
+        Left = 16
+        Top = 16
+        Width = 297
+        Height = 19
+        TabOrder = 0
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 161
+    Width = 333
+    Height = 35
+    Align = alBottom
+    BevelInner = bvLowered
+    TabOrder = 1
+    object BitBtn1: TBitBtn
+      Left = 238
+      Top = 6
+      Width = 75
+      Height = 25
+      Caption = '&Cerrar'
+      DoubleBuffered = True
+      Kind = bkClose
+      ParentDoubleBuffered = False
+      TabOrder = 0
+    end
+    object bProcesar: TBitBtn
+      Left = 157
+      Top = 6
+      Width = 75
+      Height = 25
+      Caption = 'Procesar'
+      DoubleBuffered = True
+      Glyph.Data = {
+        AA040000424DAA04000000000000360000002800000014000000130000000100
+        1800000000007404000074120000741200000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBA7956BA7956BF6636FFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFBA7956BA7956BA7956BA7956BA7956BF6636FFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBF8E
+        75BF8E75FFFFFFBA7956BA7956BA7956BA7956BA7956BF6636FFFFFFBF6636BF
+        6636D46524FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD46524D46524BF8E75BF8E75
+        D46524BA7956BA7956BA7956BA7956BA7956BF6636C3BFBDBF6636BF6636D465
+        24FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBF8E75BF8E75BF8E75BF8E75BF8E75BA
+        7956FFFFFFBA7956BA7956BF6636BF6636BF6636BF6636BF6636BF6636D46524
+        FFFFFFFFFFFFFFFFFFFFFFFFBF8E75BF8E75BF8E75BF8E75BF8E75BA7956FFFF
+        FFFFFFFFFFFFFFFFFFFFBF6636BF6636BF6636BF6636BF6636D46524FFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFBF8E75BF8E75FFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFBF6636BF6636D46524FFFFFFFFFFFFFFFFFFFFFF
+        FFC4A393C4A393C4A393FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFD46524D46524D46524FFFFFFC4A393C4A393
+        C4A393C4A393C4A393FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFD46524D46524D46524D46524D46524C4A393C4A393C4A393C4
+        A393C4A393FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFD46524D46524D46524D46524D46524C4A393C4A393C4A393C4A393C4A3
+        93FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD4
+        6524D46524D46524D46524D46524FFFFFFC4A393C4A393C4A393FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD465
+        24D46524D46524FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9B9B1C9B9B1FFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC3BFBDC3BFBDC3BFBDFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFC9B9B1C9B9B1C9B9B1C9B9B1C9B9B1C4A393FFFF
+        FFFFFFFFFFFFFFFFFFFFC9B9B1C3BFBDC3BFBDC3BFBDC3BFBDC3BFBDFFFFFFFF
+        FFFFFFFFFFFFFFFFC9B9B1C9B9B1C9B9B1C9B9B1C9B9B1C4A393FFFFFFC3BFBD
+        C3BFBDC9B9B1C9B9B1C3BFBDC3BFBDC3BFBDC3BFBDC3BFBDFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFC9B9B1C9B9B1FFFFFFC3BFBDC3BFBDC3BFBDC3BFBDC3
+        BFBDC9B9B1FFFFFFC3BFBDC3BFBDC3BFBDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFC9B9B1C9B9B1FFFFFFC3BFBDC3BFBDC3BFBDC3BFBDC3BFBDC9B9
+        B1FFFFFFC3BFBDC3BFBDC3BFBDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFC3BFBDC3BFBDC3BFBDC3BFBDC3BFBDC9B9B1FFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFC3BFBDC3BFBDC9B9B1FFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      ParentDoubleBuffered = False
+      TabOrder = 1
+      OnClick = bProcesarClick
+    end
+  end
+  object dsTiposComprobantes: TDataSource
+    AutoEdit = False
+    DataSet = dmEC.tbTiposComprobantes
+    Left = 264
+    Top = 8
+  end
+  object dsTipoTransaccion: TDataSource
+    AutoEdit = False
+    DataSet = dmEC.tbTipoTransaccion
+    Left = 352
+    Top = 8
+  end
+end
