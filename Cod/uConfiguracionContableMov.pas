@@ -21,10 +21,12 @@ type
     Label1: TLabel;
     DBEdit1: TDBEdit;
     DBText1: TDBText;
+    eIdConfiguracionContable: TDBEdit;
     procedure ConectarMaestroDetalle; override;
     procedure OcultarCamposGrid; override;
     function Validar : boolean; override;
     procedure SpeedButton1Click(Sender: TObject);
+    procedure btAceptarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,13 +44,18 @@ uses uDatosExportacion, uCuentas;
 
 { TfrConfiguracionContableMov }
 
+procedure TfrConfiguracionContableMov.btAceptarClick(Sender: TObject);
+begin
+  if dsDataSource.DataSet.State = dsInsert then
+    dsDataSource.DataSet.FieldByName('IdConfiguracionContable').Value := dmEC.SPAConfiguracionContableIdConfiguracionContable.Value;
+  inherited;
+end;
+
 procedure TfrConfiguracionContableMov.ConectarMaestroDetalle;
 begin
   inherited;
-  TDBISAMTable(dsDataSource.DataSet).MasterSource := dsMaestro;
-  TDBISAMTable(dsDataSource.DataSet).MasterFields := 'IdConfiguracionContable';
 
-///  dmEC.tbTipoOperacion.Filter := 'IdTipoComprobante = ' + IntToStr( dmEC.SPAConfiguracionContableIdTipoComprobante.Value);
+  dmEC.tbTipoOperacion.Filter := 'IdTipoComprobante = ' + IntToStr( dmEC.SPAConfiguracionContableIdTipoComprobante.Value);
   dmEC.tbTipoOperacion.Filtered := true;
 end;
 

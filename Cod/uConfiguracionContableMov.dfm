@@ -1,16 +1,16 @@
 inherited frConfiguracionContableMov: TfrConfiguracionContableMov
   BorderIcons = []
   Caption = 'Detalles'
-  ClientHeight = 377
+  ClientHeight = 333
   ClientWidth = 597
   ExplicitWidth = 613
-  ExplicitHeight = 416
+  ExplicitHeight = 372
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Top = 345
+    Top = 301
     Width = 597
-    ExplicitTop = 345
+    ExplicitTop = 301
     ExplicitWidth = 597
     inherited Panel2: TPanel
       Left = 265
@@ -19,15 +19,16 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
   end
   inherited PageControl1: TPageControl
     Width = 597
-    Height = 345
+    Height = 301
+    ActivePage = tsRegistro
     ExplicitWidth = 597
-    ExplicitHeight = 345
+    ExplicitHeight = 301
     inherited tsListado: TTabSheet
       ExplicitWidth = 589
-      ExplicitHeight = 314
+      ExplicitHeight = 270
       inherited dgGrid: TDBGrid
         Width = 589
-        Height = 288
+        Height = 244
       end
       inherited Panel3: TPanel
         Width = 589
@@ -39,28 +40,26 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
       end
     end
     inherited tsRegistro: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 27
       ExplicitWidth = 589
-      ExplicitHeight = 314
+      ExplicitHeight = 270
       inherited Bevel1: TBevel
         Width = 589
         ExplicitWidth = 589
       end
       inherited Bevel2: TBevel
-        Height = 310
+        Height = 266
         ExplicitTop = -13
         ExplicitHeight = 310
       end
       inherited Bevel3: TBevel
-        Top = 312
+        Top = 268
         Width = 589
         ExplicitTop = 217
         ExplicitWidth = 589
       end
       inherited Bevel4: TBevel
         Left = 587
-        Height = 310
+        Height = 266
         ExplicitLeft = 587
         ExplicitHeight = 215
       end
@@ -152,6 +151,7 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
         Height = 21
         DataField = 'TipoOperacion'
         DataSource = dsDataSource
+        DropDownAlign = daRight
         TabOrder = 0
       end
       object eOrigenMonto: TDBLookupComboBox
@@ -177,6 +177,7 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
           'Credito')
         ParentBackground = True
         TabOrder = 4
+        TabStop = True
         Values.Strings = (
           '1'
           '2')
@@ -191,6 +192,16 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
         TabOrder = 2
       end
     end
+  end
+  object eIdConfiguracionContable: TDBEdit [4]
+    Left = 429
+    Top = 72
+    Width = 121
+    Height = 21
+    DataField = 'IdConfiguracionContable'
+    DataSource = dsDataSource
+    TabOrder = 4
+    Visible = False
   end
   object dsMaestro: TDataSource
     AutoEdit = False

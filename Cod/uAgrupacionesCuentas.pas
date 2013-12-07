@@ -16,9 +16,11 @@ type
     SpeedButton1: TSpeedButton;
     DBText1: TDBText;
     dsMaestro: TDataSource;
+    eIdAgrupacion: TDBEdit;
     procedure SpeedButton1Click(Sender: TObject);
     procedure OcultarCamposGrid; override;
     procedure ConectarMaestroDetalle; override;
+    procedure btAceptarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,11 +53,24 @@ begin
   dgGrid.Columns[2].Visible := false;
 end;
 
+procedure TfrAgrupacionesCuentas.btAceptarClick(Sender: TObject);
+begin
+  if dsDataSource.DataSet.State = dsInsert then
+  begin
+    eIdAgrupacion.Text := IntToStr( dmEC.SPAAgrupacionesIdAgrupacion.Value);
+  end;
+  inherited;
+
+end;
+
 procedure TfrAgrupacionesCuentas.ConectarMaestroDetalle;
 begin
   inherited;
-  TDBISAMTable(dsDataSource.DataSet).MasterSource := dsMaestro;
-  TDBISAMTable(dsDataSource.DataSet).MasterFields := 'IdAgrupacion';
+  //TDBISAMTable(dsDataSource.DataSet).MasterSource := dsMaestro;
+  //TDBISAMTable(dsDataSource.DataSet).MasterFields := 'IdAgrupacion';
+  TDBISAMTable(dsDataSource.DataSet).Filtered := false;
+  TDBISAMTable(dsDataSource.DataSet).Filter := 'IdAgrupacion = ' + IntToStr( dmEC.SPAAgrupacionesIdAgrupacion.Value);
+
 end;
 
 

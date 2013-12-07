@@ -29,8 +29,6 @@ type
     CampoTerceroUsuarios: TDBComboBox;
     dgSeleccionarDiretorio: TJvSelectDirectory;
     SpeedButton1: TSpeedButton;
-    btGuardar: TBitBtn;
-    btCancelar: TBitBtn;
     pAcciones: TPanel;
     amAcciones: TActionManager;
     aImportarCuentas: TAction;
@@ -39,6 +37,12 @@ type
     aConfiguracionContable: TAction;
     DBLookupComboBox1: TDBLookupComboBox;
     aAgrupaciones: TAction;
+    Label9: TLabel;
+    CampoAgrupacionInventario: TDBComboBox;
+    Panel3: TPanel;
+    btCancelar: TBitBtn;
+    btGuardar: TBitBtn;
+    BitBtn1: TBitBtn;
     procedure SpeedButton1Click(Sender: TObject);
     procedure btGuardarClick(Sender: TObject);
     procedure btCancelarClick(Sender: TObject);
@@ -47,6 +51,7 @@ type
     procedure aConfiguracionContableExecute(Sender: TObject);
     procedure aAgrupacionesExecute(Sender: TObject);
     procedure aGenerarMovimientoContableExecute(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -93,6 +98,11 @@ begin
   ImportarCuentas;
 end;
 
+procedure TfrPrincipal.BitBtn1Click(Sender: TObject);
+begin
+  Close;
+end;
+
 procedure TfrPrincipal.btCancelarClick(Sender: TObject);
 begin
   if dsConfiguracion.State = dsEdit then
@@ -104,7 +114,6 @@ procedure TfrPrincipal.btGuardarClick(Sender: TObject);
 begin
   if dsConfiguracion.State = dsEdit then
     dsConfiguracion.DataSet.Post;
-  Close;
 end;
 
 procedure TfrPrincipal.CargarCamposComboBox(T: TDBISAMTable; var CB: TDBComboBox);
@@ -154,6 +163,12 @@ begin
     // Carga las instutuciones en el combox
     CargarCamposComboBox(dmEC.Susuarios, CampoTerceroUsuarios);
 
+    // Abre Usuarios
+    dmEC.AbrirInventario;
+
+    // Carga las instutuciones en el combox
+    CargarCamposComboBox(dmEC.Sinventario, CampoAgrupacionInventario);
+
     // Abre configuracion
     dmEC.AbrirConfiguracion;
 
@@ -179,15 +194,10 @@ begin
     100 : Begin
             pAcciones.Visible := True;
           End;
-      1 : begin
-            Self.Visible := false;
-            ImportarCuentas;
-            if not ModoPruebas then
-              Halt(1);
-          end;
+      1 : pAcciones.Visible := false;
       2 : begin
             Self.Visible := false;
-            Agrupaciones;
+            ImportarCuentas;
             if not ModoPruebas then
               Halt(1);
           end;
@@ -198,6 +208,12 @@ begin
               Halt(1);
           end;
       4 : begin
+            Self.Visible := false;
+            Agrupaciones;
+            if not ModoPruebas then
+              Halt(1);
+          end;
+      5 : begin
             Self.Visible := false;
             ProcesoGenerar;
             if not ModoPruebas then

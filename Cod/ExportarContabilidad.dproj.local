@@ -62,5 +62,6 @@
     <File Path="uPrincipal.dfm"/>
     <File Path="uGenerarMovimientoContable.pas"/>
     <File Path="uGenerarMovimientoContable.dfm"/>
+    <File Path="SMenuTerceros.Cfg"/>
   </ProjectSortOrder>
 </BorlandProject>

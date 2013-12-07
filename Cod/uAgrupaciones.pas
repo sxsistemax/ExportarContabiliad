@@ -44,6 +44,7 @@ begin
     ShowMessage('No hay registros en la tabla maestra.');
     Exit;
   end;
+
   TfrAgrupacionesCuentas.prMantenimiento(dmEC.SPAAgrupacionesCuentas, 'IdAgrupacionCuenta');
 
 end;

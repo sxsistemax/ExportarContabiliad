@@ -7,15 +7,10 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
   inherited Panel1: TPanel
     Top = 213
     ExplicitTop = 213
-    ExplicitWidth = 576
-    inherited Panel2: TPanel
-      ExplicitLeft = 244
-    end
   end
   inherited PageControl1: TPageControl
     Height = 213
     ActivePage = tsRegistro
-    ExplicitWidth = 576
     ExplicitHeight = 213
     inherited tsListado: TTabSheet
       ExplicitHeight = 182
@@ -24,9 +19,6 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
       end
     end
     inherited tsRegistro: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 27
-      ExplicitWidth = 568
       ExplicitHeight = 182
       inherited Bevel2: TBevel
         Height = 178
@@ -114,6 +106,14 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
         DataField = 'OrigenMonto'
         DataSource = dsDataSource
         TabOrder = 0
+      end
+      object eIdAgrupacion: TDBEdit
+        Left = 439
+        Top = 8
+        Width = 121
+        Height = 21
+        TabOrder = 2
+        Visible = False
       end
     end
   end

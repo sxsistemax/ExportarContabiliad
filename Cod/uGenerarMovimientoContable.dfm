@@ -4,7 +4,7 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Generar Movimiento Contable'
-  ClientHeight = 196
+  ClientHeight = 185
   ClientWidth = 333
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,10 +20,11 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
     Left = 0
     Top = 0
     Width = 333
-    Height = 161
+    Height = 150
     Align = alClient
     BevelInner = bvLowered
     TabOrder = 0
+    ExplicitHeight = 197
     object Label1: TLabel
       Left = 16
       Top = 16
@@ -34,9 +35,9 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
     object Label2: TLabel
       Left = 16
       Top = 64
-      Width = 88
+      Width = 80
       Height = 13
-      Caption = 'Tipo Comprobante'
+      Caption = 'Tipo Transacci'#243'n'
     end
     object eTipoComprobante: TDBLookupComboBox
       Left = 16
@@ -60,12 +61,13 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
     end
     object pProgreso: TPanel
       Left = 2
-      Top = 118
+      Top = 107
       Width = 329
       Height = 41
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 2
+      ExplicitTop = 154
       object lMensaje: TLabel
         Left = 16
         Top = -3
@@ -85,12 +87,13 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
   end
   object Panel2: TPanel
     Left = 0
-    Top = 161
+    Top = 150
     Width = 333
     Height = 35
     Align = alBottom
     BevelInner = bvLowered
     TabOrder = 1
+    ExplicitTop = 197
     object BitBtn1: TBitBtn
       Left = 238
       Top = 6
@@ -156,13 +159,13 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
   object dsTiposComprobantes: TDataSource
     AutoEdit = False
     DataSet = dmEC.tbTiposComprobantes
-    Left = 264
-    Top = 8
+    Left = 200
+    Top = 16
   end
   object dsTipoTransaccion: TDataSource
     AutoEdit = False
     DataSet = dmEC.tbTipoTransaccion
-    Left = 352
-    Top = 8
+    Left = 248
+    Top = 32
   end
 end

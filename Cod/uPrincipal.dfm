@@ -3,7 +3,7 @@ object frPrincipal: TfrPrincipal
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Exportar a Contabilidad'
-  ClientHeight = 393
+  ClientHeight = 422
   ClientWidth = 615
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object frPrincipal: TfrPrincipal
     Left = 0
     Top = 0
     Width = 615
-    Height = 357
+    Height = 386
     Align = alClient
     BevelInner = bvLowered
     TabOrder = 0
@@ -126,6 +126,13 @@ object frPrincipal: TfrPrincipal
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       OnClick = SpeedButton1Click
     end
+    object Label9: TLabel
+      Left = 24
+      Top = 336
+      Width = 143
+      Height = 13
+      Caption = 'Campo Agrupacion Inventario'
+    end
     object RutaExportacion: TDBEdit
       Left = 24
       Top = 107
@@ -189,39 +196,24 @@ object frPrincipal: TfrPrincipal
       DataSource = dsConfiguracion
       TabOrder = 0
     end
+    object CampoAgrupacionInventario: TDBComboBox
+      Left = 24
+      Top = 355
+      Width = 264
+      Height = 21
+      DataField = 'CampoAgruapacionInventario'
+      DataSource = dsConfiguracion
+      TabOrder = 7
+    end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 357
+    Top = 386
     Width = 615
     Height = 36
     Align = alBottom
     BevelInner = bvLowered
     TabOrder = 1
-    object btGuardar: TBitBtn
-      Left = 454
-      Top = 6
-      Width = 75
-      Height = 25
-      Caption = 'Guardar'
-      DoubleBuffered = True
-      Kind = bkOK
-      ParentDoubleBuffered = False
-      TabOrder = 0
-      OnClick = btGuardarClick
-    end
-    object btCancelar: TBitBtn
-      Left = 535
-      Top = 6
-      Width = 75
-      Height = 25
-      Caption = 'Cancelar'
-      DoubleBuffered = True
-      Kind = bkCancel
-      ParentDoubleBuffered = False
-      TabOrder = 1
-      OnClick = btCancelarClick
-    end
     object pAcciones: TPanel
       Left = 2
       Top = 2
@@ -229,7 +221,7 @@ object frPrincipal: TfrPrincipal
       Height = 32
       Align = alLeft
       BevelOuter = bvNone
-      TabOrder = 2
+      TabOrder = 0
       object ActionToolBar2: TActionToolBar
         AlignWithMargins = True
         Left = 3
@@ -249,6 +241,50 @@ object frPrincipal: TfrPrincipal
         Font.Style = []
         ParentFont = False
         Spacing = 0
+      end
+    end
+    object Panel3: TPanel
+      Left = 376
+      Top = 0
+      Width = 273
+      Height = 41
+      BevelOuter = bvNone
+      TabOrder = 1
+      object btCancelar: TBitBtn
+        Left = 82
+        Top = 6
+        Width = 75
+        Height = 25
+        Caption = 'Cancelar'
+        DoubleBuffered = True
+        Kind = bkCancel
+        ParentDoubleBuffered = False
+        TabOrder = 0
+        OnClick = btCancelarClick
+      end
+      object btGuardar: TBitBtn
+        Left = 5
+        Top = 6
+        Width = 75
+        Height = 25
+        Caption = 'Guardar'
+        DoubleBuffered = True
+        Kind = bkOK
+        ParentDoubleBuffered = False
+        TabOrder = 1
+        OnClick = btGuardarClick
+      end
+      object BitBtn1: TBitBtn
+        Left = 160
+        Top = 6
+        Width = 75
+        Height = 25
+        Caption = '&Cerrar'
+        DoubleBuffered = True
+        Kind = bkClose
+        ParentDoubleBuffered = False
+        TabOrder = 2
+        OnClick = BitBtn1Click
       end
     end
   end
@@ -281,6 +317,7 @@ object frPrincipal: TfrPrincipal
           end
           item
             Action = aGenerarMovimientoContable
+            Caption = '&Generar'
           end>
         ActionBar = ActionToolBar2
       end>

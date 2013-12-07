@@ -52,7 +52,7 @@ end;
 
 procedure TfrImportarCuentas.bImportarClick(Sender: TObject);
 begin
-  if dmEC.tbmCuentasContai.Active and (dmEC.tbmCuentasContai.RecordCount > 0) then
+  if dmEC.tbCuentasContai.Active and (dmEC.tbCuentasContai.RecordCount > 0) then
   begin
     eArchivo.Text := odArchivo.FileName;
 
@@ -89,10 +89,10 @@ begin
     Exit;
   end;
 
-  if dmEC.tbmCuentasContai.Active then
-    dmEC.tbmCuentasContai.EmptyTable
+  if dmEC.tbCuentasContai.Active then
+    dmEC.tbCuentasContai.EmptyTable
   else
-    dmEC.tbmCuentasContai.Open;
+    dmEC.tbCuentasContai.Open;
 
 
   AssignFile(F, eArchivo.Text);
@@ -101,24 +101,24 @@ begin
   Readln(F, S);
   while not eof(F)do
   begin
-    dmEC.tbmCuentasContai.Append;
+    dmEC.tbCuentasContai.Append;
 
-    dmEC.tbmCuentasContaiCuenta.Value := Copy( S, 1, 10);
-    dmEC.tbmCuentasContaiDescripcion.Value := Copy(S, 11, 30);
-    dmEC.tbmCuentasContaiManejaMovimiento.Value := Copy( S, 43, 1);
-    dmEC.tbmCuentasContaiManejaTercero.Value := Copy(S, 42, 1);
-    dmEC.tbmCuentasContaiTipoCuenta.Value := Copy(S, 41, 1);
-    dmEC.tbmCuentasContai.Post;
+    dmEC.tbCuentasContaiCuenta.Value := Copy( S, 1, 10);
+    dmEC.tbCuentasContaiDescripcion.Value := Copy(S, 11, 30);
+    dmEC.tbCuentasContaiManejaMovimiento.Value := Copy( S, 43, 1);
+    dmEC.tbCuentasContaiManejaTercero.Value := Copy(S, 42, 1);
+    dmEC.tbCuentasContaiTipoCuenta.Value := Copy(S, 41, 1);
+    dmEC.tbCuentasContai.Post;
 
-    dmEC.tbmCuentasContai.Next;
+    dmEC.tbCuentasContai.Next;
     Readln(F, S);
   end;
 
   CloseFile(F);
 
-  dmEC.tbmCuentasContai.First;
+  dmEC.tbCuentasContai.First;
 
-  dsCuentas.DataSet := dmEC.tbmCuentasContai;
+  dsCuentas.DataSet := dmEC.tbCuentasContai;
 end;
 
 procedure TfrImportarCuentas.ImportarCuentasContaI;
@@ -128,22 +128,22 @@ begin
   if not dmEC.a2CCuentas.Active then
     dmEC.a2CCuentas.Open;
 
-  dmEC.tbmCuentasContai.First;
-  while not dmEC.tbmCuentasContai.Eof do
+  dmEC.tbCuentasContai.First;
+  while not dmEC.tbCuentasContai.Eof do
   begin
     dmEC.a2CCuentas.Append;
 
-    dmEc.a2CCuentasCODIGO.Value := dmEC.tbmCuentasContaiCuenta.Value;
-    dmEc.a2CCuentasDESCRIPCION.Value := dmEC.tbmCuentasContaiDescripcion.Value;
+    dmEc.a2CCuentasCODIGO.Value := dmEC.tbCuentasContaiCuenta.Value;
+    dmEc.a2CCuentasDESCRIPCION.Value := dmEC.tbCuentasContaiDescripcion.Value;
     dmEc.a2CCuentasFECHA_APERTURA.Value := Now();
-    dmEc.a2CCuentasMOVIMIENTO.Value := dmEc.tbmCuentasContaiManejaMovimiento.Value = 'S';
-    dmEc.a2CCuentasMANEJA_CCOSTO.Value := dmEC.tbmCuentasContaiManejaCentroCostos.Value = 'S';
-    dmEc.a2CCuentasMANEJA_AUXILIAR.Value := dmEc.tbmCuentasContaiManejaTercero.Value = 'S';
-    dmEc.a2CCuentasMANEJA_BASES.Value := dmEC.tbmCuentasContaiTipoCuenta.Value = 'B';
+    dmEc.a2CCuentasMOVIMIENTO.Value := dmEc.tbCuentasContaiManejaMovimiento.Value = 'S';
+    dmEc.a2CCuentasMANEJA_CCOSTO.Value := dmEC.tbCuentasContaiManejaCentroCostos.Value = 'S';
+    dmEc.a2CCuentasMANEJA_AUXILIAR.Value := dmEc.tbCuentasContaiManejaTercero.Value = 'S';
+    dmEc.a2CCuentasMANEJA_BASES.Value := dmEC.tbCuentasContaiTipoCuenta.Value = 'B';
 
     dmEC.a2CCuentas.Post;
 
-    dmEC.tbmCuentasContai.Next;
+    dmEC.tbCuentasContai.Next;
   end;
 end;
 
