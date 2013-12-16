@@ -5,16 +5,15 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, MantenimientoSPA, DB, JvComponentBase, JvEnterTab, DBCtrls, ExtCtrls,
-  StdCtrls, Grids, DBGrids, ComCtrls, Buttons, dbisamtb, Mask;
+  StdCtrls, Grids, DBGrids, ComCtrls, Buttons, dbisamtb, Mask, JvExStdCtrls,
+  JvEdit, JvDBSearchEdit;
 
 type
   TfrConfiguracionContableMov = class(TfmBaseMantenimiento)
     dsMaestro: TDataSource;
-    Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     eCuenta: TDBEdit;
-    eTipoOperacion: TDBLookupComboBox;
     eOrigenMonto: TDBLookupComboBox;
     eTipoAsiento: TDBRadioGroup;
     SpeedButton1: TSpeedButton;
@@ -22,8 +21,10 @@ type
     DBEdit1: TDBEdit;
     DBText1: TDBText;
     eIdConfiguracionContable: TDBEdit;
-    procedure ConectarMaestroDetalle; override;
+    Label2: TLabel;
+    eSubCentroCostos: TDBEdit;
     procedure OcultarCamposGrid; override;
+    procedure ConectarMaestroDetalle; override;
     function Validar : boolean; override;
     procedure SpeedButton1Click(Sender: TObject);
     procedure btAceptarClick(Sender: TObject);
@@ -54,9 +55,9 @@ end;
 procedure TfrConfiguracionContableMov.ConectarMaestroDetalle;
 begin
   inherited;
-
-  dmEC.tbTipoOperacion.Filter := 'IdTipoComprobante = ' + IntToStr( dmEC.SPAConfiguracionContableIdTipoComprobante.Value);
-  dmEC.tbTipoOperacion.Filtered := true;
+  TDBISAMTable(dsDataSource.DataSet).Filtered := false;
+  TDBISAMTable(dsDataSource.DataSet).Filter := 'IdConfiguracionContable = ' + IntToStr( dmEC.SPAConfiguracionContableIdConfiguracionContable.Value);
+  TDBISAMTable(dsDataSource.DataSet).Filtered := True;
 end;
 
 procedure TfrConfiguracionContableMov.OcultarCamposGrid;
@@ -84,13 +85,6 @@ begin
   Result := inherited;
 
   Result := false;
-
-  if eTipoOperacion.Text = '' then
-  Begin
-    ShowMessage('Seleccione el tipo de operación.');
-    eTipoOperacion.SetFocus;
-    Exit;
-  End;
 
   if eOrigenMonto.Text = '' then
   Begin

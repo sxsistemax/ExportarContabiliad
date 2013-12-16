@@ -1,14 +1,14 @@
 object dmEC: TdmEC
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 473
-  Width = 739
+  Height = 490
+  Width = 689
   object SPAConfiguracionExportarContabilidad: TDBISAMTable
     DatabaseName = 'dbA2'
     EngineVersion = '4.29 Build 1'
     TableName = 'SPAConfiguracionExportarContabilidad'
     Left = 96
-    Top = 88
+    Top = 104
     object SPAConfiguracionExportarContabilidadModuloAExportar: TIntegerField
       FieldName = 'ModuloAExportar'
     end
@@ -38,6 +38,13 @@ object dmEC: TdmEC
     object SPAConfiguracionExportarContabilidadCampoAgruapacionInventario: TStringField
       FieldName = 'CampoAgruapacionInventario'
       Size = 50
+    end
+    object SPAConfiguracionExportarContabilidadRutaConsecutivos: TStringField
+      FieldName = 'RutaConsecutivos'
+      Size = 250
+    end
+    object SPAConfiguracionExportarContabilidadPorcentajeCREE: TFloatField
+      FieldName = 'PorcentajeCREE'
     end
   end
   object a2CCuentas: TDBISAMTable
@@ -251,7 +258,7 @@ object dmEC: TdmEC
   object tbCuentasContai: TJvMemoryData
     FieldDefs = <>
     Left = 608
-    Top = 136
+    Top = 152
     object tbCuentasContaiCuenta: TStringField
       FieldName = 'Cuenta'
       Size = 10
@@ -282,18 +289,21 @@ object dmEC: TdmEC
     EngineVersion = '4.29 Build 1'
     TableName = 'SPAMovimientoGenerado'
     Left = 200
-    Top = 64
+    Top = 80
     object SPAMovimientoGeneradoIdMovimientoGenerado: TAutoIncField
       FieldName = 'IdMovimientoGenerado'
     end
-    object SPAMovimientoGeneradoIdTipoComprobante: TSmallintField
-      FieldName = 'IdTipoComprobante'
+    object SPAMovimientoGeneradoIdConfiguracionContable: TIntegerField
+      FieldName = 'IdConfiguracionContable'
     end
-    object SPAMovimientoGeneradoIdTipoTransaccion: TSmallintField
-      FieldName = 'IdTipoTransaccion'
-    end
-    object SPAMovimientoGeneradoIdTipoOperacion: TSmallintField
+    object SPAMovimientoGeneradoIdTipoOperacion: TIntegerField
       FieldName = 'IdTipoOperacion'
+    end
+    object SPAMovimientoGeneradoIdClasificacion: TIntegerField
+      FieldName = 'IdClasificacion'
+    end
+    object SPAMovimientoGeneradoIdDocumento: TIntegerField
+      FieldName = 'IdDocumento'
     end
     object SPAMovimientoGeneradoIdOrigenMonto: TSmallintField
       FieldName = 'IdOrigenMonto'
@@ -391,7 +401,7 @@ object dmEC: TdmEC
     TableName = 'SPAConfiguracionContableMov'
     StoreDefs = True
     Left = 384
-    Top = 56
+    Top = 72
     object SPAConfiguracionContableMovIdConfiguracionContableMov: TAutoIncField
       AutoGenerateValue = arAutoInc
       FieldName = 'IdConfiguracionContableMov'
@@ -399,9 +409,6 @@ object dmEC: TdmEC
     object SPAConfiguracionContableMovIdConfiguracionContable: TIntegerField
       FieldName = 'IdConfiguracionContable'
       Required = True
-    end
-    object SPAConfiguracionContableMovIdTipoOperacion: TIntegerField
-      FieldName = 'IdTipoOperacion'
     end
     object SPAConfiguracionContableMovIdOrigenMonto: TIntegerField
       FieldName = 'IdOrigenMonto'
@@ -417,35 +424,15 @@ object dmEC: TdmEC
     object SPAConfiguracionContableMovTipoAsiento: TSmallintField
       FieldName = 'TipoAsiento'
     end
-  end
-  object tbTiposComprobantes: TJvMemoryData
-    FieldDefs = <>
-    Left = 80
-    Top = 168
-    object tbTiposComprobantesIdTipoComprobante: TIntegerField
-      FieldName = 'IdTipoComprobante'
-    end
-    object tbTiposComprobantesTipoComprobante: TStringField
-      FieldName = 'TipoComprobante'
-      Size = 40
-    end
-  end
-  object tbTipoTransaccion: TJvMemoryData
-    FieldDefs = <>
-    Left = 152
-    Top = 152
-    object tbTipoTransaccionIdTipoTransaccion: TIntegerField
-      FieldName = 'IdTipoTransaccion'
-    end
-    object tbTipoTransaccionTipoTransaccion: TStringField
-      FieldName = 'TipoTransaccion'
-      Size = 40
+    object SPAConfiguracionContableMovSubCentroCostos: TStringField
+      FieldName = 'SubCentroCostos'
+      Size = 6
     end
   end
   object tbOrigenMonto: TJvMemoryData
     FieldDefs = <>
-    Left = 280
-    Top = 152
+    Left = 248
+    Top = 168
     object tbOrigenMontoIdOrigenMonto: TSmallintField
       FieldName = 'IdOrigenMonto'
     end
@@ -456,13 +443,10 @@ object dmEC: TdmEC
   end
   object tbTipoOperacion: TJvMemoryData
     FieldDefs = <>
-    Left = 224
+    Left = 144
     Top = 168
     object tbTipoOperacionIdTipoOperacion: TSmallintField
       FieldName = 'IdTipoOperacion'
-    end
-    object tbTipoOperacionIdTipoComprobante: TSmallintField
-      FieldName = 'IdTipoComprobante'
     end
     object tbTipoOperacionTipoOperacion: TStringField
       FieldName = 'TipoOperacion'
@@ -472,7 +456,7 @@ object dmEC: TdmEC
   object tbModulos: TJvMemoryData
     FieldDefs = <>
     Left = 24
-    Top = 152
+    Top = 168
     object tbModulosIdModulo: TSmallintField
       FieldName = 'IdModulo'
     end
@@ -492,7 +476,7 @@ object dmEC: TdmEC
     TableName = 'SPAAgrupaciones'
     StoreDefs = True
     Left = 488
-    Top = 80
+    Top = 96
     object SPAAgrupacionesIdAgrupacion: TAutoIncField
       AutoGenerateValue = arAutoInc
       FieldName = 'IdAgrupacion'
@@ -518,7 +502,7 @@ object dmEC: TdmEC
     TableName = 'SPAAgrupacionesCuentas'
     StoreDefs = True
     Left = 576
-    Top = 56
+    Top = 72
     object SPAAgrupacionesCuentasIdAgrupacionCuenta: TAutoIncField
       AutoGenerateValue = arAutoInc
       FieldName = 'IdAgrupacionCuenta'
@@ -526,12 +510,22 @@ object dmEC: TdmEC
     object SPAAgrupacionesCuentasIdAgrupacion: TIntegerField
       FieldName = 'IdAgrupacion'
     end
+    object SPAAgrupacionesCuentasIdTipoOperacion: TIntegerField
+      FieldName = 'IdTipoOperacion'
+    end
+    object SPAAgrupacionesCuentasIdClasificacion: TIntegerField
+      FieldName = 'IdClasificacion'
+    end
     object SPAAgrupacionesCuentasIdOrigenMonto: TIntegerField
       FieldName = 'IdOrigenMonto'
     end
     object SPAAgrupacionesCuentasCuenta: TStringField
       FieldName = 'Cuenta'
       Size = 30
+    end
+    object SPAAgrupacionesCuentasSubCentroCostos: TStringField
+      FieldName = 'SubCentroCostos'
+      Size = 6
     end
   end
   object Susuarios: TDBISAMTable
@@ -776,23 +770,26 @@ object dmEC: TdmEC
     EngineVersion = '4.29 Build 1'
     TableName = 'SPAConfiguracionContable'
     Left = 288
-    Top = 80
+    Top = 96
     object SPAConfiguracionContableIdConfiguracionContable: TAutoIncField
       FieldName = 'IdConfiguracionContable'
-    end
-    object SPAConfiguracionContableIdTipoComprobante: TSmallintField
-      FieldName = 'IdTipoComprobante'
-    end
-    object SPAConfiguracionContableComprobante: TStringField
-      FieldName = 'Comprobante'
-      Size = 10
     end
     object SPAConfiguracionContableDescripcion: TStringField
       FieldName = 'Descripcion'
       Size = 50
     end
-    object SPAConfiguracionContableIdTipoTransaccion: TSmallintField
-      FieldName = 'IdTipoTransaccion'
+    object SPAConfiguracionContableComprobante: TStringField
+      FieldName = 'Comprobante'
+      Size = 10
+    end
+    object SPAConfiguracionContableIdTipoOperacion: TIntegerField
+      FieldName = 'IdTipoOperacion'
+    end
+    object SPAConfiguracionContableIdClasificacion: TIntegerField
+      FieldName = 'IdClasificacion'
+    end
+    object SPAConfiguracionContableIdConsecutivo: TIntegerField
+      FieldName = 'IdConsecutivo'
     end
   end
   object qrDocumentosInventario: TDBISAMQuery
@@ -1099,23 +1096,23 @@ object dmEC: TdmEC
     DatabaseName = 'dbA2'
     EngineVersion = '4.29 Build 1'
     TableName = 'SPAMovimientoTemp'
-    Left = 176
+    Left = 160
     Top = 280
     object SPAMovimientoTempIdMovimientoGenerado: TAutoIncField
       FieldName = 'IdMovimientoGenerado'
       Origin = 'SPAMovimientoTemp.IdMovimientoGenerado'
     end
-    object SPAMovimientoTempIdTipoComprobante: TSmallintField
-      FieldName = 'IdTipoComprobante'
-      Origin = 'SPAMovimientoTemp.IdTipoComprobante'
+    object SPAMovimientoTempIdConfiguracionContable: TIntegerField
+      FieldName = 'IdConfiguracionContable'
     end
-    object SPAMovimientoTempIdTipoTransaccion: TSmallintField
-      FieldName = 'IdTipoTransaccion'
-      Origin = 'SPAMovimientoTemp.IdTipoTransaccion'
-    end
-    object SPAMovimientoTempIdTipoOperacion: TSmallintField
+    object SPAMovimientoTempIdTipoOperacion: TIntegerField
       FieldName = 'IdTipoOperacion'
-      Origin = 'SPAMovimientoTemp.IdTipoOperacion'
+    end
+    object SPAMovimientoTempIdClasificacion: TIntegerField
+      FieldName = 'IdClasificacion'
+    end
+    object SPAMovimientoTempIdDocumento: TIntegerField
+      FieldName = 'IdDocumento'
     end
     object SPAMovimientoTempIdOrigenMonto: TSmallintField
       FieldName = 'IdOrigenMonto'
@@ -1178,14 +1175,12 @@ object dmEC: TdmEC
     EngineVersion = '4.29 Build 1'
     SQL.Strings = (
       'SELECT'
-      '  SPAConfiguracionContable.IdTipoComprobante,'
       '  SPAConfiguracionContable.Comprobante,'
-      '  SPAConfiguracionContable.IdTipoTransaccion,'
-      '  SPAConfiguracionContableMov.IdTipoOperacion,'
       '  SPAConfiguracionContableMov.IdOrigenMonto,'
       '  SPAConfiguracionContableMov.Detalle,'
       '  SPAConfiguracionContableMov.CuentaGeneral,'
-      '  SPAConfiguracionContableMov.TipoAsiento'
+      '  SPAConfiguracionContableMov.TipoAsiento,'
+      '  SPAConfiguracionContableMov.SubCentroCostos'
       'FROM'
       ' SPAConfiguracionContable'
       
@@ -1194,64 +1189,24 @@ object dmEC: TdmEC
         'guracionContable)'
       'WHERE'
       
-        '  (SPAConfiguracionContable.IdTipoComprobante = :IdTipoComproban' +
-        'te) AND'
-      
-        '  (SPAConfiguracionContable.IdTipoTransaccion = :IdTipoTransacci' +
-        'on) AND'
-      
-        '  (SPAConfiguracionContableMov.IdTipoOperacion = :IdTipoOperacio' +
-        'n)')
+        '  (SPAConfiguracionContable.IdConfiguracionContable = :IdConfigu' +
+        'racionContable)')
     Params = <
       item
-        DataType = ftInteger
-        Name = 'IdTipoComprobante'
-        Value = 0
-      end
-      item
-        DataType = ftInteger
-        Name = 'IdTipoTransaccion'
-        Value = 0
-      end
-      item
-        DataType = ftInteger
-        Name = 'IdTipoOperacion'
-        Value = 0
+        DataType = ftUnknown
+        Name = 'IdConfiguracionContable'
       end>
     Left = 56
     Top = 352
     ParamData = <
       item
-        DataType = ftInteger
-        Name = 'IdTipoComprobante'
-        Value = 0
-      end
-      item
-        DataType = ftInteger
-        Name = 'IdTipoTransaccion'
-        Value = 0
-      end
-      item
-        DataType = ftInteger
-        Name = 'IdTipoOperacion'
-        Value = 0
+        DataType = ftUnknown
+        Name = 'IdConfiguracionContable'
       end>
-    object qrCodificacionGeneralIdTipoComprobante: TSmallintField
-      FieldName = 'IdTipoComprobante'
-      Origin = 'SPAConfiguracionContable.IdTipoComprobante'
-    end
     object qrCodificacionGeneralComprobante: TStringField
       FieldName = 'Comprobante'
       Origin = 'SPAConfiguracionContable.Comprobante'
       Size = 10
-    end
-    object qrCodificacionGeneralIdTipoTransaccion: TSmallintField
-      FieldName = 'IdTipoTransaccion'
-      Origin = 'SPAConfiguracionContable.IdTipoTransaccion'
-    end
-    object qrCodificacionGeneralIdTipoOperacion: TIntegerField
-      FieldName = 'IdTipoOperacion'
-      Origin = 'SPAConfiguracionContableMov.IdTipoOperacion'
     end
     object qrCodificacionGeneralIdOrigenMonto: TIntegerField
       FieldName = 'IdOrigenMonto'
@@ -1271,6 +1226,10 @@ object dmEC: TdmEC
       FieldName = 'TipoAsiento'
       Origin = 'SPAConfiguracionContableMov.TipoAsiento'
     end
+    object qrCodificacionGeneralSubCentroCostos: TStringField
+      FieldName = 'SubCentroCostos'
+      Size = 6
+    end
   end
   object qrConsulta: TDBISAMQuery
     DatabaseName = 'dbA2'
@@ -1278,7 +1237,344 @@ object dmEC: TdmEC
     SQL.Strings = (
       'delete from SPAMovimientoTemp')
     Params = <>
-    Left = 296
-    Top = 232
+    Left = 144
+    Top = 352
+  end
+  object dbConsecutivos: TDBISAMDatabase
+    EngineVersion = '4.29 Build 1'
+    Connected = True
+    DatabaseName = 'dbConsecutivos'
+    SessionName = 'Default'
+    Left = 392
+    Top = 176
+  end
+  object SPAConsecutivos: TDBISAMTable
+    DatabaseName = 'dbConsecutivos'
+    EngineVersion = '4.29 Build 1'
+    TableName = 'SPAConsecutivos'
+    Left = 360
+    Top = 280
+    object SPAConsecutivosIdConsecutivo: TAutoIncField
+      FieldName = 'IdConsecutivo'
+    end
+    object SPAConsecutivosDescripcion: TStringField
+      FieldName = 'Descripcion'
+      Size = 50
+    end
+    object SPAConsecutivosUltimoNumero: TIntegerField
+      FieldName = 'UltimoNumero'
+    end
+  end
+  object a2CCostos: TDBISAMTable
+    DatabaseName = 'dbA2'
+    EngineVersion = '4.29 Build 1'
+    TableName = 'a2CCostos'
+    Left = 304
+    Top = 16
+    object a2CCostosCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Required = True
+      Size = 30
+    end
+    object a2CCostosDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Required = True
+      Size = 40
+    end
+    object a2CCostosTIPO: TSmallintField
+      FieldName = 'TIPO'
+    end
+    object a2CCostosCGRUPO: TStringField
+      FieldName = 'CGRUPO'
+      Size = 30
+    end
+    object a2CCostosCSUBGRUPO: TStringField
+      FieldName = 'CSUBGRUPO'
+      Size = 30
+    end
+    object a2CCostosMANEJA_PRESUPUESTO: TBooleanField
+      FieldName = 'MANEJA_PRESUPUESTO'
+    end
+    object a2CCostosMOVIMIENTO: TBooleanField
+      FieldName = 'MOVIMIENTO'
+    end
+    object a2CCostosREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+      Size = 30
+    end
+    object a2CCostosSTATUS: TBooleanField
+      FieldName = 'STATUS'
+    end
+    object a2CCostosFLAG: TStringField
+      FieldName = 'FLAG'
+      Size = 1
+    end
+    object a2CCostosBASE_AUTOINCREMENT: TAutoIncField
+      FieldName = 'BASE_AUTOINCREMENT'
+    end
+  end
+  object SPACuentasxCentro: TDBISAMTable
+    DatabaseName = 'dbA2'
+    EngineVersion = '4.29 Build 1'
+    TableName = 'SPACuentasxCentro'
+    Left = 256
+    Top = 256
+    object SPACuentasxCentroIdCuentasxCentro: TAutoIncField
+      FieldName = 'IdCuentasxCentro'
+    end
+    object SPACuentasxCentroIdConfiguracionContable: TAutoIncField
+      FieldName = 'IdConfiguracionContable'
+    end
+    object SPACuentasxCentroIdOrigenMonto: TIntegerField
+      FieldName = 'IdOrigenMonto'
+    end
+    object SPACuentasxCentroCentroCostos: TStringField
+      FieldName = 'CentroCostos'
+      Size = 30
+    end
+    object SPACuentasxCentroCuenta: TStringField
+      FieldName = 'Cuenta'
+      Size = 30
+    end
+    object SPACuentasxCentroNombreCentroCostos: TStringField
+      FieldKind = fkLookup
+      FieldName = 'NombreCentroCostos'
+      LookupDataSet = a2CCostos
+      LookupKeyFields = 'CODIGO'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'CentroCostos'
+      Size = 40
+      Lookup = True
+    end
+  end
+  object SPAClasificacionCuentas: TDBISAMTable
+    DatabaseName = 'dbA2'
+    EngineVersion = '4.29 Build 1'
+    TableName = 'SPAClasificacionCuentas'
+    Left = 456
+    Top = 264
+    object SPAClasificacionCuentasIdClasificacionCuenta: TAutoIncField
+      FieldName = 'IdClasificacionCuenta'
+    end
+    object SPAClasificacionCuentasIdConfiguracionContable: TAutoIncField
+      FieldName = 'IdConfiguracionContable'
+    end
+    object SPAClasificacionCuentasIdOrigenMonto: TIntegerField
+      FieldName = 'IdOrigenMonto'
+    end
+    object SPAClasificacionCuentasIdClasificacion: TStringField
+      DisplayWidth = 10
+      FieldName = 'IdClasificacion'
+      Size = 10
+    end
+    object SPAClasificacionCuentasClasificacion: TStringField
+      FieldKind = fkLookup
+      FieldName = 'Clasificacion'
+      LookupDataSet = Sclasificacion
+      LookupKeyFields = 'FCL_CODIGO'
+      LookupResultField = 'FCL_NOMBRE'
+      KeyFields = 'IdClasificacion'
+      Size = 40
+      Lookup = True
+    end
+    object SPAClasificacionCuentasCuenta: TStringField
+      FieldName = 'Cuenta'
+      Size = 30
+    end
+  end
+  object Sclasificacion: TDBISAMTable
+    DatabaseName = 'dbA2'
+    EngineVersion = '4.29 Build 1'
+    TableName = 'Sclasificacion'
+    Left = 384
+    Top = 16
+    object SclasificacionFCL_CODIGO: TAutoIncField
+      FieldName = 'FCL_CODIGO'
+    end
+    object SclasificacionFCL_NOMBRE: TStringField
+      FieldName = 'FCL_NOMBRE'
+      Size = 40
+    end
+    object SclasificacionFCL_DESCRIPCION: TMemoField
+      FieldName = 'FCL_DESCRIPCION'
+      BlobType = ftMemo
+    end
+    object SclasificacionFCL_TIPO: TIntegerField
+      FieldName = 'FCL_TIPO'
+    end
+  end
+  object qrCompras: TDBISAMQuery
+    DatabaseName = 'dbA2'
+    EngineVersion = '4.29 Build 1'
+    SQL.Strings = (
+      'SELECT'
+      '  SOperacionInv.FTI_DOCUMENTO AS Documento,'
+      '  SOperacionInv.FTI_FECHAEMISION AS Fecha,'
+      '  SOperacionInv.FTI_TOTALCOSTO AS TotalCosto,'
+      '  SOperacionInv.FTI_TOTALCOSTOREAL AS TotalCostoReal,'
+      '  SOperacionInv.FTI_TOTALBRUTO AS TotalBruto,'
+      '  SOperacionInv.FTI_DESCUENTO1MONTO AS Descuento1,'
+      '  SOperacionInv.FTI_DESCUENTO2MONTO AS Descuento2,'
+      '  SOperacionInv.FTI_BASEIMPONIBLE AS BaseImpuesto,'
+      '  SOperacionInv.FTI_IMPUESTO1MONTO AS Impuesto,'
+      '  SOperacionInv.FTI_TOTALNETO AS TotalNeto,'
+      '  SOperacionInv.FTI_RESPONSABLE AS Nit,'
+      '  SOperacionInv.FTI_PERSONACONTACTO AS Contacto,'
+      '  SOperacionInv.FTI_TELEFONOCONTACTO AS Telefono,'
+      '  SOperacionInv.FTI_SALDOOPERACION AS SaldoOperacion,'
+      '  SOperacionInv.FTI_FORMADEPAGO AS FormaPago,'
+      '  SOperacionInv.FTI_FLETEMONEDA AS Flete,'
+      '  SOperacionInv.FTI_MONTOPAGADO AS MontoPagado,'
+      '  SDetalleCompra.FDI_CANTIDAD AS Cantidad,'
+      '  SDetalleCompra.FDI_PRECIOCONDESCUENTO AS Costo,'
+      
+        '  SDetalleCompra.FDI_CANTIDAD * SDetalleCompra.FDI_PRECIOCONDESC' +
+        'UENTO AS TotalItem,'
+      '  SOperacionInv.FTI_CTOCOSTO AS CCosto,'
+      '  SDetalleCompra.FDI_MONTOIMPUESTO1 AS Impuesto1,'
+      
+        '  SDetalleCompra.FDI_CANTIDAD * SDetalleCompra.FDI_MONTOIMPUESTO' +
+        '1 AS TotalImpuestoItem,'
+      '  SDetalleCompra.FDI_MONTOIMPUESTO2 AS Impuesto2,'
+      
+        '  SDetalleCompra.FDI_CANTIDAD * SDetalleCompra.FDI_MONTOIMPUESTO' +
+        '2 AS TotalImpuesto2Item,'
+      '  :IdAgrupacion AS IdAgrupacion,'
+      '  SOperacionInv.FTI_AUTOINCREMENT AS IdDocumento'
+      'FROM'
+      ' SDetalleCompra'
+      
+        ' INNER JOIN Sinventario ON (SDetalleCompra.FDI_CODIGO=Sinventari' +
+        'o.FI_CODIGO)'
+      
+        ' INNER JOIN SOperacionInv ON (SOperacionInv.FTI_AUTOINCREMENT=SD' +
+        'etalleCompra.FDI_OPERACION_AUTOINCREMENT)'
+      
+        ' LEFT OUTER JOIN SPAMovimientoGenerado ON (SOperacionInv.FTI_AUT' +
+        'OINCREMENT=SPAMovimientoGenerado.IdDocumento)'
+      
+        '  AND (SOperacionInv.FTI_TIPO=SPAMovimientoGenerado.IdTipoOperac' +
+        'ion)'
+      
+        '  AND (SOperacionInv.FTI_CLASIFICACION=SPAMovimientoGenerado.IdC' +
+        'lasificacion)'
+      'WHERE'
+      '  (SOperacionInv.FTI_STATUS = 1) AND'
+      '  (SPAMovimientoGenerado.IdMovimientoGenerado IS NULL) AND'
+      '  (SOperacionInv.FTI_TIPO = :IdTipoOperacion) AND'
+      '  (SOperacionInv.FTI_CLASIFICACION = :IdClasificacion)   AND'
+      '  (SOperacionInv.FTI_FECHAEMISION <= :FechaCorte)')
+    Params = <
+      item
+        DataType = ftString
+        Name = 'IdAgrupacion'
+        Value = 'Sinventario.FI_SUSTITUTO4'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdTipoOperacion'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdClasificacion'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FechaCorte'
+      end>
+    Left = 16
+    Top = 424
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'IdAgrupacion'
+        Value = 'Sinventario.FI_SUSTITUTO4'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdTipoOperacion'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdClasificacion'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FechaCorte'
+      end>
+  end
+  object qrMovimientoTemporal: TDBISAMQuery
+    DatabaseName = 'dbA2'
+    EngineVersion = '4.29 Build 1'
+    SQL.Strings = (
+      'SELECT'
+      '  SPAMovimientoTemp.IdConfiguracionContable,'
+      '  SPAMovimientoTemp.IdTipoOperacion,'
+      '  SPAMovimientoTemp.IdClasificacion,'
+      '  SPAMovimientoTemp.IdDocumento,'
+      '  SPAMovimientoTemp.IdOrigenMonto,'
+      '  SPAMovimientoTemp.Cuenta,'
+      '  SPAMovimientoTemp.Comprobante,'
+      '  SPAMovimientoTemp.Fecha,'
+      '  SPAMovimientoTemp.Documento,'
+      '  SPAMovimientoTemp.DocumentoRef,'
+      '  SPAMovimientoTemp.Nit,'
+      '  SPAMovimientoTemp.Detalle,'
+      '  SPAMovimientoTemp.Tipo,'
+      '  SUM(SPAMovimientoTemp.Valor) AS Valor,'
+      '  SPAMovimientoTemp.CCosto,'
+      '  SUM(SPAMovimientoTemp.Base) AS Base'
+      'FROM'
+      ' SPAMovimientoTemp'
+      
+        ' INNER JOIN SPAConfiguracionContable ON (SPAMovimientoTemp.IdCon' +
+        'figuracionContable=SPAConfiguracionContable.IdConfiguracionConta' +
+        'ble)'
+      
+        '  AND (SPAMovimientoTemp.IdTipoOperacion=SPAConfiguracionContabl' +
+        'e.IdTipoOperacion)'
+      
+        '  AND (SPAConfiguracionContable.IdClasificacion=SPAMovimientoTem' +
+        'p.IdClasificacion)'
+      'WHERE'
+      
+        '  (SPAMovimientoTemp.IdConfiguracionContable = :IdConfiguracionC' +
+        'ontable) AND'
+      '  (SPAMovimientoTemp.IdDocumento = :IdDocumento)'
+      'GROUP BY'
+      '  SPAMovimientoTemp.IdConfiguracionContable,'
+      '  SPAMovimientoTemp.IdTipoOperacion,'
+      '  SPAMovimientoTemp.IdClasificacion,'
+      '  SPAMovimientoTemp.IdDocumento,'
+      '  SPAMovimientoTemp.IdOrigenMonto,'
+      '  SPAMovimientoTemp.Cuenta,'
+      '  SPAMovimientoTemp.Comprobante,'
+      '  SPAMovimientoTemp.Fecha,'
+      '  SPAMovimientoTemp.Documento,'
+      '  SPAMovimientoTemp.DocumentoRef,'
+      '  SPAMovimientoTemp.Nit,'
+      '  SPAMovimientoTemp.Detalle,'
+      '  SPAMovimientoTemp.Tipo,'
+      '  SPAMovimientoTemp.CCosto')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'IdConfiguracionContable'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdDocumento'
+      end>
+    Left = 120
+    Top = 424
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'IdConfiguracionContable'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdDocumento'
+      end>
   end
 end

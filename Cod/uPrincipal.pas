@@ -43,6 +43,12 @@ type
     btCancelar: TBitBtn;
     btGuardar: TBitBtn;
     BitBtn1: TBitBtn;
+    RutaConsecutivos: TDBEdit;
+    Label10: TLabel;
+    SpeedButton2: TSpeedButton;
+    aConsecutivos: TAction;
+    Label11: TLabel;
+    PorcentajeCREE: TDBEdit;
     procedure SpeedButton1Click(Sender: TObject);
     procedure btGuardarClick(Sender: TObject);
     procedure btCancelarClick(Sender: TObject);
@@ -52,6 +58,8 @@ type
     procedure aAgrupacionesExecute(Sender: TObject);
     procedure aGenerarMovimientoContableExecute(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure aConsecutivosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,6 +68,7 @@ type
     procedure ConfiguracionContable;
     procedure Agrupaciones;
     procedure ProcesoGenerar;
+    procedure Consecutivos;
   end;
 
 var
@@ -69,7 +78,7 @@ implementation
 
 uses uDatosExportacion, uBaseDatosA2, uTablasConBlobAdministrativo, uUtilidadesSPA,
   uImportarCuentas, uCuentas, uConfiguracionContable, uAgrupaciones,
-  uGenerarMovimientoContable;
+  uGenerarMovimientoContable, uConsecutivos, uCentrosCuentas;
 
 {$R *.dfm}
 
@@ -81,6 +90,11 @@ end;
 procedure TfrPrincipal.aConfiguracionContableExecute(Sender: TObject);
 begin
   ConfiguracionContable;
+end;
+
+procedure TfrPrincipal.aConsecutivosExecute(Sender: TObject);
+begin
+  Consecutivos;
 end;
 
 procedure TfrPrincipal.aGenerarMovimientoContableExecute(Sender: TObject);
@@ -107,7 +121,6 @@ procedure TfrPrincipal.btCancelarClick(Sender: TObject);
 begin
   if dsConfiguracion.State = dsEdit then
     dsConfiguracion.DataSet.Cancel;
-  Close;
 end;
 
 procedure TfrPrincipal.btGuardarClick(Sender: TObject);
@@ -130,6 +143,11 @@ end;
 procedure TfrPrincipal.ConfiguracionContable;
 begin
   TfrConfiguracionContable.prMantenimiento(dmEC.SPAConfiguracionContable, 'IdConfiguracionContable');
+end;
+
+procedure TfrPrincipal.Consecutivos;
+begin
+  TfrConsecutivos.prMantenimiento(dmEC.SPAConsecutivos, 'IdConsecutivo');
 end;
 
 procedure TfrPrincipal.FormCreate(Sender: TObject);
@@ -176,11 +194,14 @@ begin
     dmEC.SPAConfiguracionExportarContabilidad.Edit;
 
     // Crea las tablas del sistema
+    dmEC.AbrirSPAConsecutivos;
     dmEC.AbrirSPAConfiguracionContable;
     dmEC.AbrirSPAConfiguracionContableMov;
     dmEC.AbrirSPAAgrupaciones;
     dmEC.AbrirSPAAgrupacionesCuentas;
     dmEC.AbrirSPAMovimientoGenerado;
+    dmEC.AbrirSPACuentasCentros;
+    dmEC.AbrirSPAClasificacionCuentas;
   End
   Else
   begin
@@ -219,6 +240,12 @@ begin
             if not ModoPruebas then
               Halt(1);
           end;
+      6 : begin
+            Self.Visible := false;
+            Consecutivos;
+            if not ModoPruebas then
+              Halt(1);
+          end;
     else  begin
             ShowMessage('La opción no esta implementada.');
             halt(1);
@@ -236,6 +263,14 @@ begin
   if dgSeleccionarDiretorio.Execute then
   begin
     RutaExportacion.Text := dgSeleccionarDiretorio.Directory;
+  end;
+end;
+
+procedure TfrPrincipal.SpeedButton2Click(Sender: TObject);
+begin
+  if dgSeleccionarDiretorio.Execute then
+  begin
+    RutaConsecutivos.Text := dgSeleccionarDiretorio.Directory;
   end;
 end;
 

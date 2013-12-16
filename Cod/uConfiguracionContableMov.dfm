@@ -1,5 +1,4 @@
 inherited frConfiguracionContableMov: TfrConfiguracionContableMov
-  BorderIcons = []
   Caption = 'Detalles'
   ClientHeight = 333
   ClientWidth = 597
@@ -30,16 +29,18 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
         Width = 589
         Height = 244
       end
-      inherited Panel3: TPanel
+      inherited pBusqueda: TPanel
         Width = 589
         ExplicitWidth = 589
         inherited Panel4: TPanel
-          Left = 402
-          ExplicitLeft = 402
+          Left = 400
+          ExplicitLeft = 400
         end
       end
     end
     inherited tsRegistro: TTabSheet
+      ExplicitLeft = 3
+      ExplicitTop = 25
       ExplicitWidth = 589
       ExplicitHeight = 270
       inherited Bevel1: TBevel
@@ -63,31 +64,24 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
         ExplicitLeft = 587
         ExplicitHeight = 215
       end
-      object Label2: TLabel
-        Left = 16
-        Top = 32
-        Width = 73
-        Height = 13
-        Caption = 'Tipo Operacion'
-      end
       object Label3: TLabel
         Left = 16
-        Top = 72
+        Top = 8
         Width = 64
         Height = 13
         Caption = 'Origen Monto'
       end
       object Label4: TLabel
         Left = 16
-        Top = 155
+        Top = 91
         Width = 74
         Height = 13
         Caption = 'Cuenta General'
         FocusControl = eCuenta
       end
       object SpeedButton1: TSpeedButton
-        Left = 199
-        Top = 173
+        Left = 195
+        Top = 109
         Width = 23
         Height = 22
         Glyph.Data = {
@@ -121,51 +115,49 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
       end
       object Label1: TLabel
         Left = 16
-        Top = 112
+        Top = 48
         Width = 33
         Height = 13
         Caption = 'Detalle'
         FocusControl = DBEdit1
       end
       object DBText1: TDBText
-        Left = 228
-        Top = 177
+        Left = 224
+        Top = 113
         Width = 333
         Height = 17
         DataField = 'NombreCuenta'
         DataSource = dsDataSource
       end
+      object Label2: TLabel
+        Left = 16
+        Top = 195
+        Width = 88
+        Height = 13
+        Caption = 'Sub Centro Costos'
+        FocusControl = btAceptar
+      end
       object eCuenta: TDBEdit
         Left = 16
-        Top = 174
+        Top = 110
         Width = 177
         Height = 21
         DataField = 'CuentaGeneral'
         DataSource = dsDataSource
-        TabOrder = 3
-      end
-      object eTipoOperacion: TDBLookupComboBox
-        Left = 16
-        Top = 45
-        Width = 205
-        Height = 21
-        DataField = 'TipoOperacion'
-        DataSource = dsDataSource
-        DropDownAlign = daRight
-        TabOrder = 0
+        TabOrder = 2
       end
       object eOrigenMonto: TDBLookupComboBox
         Left = 16
-        Top = 85
+        Top = 21
         Width = 253
         Height = 21
         DataField = 'OrigenMonto'
         DataSource = dsDataSource
-        TabOrder = 1
+        TabOrder = 0
       end
       object eTipoAsiento: TDBRadioGroup
         Left = 16
-        Top = 201
+        Top = 137
         Width = 185
         Height = 51
         Caption = ' Tipo Asiento '
@@ -176,7 +168,7 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
           'Debito'
           'Credito')
         ParentBackground = True
-        TabOrder = 4
+        TabOrder = 3
         TabStop = True
         Values.Strings = (
           '1'
@@ -184,24 +176,33 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
       end
       object DBEdit1: TDBEdit
         Left = 16
-        Top = 128
+        Top = 64
         Width = 394
         Height = 21
         DataField = 'Detalle'
         DataSource = dsDataSource
-        TabOrder = 2
+        TabOrder = 1
+      end
+      object eIdConfiguracionContable: TDBEdit
+        Left = 357
+        Top = 21
+        Width = 121
+        Height = 21
+        DataField = 'IdConfiguracionContable'
+        DataSource = dsDataSource
+        TabOrder = 4
+        Visible = False
+      end
+      object eSubCentroCostos: TDBEdit
+        Left = 16
+        Top = 214
+        Width = 177
+        Height = 21
+        DataField = 'SubCentroCostos'
+        DataSource = dsDataSource
+        TabOrder = 5
       end
     end
-  end
-  object eIdConfiguracionContable: TDBEdit [4]
-    Left = 429
-    Top = 72
-    Width = 121
-    Height = 21
-    DataField = 'IdConfiguracionContable'
-    DataSource = dsDataSource
-    TabOrder = 4
-    Visible = False
   end
   object dsMaestro: TDataSource
     AutoEdit = False

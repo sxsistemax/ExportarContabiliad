@@ -1,35 +1,39 @@
 inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
   Caption = 'Cuentas para las agrupaciones'
-  ClientHeight = 245
-  ExplicitHeight = 284
+  ClientHeight = 326
+  ExplicitWidth = 592
+  ExplicitHeight = 365
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Top = 213
-    ExplicitTop = 213
+    Top = 294
+    ExplicitTop = 294
   end
   inherited PageControl1: TPageControl
-    Height = 213
+    Height = 294
     ActivePage = tsRegistro
-    ExplicitHeight = 213
+    ExplicitHeight = 294
     inherited tsListado: TTabSheet
-      ExplicitHeight = 182
+      ExplicitHeight = 263
       inherited dgGrid: TDBGrid
-        Height = 156
+        Height = 237
       end
     end
     inherited tsRegistro: TTabSheet
-      ExplicitHeight = 182
+      ExplicitLeft = 4
+      ExplicitTop = 27
+      ExplicitWidth = 568
+      ExplicitHeight = 263
       inherited Bevel2: TBevel
-        Height = 178
+        Height = 259
         ExplicitHeight = 178
       end
       inherited Bevel3: TBevel
-        Top = 180
+        Top = 261
         ExplicitTop = 180
       end
       inherited Bevel4: TBevel
-        Height = 178
+        Height = 259
         ExplicitHeight = 178
       end
       object Label1: TLabel
@@ -41,7 +45,7 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
       end
       object Label2: TLabel
         Left = 8
-        Top = 54
+        Top = 150
         Width = 34
         Height = 13
         Caption = 'Cuenta'
@@ -49,7 +53,7 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
       end
       object SpeedButton1: TSpeedButton
         Left = 215
-        Top = 70
+        Top = 166
         Width = 23
         Height = 22
         Glyph.Data = {
@@ -83,15 +87,37 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
       end
       object DBText1: TDBText
         Left = 244
-        Top = 73
+        Top = 169
         Width = 316
         Height = 17
         DataField = 'NombreCuenta'
         DataSource = dsDataSource
       end
+      object Label5: TLabel
+        Left = 8
+        Top = 54
+        Width = 73
+        Height = 13
+        Caption = 'Tipo Operacion'
+      end
+      object Label6: TLabel
+        Left = 8
+        Top = 102
+        Width = 59
+        Height = 13
+        Caption = 'Clasificaci'#243'n'
+      end
+      object Label3: TLabel
+        Left = 8
+        Top = 195
+        Width = 88
+        Height = 13
+        Caption = 'Sub Centro Costos'
+        FocusControl = btAceptar
+      end
       object eCuenta: TDBEdit
         Left = 8
-        Top = 70
+        Top = 166
         Width = 199
         Height = 21
         DataField = 'Cuenta'
@@ -112,8 +138,37 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
         Top = 8
         Width = 121
         Height = 21
+        DataField = 'IdAgrupacion'
+        DataSource = dsDataSource
         TabOrder = 2
         Visible = False
+      end
+      object eTipoOperacion: TDBLookupComboBox
+        Left = 8
+        Top = 73
+        Width = 241
+        Height = 21
+        DataField = 'TipoOperacion'
+        DataSource = dsDataSource
+        TabOrder = 3
+      end
+      object eClasificacion: TDBLookupComboBox
+        Left = 8
+        Top = 121
+        Width = 241
+        Height = 21
+        DataField = 'Clasificacion'
+        DataSource = dsDataSource
+        TabOrder = 4
+      end
+      object eSubCentroCostos: TDBEdit
+        Left = 8
+        Top = 214
+        Width = 177
+        Height = 21
+        DataField = 'SubCentroCostos'
+        DataSource = dsDataSource
+        TabOrder = 5
       end
     end
   end
@@ -123,6 +178,7 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
   object dsMaestro: TDataSource
     AutoEdit = False
     DataSet = dmEC.SPAAgrupaciones
-    Left = 224
+    Left = 312
+    Top = 40
   end
 end

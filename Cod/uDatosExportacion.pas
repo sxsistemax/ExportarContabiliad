@@ -8,13 +8,12 @@ uses
 
 type
   tModulos = (moContai);
-  tTiposTransaccion = (ttTodas, ttContado, ttCredito);
   tTiposComprobantes = (tcNinguno, tcInventario, tcCompras, tcVentas,
     tcCuentasxPagar, tcCuentasxCobrar);
-  tOrigenMonto = (cmNinguno, omMontoBruto, omComprasGravadas, omComprasExentas,
+  tOrigenMonto = (cmNinguno, omValorBruto, omValorGrabado, omValorExento,
     omDescuento1, omDescuento2, omFleteCompra, omIva1, omIva2,
-    omSaldoOperacion, omTotalCancelado, omFormaPago, omDiferenciaAFavor,
-    omDiferenciaEnContra, omDecuentoParcial);
+    omSaldoOperacion, omValorCancelado, omDiferenciaAFavor,
+    omDiferenciaEnContra, omCree, omRetencionEnFormasPago);
   tTipoConsultas = (tcBorrarCuentas, tcMovimientoTemporal,
     tcBorrarMovimientoTemporal);
 
@@ -115,23 +114,15 @@ type
     SPAConfiguracionContableMov: TDBISAMTable;
     SPAConfiguracionContableMovIdConfiguracionContable: TIntegerField;
     SPAConfiguracionContableMovIdConfiguracionContableMov: TAutoIncField;
-    SPAConfiguracionContableMovIdTipoOperacion: TIntegerField;
     SPAConfiguracionContableMovIdOrigenMonto: TIntegerField;
     SPAConfiguracionContableMovDetalle: TStringField;
     SPAConfiguracionContableMovCuentaGeneral: TStringField;
     SPAConfiguracionContableMovTipoAsiento: TSmallintField;
-    tbTiposComprobantes: TJvMemoryData;
-    tbTiposComprobantesIdTipoComprobante: TIntegerField;
-    tbTiposComprobantesTipoComprobante: TStringField;
-    tbTipoTransaccion: TJvMemoryData;
-    tbTipoTransaccionIdTipoTransaccion: TIntegerField;
-    tbTipoTransaccionTipoTransaccion: TStringField;
     tbOrigenMonto: TJvMemoryData;
     tbOrigenMontoIdOrigenMonto: TSmallintField;
     tbOrigenMontoOrigenMonto: TStringField;
     tbTipoOperacion: TJvMemoryData;
     tbTipoOperacionIdTipoOperacion: TSmallintField;
-    tbTipoOperacionIdTipoComprobante: TSmallintField;
     tbTipoOperacionTipoOperacion: TStringField;
     tbModulos: TJvMemoryData;
     tbModulosIdModulo: TSmallintField;
@@ -213,11 +204,6 @@ type
     SPAConfiguracionContableIdConfiguracionContable: TAutoIncField;
     SPAConfiguracionContableComprobante: TStringField;
     SPAConfiguracionContableDescripcion: TStringField;
-    SPAConfiguracionContableIdTipoTransaccion: TSmallintField;
-    SPAConfiguracionContableIdTipoComprobante: TSmallintField;
-    SPAMovimientoGeneradoIdTipoComprobante: TSmallintField;
-    SPAMovimientoGeneradoIdTipoTransaccion: TSmallintField;
-    SPAMovimientoGeneradoIdTipoOperacion: TSmallintField;
     SPAMovimientoGeneradoIdOrigenMonto: TSmallintField;
     SPAMovimientoGeneradoIdMovimientoGenerado: TAutoIncField;
     qrDocumentosInventario: TDBISAMQuery;
@@ -302,9 +288,6 @@ type
     SPAAgrupacionesCuentasCuenta: TStringField;
     SPAMovimientoTemp: TDBISAMTable;
     SPAMovimientoTempIdMovimientoGenerado: TAutoIncField;
-    SPAMovimientoTempIdTipoComprobante: TSmallintField;
-    SPAMovimientoTempIdTipoTransaccion: TSmallintField;
-    SPAMovimientoTempIdTipoOperacion: TSmallintField;
     SPAMovimientoTempIdOrigenMonto: TSmallintField;
     SPAMovimientoTempCuenta: TStringField;
     SPAMovimientoTempComprobante: TStringField;
@@ -318,19 +301,73 @@ type
     SPAMovimientoTempBase: TFloatField;
     SPAMovimientoTempCCosto: TStringField;
     qrCodificacionGeneral: TDBISAMQuery;
-    qrCodificacionGeneralIdTipoComprobante: TSmallintField;
     qrCodificacionGeneralComprobante: TStringField;
-    qrCodificacionGeneralIdTipoTransaccion: TSmallintField;
-    qrCodificacionGeneralIdTipoOperacion: TIntegerField;
     qrCodificacionGeneralIdOrigenMonto: TIntegerField;
     qrCodificacionGeneralDetalle: TStringField;
     qrCodificacionGeneralCuentaGeneral: TStringField;
     qrCodificacionGeneralTipoAsiento: TSmallintField;
     qrConsulta: TDBISAMQuery;
+    dbConsecutivos: TDBISAMDatabase;
+    SPAConfiguracionExportarContabilidadRutaConsecutivos: TStringField;
+    SPAConsecutivos: TDBISAMTable;
+    SPAConsecutivosIdConsecutivo: TAutoIncField;
+    SPAConfiguracionContableIdClasificacion: TIntegerField;
+    SPAConsecutivosDescripcion: TStringField;
+    SPAConfiguracionContableIdConsecutivo: TIntegerField;
+    a2CCostos: TDBISAMTable;
+    a2CCostosCODIGO: TStringField;
+    a2CCostosDESCRIPCION: TStringField;
+    a2CCostosTIPO: TSmallintField;
+    a2CCostosCGRUPO: TStringField;
+    a2CCostosCSUBGRUPO: TStringField;
+    a2CCostosMANEJA_PRESUPUESTO: TBooleanField;
+    a2CCostosMOVIMIENTO: TBooleanField;
+    a2CCostosREFERENCIA: TStringField;
+    a2CCostosSTATUS: TBooleanField;
+    a2CCostosFLAG: TStringField;
+    a2CCostosBASE_AUTOINCREMENT: TAutoIncField;
+    SPACuentasxCentro: TDBISAMTable;
+    SPAAgrupacionesCuentasIdClasificacion: TIntegerField;
+    SPAAgrupacionesCuentasIdTipoOperacion: TIntegerField;
+    SPAConfiguracionExportarContabilidadPorcentajeCREE: TFloatField;
+    SPACuentasxCentroIdConfiguracionContable: TAutoIncField;
+    SPACuentasxCentroIdCuentasxCentro: TAutoIncField;
+    SPACuentasxCentroIdOrigenMonto: TIntegerField;
+    SPACuentasxCentroCuenta: TStringField;
+    SPAClasificacionCuentas: TDBISAMTable;
+    SPAClasificacionCuentasIdClasificacionCuenta: TAutoIncField;
+    SPAClasificacionCuentasIdConfiguracionContable: TAutoIncField;
+    SPAClasificacionCuentasIdOrigenMonto: TIntegerField;
+    SPAClasificacionCuentasCuenta: TStringField;
+    SPAConfiguracionContableIdTipoOperacion: TIntegerField;
+    Sclasificacion: TDBISAMTable;
+    SclasificacionFCL_CODIGO: TAutoIncField;
+    SclasificacionFCL_NOMBRE: TStringField;
+    SclasificacionFCL_DESCRIPCION: TMemoField;
+    SclasificacionFCL_TIPO: TIntegerField;
+    SPACuentasxCentroCentroCostos: TStringField;
+    SPACuentasxCentroNombreCentroCostos: TStringField;
+    SPAClasificacionCuentasIdClasificacion: TStringField;
+    SPAClasificacionCuentasClasificacion: TStringField;
+    SPAMovimientoGeneradoIdConfiguracionContable: TIntegerField;
+    SPAMovimientoTempIdConfiguracionContable: TIntegerField;
+    SPAMovimientoGeneradoIdDocumento: TIntegerField;
+    SPAMovimientoTempIdDocumento: TIntegerField;
+    qrCompras: TDBISAMQuery;
+    SPAMovimientoTempIdTipoOperacion: TIntegerField;
+    SPAMovimientoTempIdClasificacion: TIntegerField;
+    SPAMovimientoGeneradoIdTipoOperacion: TIntegerField;
+    SPAMovimientoGeneradoIdClasificacion: TIntegerField;
+    qrMovimientoTemporal: TDBISAMQuery;
+    SPAConfiguracionContableMovSubCentroCostos: TStringField;
+    SPAAgrupacionesCuentasSubCentroCostos: TStringField;
+    qrCodificacionGeneralSubCentroCostos: TStringField;
+    SPAConsecutivosUltimoNumero: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
     FMensaje: TLabel;
+    FProgreso: TJvProgressBar;
   public
     { Public declarations }
     procedure AbrirConfiguracion;
@@ -342,23 +379,24 @@ type
     procedure AbrirSPAAgrupaciones;
     procedure AbrirSPAAgrupacionesCuentas;
     procedure AbrirSPAMovimientoGenerado;
+    procedure AbrirSPAConsecutivos;
+    procedure AbrirSPACuentasCentros;
+    Procedure AbrirSPAClasificacionCuentas;
     procedure ProcesarComprobante(P: TJvProgressBar; L: TLabel;
-      IdTipoComprobante, IdTipoTransaccion: SmallInt);
-    procedure ProcesarCompras(P: TJvProgressBar;
-      IdTipoComprobante, IdTipoTransaccion, IdTipoOperacion: SmallInt);
+      IdConfiguracionContable: SmallInt; FechaCorte : string);
+    procedure ProcesarCompras(IdConfiguracionContable, IdTipoOperacion, IdClasificacion, IdConsecutivo: SmallInt; FechaCorte : String);
     procedure PonerMensaje(S: string);
     function BuscarCuentaAgrupacion(IdAgrupacion, IdOrigenMonto: integer;
-      Cuenta: string): string;
-    procedure CargarCodifcacionGeneral(IdTipoComprobante, IdTipoTransaccion,
-      IdTipoOperacion: integer);
-    procedure CargarConsultaOperacionsInv(IdTipoComprobante, IdTipoTransaccion,
-      IdTipoOperacion: integer);
-    procedure InsertarRegistroTemporal(IdTipoComprobante, IdTipoTransaccion,
-      IdTipoOperacion, IdOrigenMonto: integer; Cuenta, Comprobante: string;
+      Cuenta: string; var SubCentroCosto : string): string;
+    procedure CargarCodifcacionGeneral(IdConfiguracionContable : integer);
+    procedure CargarConsultaOperacionsInv(IdTipoOperacion, IdClasificacion: integer; FechaCorte : string);
+    procedure InsertarRegistroTemporal(MovimientoUnico: boolean; IdConfiguracionContable, IdTipoOperacion,
+      IdClasificacion, IdDocumento, IdOrigenMonto: integer; Cuenta, Comprobante: string;
       Fecha: TDate; Documento, DocumentoRef, Nit, Detalle: string;
       Tipo: integer; Valor, Base: Double; CCosto: String);
-    procedure MoverTemporalAGenerado;
-    procedure EjecutarConsulta(IdTipoConsulta: tTipoConsultas);
+    procedure MoverTemporalAGenerado( IdConfiguracionContable, IdDocumento : integer);
+    procedure EjecutarConsulta(IdTipoConsulta: tTipoConsultas; IdConfiguracionContable, IdDocumento : integer);
+    function CargarConsecutivo( IdConsecutivo : integer):string;
   end;
 
 var
@@ -381,134 +419,25 @@ begin
   end;
 
   try
-    tbTiposComprobantes.Open;
-
-    tbTiposComprobantes.Append;
-    tbTiposComprobantesIdTipoComprobante.Value := 0;
-    tbTiposComprobantesTipoComprobante.Value := '';
-
-    tbTiposComprobantes.Append;
-    tbTiposComprobantesIdTipoComprobante.Value := 1;
-    tbTiposComprobantesTipoComprobante.Value := 'Inventario';
-
-    tbTiposComprobantes.Append;
-    tbTiposComprobantesIdTipoComprobante.Value := 2;
-    tbTiposComprobantesTipoComprobante.Value := 'Compras';
-
-    tbTiposComprobantes.Append;
-    tbTiposComprobantesIdTipoComprobante.Value := 3;
-    tbTiposComprobantesTipoComprobante.Value := 'Ventas';
-
-    tbTiposComprobantes.Append;
-    tbTiposComprobantesIdTipoComprobante.Value := 4;
-    tbTiposComprobantesTipoComprobante.Value := 'Cuentas x Pagar';
-
-    tbTiposComprobantes.Append;
-    tbTiposComprobantesIdTipoComprobante.Value := 5;
-    tbTiposComprobantesTipoComprobante.Value := 'Cuentas x Cobrar';
-    tbTiposComprobantes.Post;
-
-  except
-
-  end;
-
-  try
-    tbTipoTransaccion.Open;
-
-    tbTipoTransaccion.Append;
-    tbTipoTransaccionIdTipoTransaccion.Value := 0;
-    tbTipoTransaccionTipoTransaccion.Value := 'Todas';
-
-    tbTipoTransaccion.Append;
-    tbTipoTransaccionIdTipoTransaccion.Value := 1;
-    tbTipoTransaccionTipoTransaccion.Value := 'Contado';
-
-    tbTipoTransaccion.Append;
-    tbTipoTransaccionIdTipoTransaccion.Value := 2;
-    tbTipoTransaccionTipoTransaccion.Value := 'Crédito';
-    tbTipoTransaccion.Post;
-  except
-  end;
-
-  try
     tbTipoOperacion.Open;
 
     tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 1;
-    tbTipoOperacionIdTipoOperacion.Value := 1;
-    tbTipoOperacionTipoOperacion.Value := 'Traslados';
 
     tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 1;
-    tbTipoOperacionIdTipoOperacion.Value := 2;
-    tbTipoOperacionTipoOperacion.Value := 'Cargos';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 1;
-    tbTipoOperacionIdTipoOperacion.Value := 3;
-    tbTipoOperacionTipoOperacion.Value := 'Descargos';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 1;
-    tbTipoOperacionIdTipoOperacion.Value := 4;
-    tbTipoOperacionTipoOperacion.Value := 'Ajustes';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 0;
-    tbTipoOperacionIdTipoOperacion.Value := 5;
-    tbTipoOperacionTipoOperacion.Value := 'Ordenes de Compra';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 2;
-    tbTipoOperacionIdTipoOperacion.Value := 6;
+    tbTipoOperacionIdTipoOperacion.Value := Integer(toiCompras);
     tbTipoOperacionTipoOperacion.Value := 'Compras';
 
     tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 2;
-    tbTipoOperacionIdTipoOperacion.Value := 7;
+    tbTipoOperacionIdTipoOperacion.Value := Integer(toiDevoluciónCompras);
     tbTipoOperacionTipoOperacion.Value := 'Devolución de Compras';
 
     tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 0;
-    tbTipoOperacionIdTipoOperacion.Value := 8;
-    tbTipoOperacionTipoOperacion.Value := 'Notas de Entregas en Compra';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 0;
-    tbTipoOperacionIdTipoOperacion.Value := 9;
-    tbTipoOperacionTipoOperacion.Value := 'Presupuestos';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 0;
-    tbTipoOperacionIdTipoOperacion.Value := 10;
-    tbTipoOperacionTipoOperacion.Value := 'Pedidos';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 4;
-    tbTipoOperacionIdTipoOperacion.Value := 11;
+    tbTipoOperacionIdTipoOperacion.Value := Integer(toiFacturas);
     tbTipoOperacionTipoOperacion.Value := 'Facturas';
 
     tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 4;
-    tbTipoOperacionIdTipoOperacion.Value := 12;
+    tbTipoOperacionIdTipoOperacion.Value := Integer(toiDevoluciónVentas);
     tbTipoOperacionTipoOperacion.Value := 'Devolución de Ventas';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 0;
-    tbTipoOperacionIdTipoOperacion.Value := 13;
-    tbTipoOperacionTipoOperacion.Value := 'Notas de Entregas de Ventas';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 4;
-    tbTipoOperacionIdTipoOperacion.Value := 14;
-    tbTipoOperacionTipoOperacion.Value := 'Apartados';
-
-    tbTipoOperacion.Append;
-    tbTipoOperacionIdTipoComprobante.Value := 0;
-    tbTipoOperacionIdTipoOperacion.Value := 23;
-    tbTipoOperacionTipoOperacion.Value := 'Ordenes de Servicios';
-    tbTipoOperacion.Post;
-
   except
   end;
 
@@ -516,60 +445,52 @@ begin
     tbOrigenMonto.Open;
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 1;
-    tbOrigenMontoOrigenMonto.Value := 'Monto Bruto';
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omValorBruto);
+    tbOrigenMontoOrigenMonto.Value := 'Valor Bruto';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 2;
-    tbOrigenMontoOrigenMonto.Value := 'Compras Gravadas';
-
-    tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 3;
-    tbOrigenMontoOrigenMonto.Value := 'Compras Exentas';
-
-    tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 4;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omDescuento1);
     tbOrigenMontoOrigenMonto.Value := 'Descuento 1';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 5;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omDescuento2);
     tbOrigenMontoOrigenMonto.Value := 'Descuento 2';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 6;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omFleteCompra);
     tbOrigenMontoOrigenMonto.Value := 'Flete en Compra';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 7;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omIva1);
     tbOrigenMontoOrigenMonto.Value := 'Iva 1';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 8;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omIva2);
     tbOrigenMontoOrigenMonto.Value := 'Iva 2';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 9;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omSaldoOperacion);
     tbOrigenMontoOrigenMonto.Value := 'Saldo Operación';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 10;
-    tbOrigenMontoOrigenMonto.Value := 'Total Cancelado';
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omValorCancelado);
+    tbOrigenMontoOrigenMonto.Value := 'Valor Cancelado';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 11;
-    tbOrigenMontoOrigenMonto.Value := 'Forma de Pago';
-
-    tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 12;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omDiferenciaAFavor);
     tbOrigenMontoOrigenMonto.Value := 'Diferencia a Favor';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 13;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omDiferenciaEnContra);
     tbOrigenMontoOrigenMonto.Value := 'Diferencia en Contra';
 
     tbOrigenMonto.Append;
-    tbOrigenMontoIdOrigenMonto.Value := 14;
-    tbOrigenMontoOrigenMonto.Value := 'Decuento Parcial';
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omCree);
+    tbOrigenMontoOrigenMonto.Value := 'Retención CREE';
+
+    tbOrigenMonto.Append;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omRetencionEnFormasPago);
+    tbOrigenMontoOrigenMonto.Value := 'Retención en Formas de Pago';
 
     tbOrigenMonto.Post;
 
@@ -577,19 +498,29 @@ begin
   end;
 end;
 
-procedure TdmEC.InsertarRegistroTemporal(IdTipoComprobante, IdTipoTransaccion,
-  IdTipoOperacion, IdOrigenMonto: integer; Cuenta, Comprobante: string;
-  Fecha: TDate; Documento, DocumentoRef, Nit, Detalle: string; Tipo: integer;
-  Valor, Base: Double; CCosto: String);
+procedure TdmEC.InsertarRegistroTemporal(MovimientoUnico: boolean; IdConfiguracionContable, IdTipoOperacion,
+      IdClasificacion, IdDocumento, IdOrigenMonto: integer; Cuenta, Comprobante: string;
+      Fecha: TDate; Documento, DocumentoRef, Nit, Detalle: string;
+      Tipo: integer; Valor, Base: Double; CCosto: String);
 begin
   // valida que no se inserte un valor en 0 con base
-  if ( Valor = 0) and ( Base <> 0)  then
+  if (Valor = 0) and (Base <> 0) then
     exit;
 
+  if MovimientoUnico and 
+    SPAMovimientoTemp.Locate('IdConfiguracionContable;IdTipoOperacion;IdClasificacion;IdDocumento;IdOrigenMonto', 
+        varArrayOf( [IdConfiguracionContable, 
+                    IdTipoOperacion, 
+                    IdClasificacion, 
+                    IdDocumento, 
+                    IdOrigenMonto]), []) then
+    Exit;
+        
   SPAMovimientoTemp.Insert;
-  SPAMovimientoTempIdTipoComprobante.Value := IdTipoComprobante;
-  SPAMovimientoTempIdTipoTransaccion.Value := IdTipoTransaccion;
+  SPAMovimientoTempIdConfiguracionContable.Value := IdConfiguracionContable;
   SPAMovimientoTempIdTipoOperacion.Value := IdTipoOperacion;
+  SPAMovimientoTempIdClasificacion.Value := IdClasificacion;
+  SPAMovimientoTempIdDocumento.Value := IdDocumento;
   SPAMovimientoTempIdOrigenMonto.Value := IdOrigenMonto;
   SPAMovimientoTempCuenta.Value := Cuenta;
   SPAMovimientoTempComprobante.Value := Comprobante;
@@ -605,21 +536,23 @@ begin
   SPAMovimientoTemp.Post;
 end;
 
-procedure TdmEC.MoverTemporalAGenerado;
+procedure TdmEC.MoverTemporalAGenerado( IdConfiguracionContable, IdDocumento : integer);
 begin
   // Llama la consulta general
-  EjecutarConsulta(tcMovimientoTemporal);
+  EjecutarConsulta(tcMovimientoTemporal, IdConfiguracionContable, IdDocumento);
 
   qrConsulta.First;
   while not qrConsulta.Eof do
   begin
     SPAMovimientoGenerado.Insert;
-    SPAMovimientoGeneradoIdTipoComprobante.Value := qrConsulta.FieldByName
-      ('IdTipoComprobante').Value;
-    SPAMovimientoGeneradoIdTipoTransaccion.Value := qrConsulta.FieldByName
-      ('IdTipoTransaccion').Value;
+    SPAMovimientoGeneradoIdConfiguracionContable.Value := qrConsulta.FieldByName
+      ('IdConfiguracionContable').Value;
     SPAMovimientoGeneradoIdTipoOperacion.Value := qrConsulta.FieldByName
       ('IdTipoOperacion').Value;
+    SPAMovimientoGeneradoIdClasificacion.Value := qrConsulta.FieldByName
+      ('IdClasificacion').Value;
+    SPAMovimientoGeneradoIdDocumento.Value := qrConsulta.FieldByName
+      ('IdDocumento').Value;
     SPAMovimientoGeneradoIdOrigenMonto.Value := qrConsulta.FieldByName
       ('IdOrigenMonto').Value;
     SPAMovimientoGeneradoCuenta.Value := qrConsulta.FieldByName('Cuenta').Value;
@@ -634,14 +567,18 @@ begin
     SPAMovimientoGeneradoDetalle.Value := qrConsulta.FieldByName('Detalle')
       .Value;
     SPAMovimientoGeneradoTipo.Value := qrConsulta.FieldByName('Tipo').Value;
-    SPAMovimientoGeneradoValor.Value := Trunc( qrConsulta.FieldByName('Valor').Value);
-    SPAMovimientoGeneradoBase.Value := Trunc( qrConsulta.FieldByName('Base').Value);
-    SPAMovimientoGeneradoCCosto.Value := VarToStr( qrConsulta.FieldByName('CCosto').Value);
+    SPAMovimientoGeneradoValor.Value := Trunc
+      (qrConsulta.FieldByName('Valor').Value);
+    SPAMovimientoGeneradoBase.Value := Trunc
+      (qrConsulta.FieldByName('Base').Value);
+    SPAMovimientoGeneradoCCosto.Value := VarToStr
+      (qrConsulta.FieldByName('CCosto').Value);
     SPAMovimientoGeneradoExportado.Value := False;
     SPAMovimientoGenerado.Post;
     qrConsulta.Next;
   end;
-  EjecutarConsulta(tcBorrarMovimientoTemporal);
+  
+  EjecutarConsulta(tcBorrarMovimientoTemporal, IdConfiguracionContable, IdDocumento);
 
 end;
 
@@ -652,31 +589,30 @@ begin
 end;
 
 procedure TdmEC.ProcesarComprobante(P: TJvProgressBar; L: TLabel;
-  IdTipoComprobante, IdTipoTransaccion: SmallInt);
+  IdConfiguracionContable: SmallInt; FechaCorte : string);
+var
+  IdTipoOperacion,
+  IdConsecutivo,
+  IdClasificacion : integer;
+
+
 begin
   FMensaje := L;
-  case tTiposComprobantes(IdTipoComprobante) of
-    tcInventario:
-      begin
+  FProgreso := P;
 
-      end;
-    tcCompras:
-      begin
-        ProcesarCompras(P, IdTipoComprobante, IdTipoTransaccion,
-          integer(toiCompras));
-      end;
-    tcVentas:
-      begin
+  if SPAConfiguracionContable.Locate('IdConfiguracionContable', IdConfiguracionContable, [] ) then
+  begin
+    IdTipoOperacion := SPAConfiguracionContableIdTipoOperacion.Value;
+    IdClasificacion := SPAConfiguracionContableIdClasificacion.Value;
+    IdConsecutivo   := SPAConfiguracionContableIdConsecutivo.Value;
 
-      end;
-    tcCuentasxPagar:
-      begin
-
-      end;
-    tcCuentasxCobrar:
-      begin
-
-      end;
+    case tTransaccionesOperacionesInv(IdTipoOperacion) of
+      toiCompras, toiDevoluciónCompras :
+        begin
+          ProcesarCompras(IdConfiguracionContable, IdTipoOperacion, IdClasificacion, IdConsecutivo, FechaCorte);
+        end;
+    end;
+      
   end;
 end;
 
@@ -700,14 +636,26 @@ begin
       + SPAAgrupacionesCuentas.TableName + '.dat') then
     SPAAgrupacionesCuentas.CreateTable();
 
-  // NombreCuenta
+  // Tipo Comprobante
   C := TStringField.Create(SPAAgrupacionesCuentas);
-  C.Name := 'SPAAgrupacionesCuentasNombreCuenta';
-  C.FieldName := 'NombreCuenta';
-  C.KeyFields := 'Cuenta';
-  C.LookupDataSet := dmEC.a2CCuentas;
-  C.LookupKeyFields := 'Codigo';
-  C.LookupResultField := 'Descripcion';
+  C.Name := 'SPAAgrupacionesCuentasTipoOperacion';
+  C.FieldName := 'TipoOperacion';
+  C.KeyFields := 'IdTipoOperacion';
+  C.LookupDataSet := tbTipoOperacion;
+  C.LookupKeyFields := 'IdTipoOperacion';
+  C.LookupResultField := 'TipoOperacion';
+  C.FieldKind := fkLookup;
+  C.Dataset := SPAAgrupacionesCuentas;
+
+
+  // Clasificacion
+  C := TStringField.Create(SPAAgrupacionesCuentas);
+  C.Name := 'SPAAgrupacionesCuentasClasificacion';
+  C.FieldName := 'Clasificacion';
+  C.KeyFields := 'IdClasificacion';
+  C.LookupDataSet := Sclasificacion;
+  C.LookupKeyFields := 'FCL_CODIGO';
+  C.LookupResultField := 'FCL_NOMBRE';
   C.FieldKind := fkLookup;
   C.Dataset := SPAAgrupacionesCuentas;
 
@@ -719,6 +667,17 @@ begin
   C.LookupDataSet := tbOrigenMonto;
   C.LookupKeyFields := 'IdOrigenMonto';
   C.LookupResultField := 'OrigenMonto';
+  C.FieldKind := fkLookup;
+  C.Dataset := SPAAgrupacionesCuentas;
+
+  // NombreCuenta
+  C := TStringField.Create(SPAAgrupacionesCuentas);
+  C.Name := 'SPAAgrupacionesCuentasNombreCuenta';
+  C.FieldName := 'NombreCuenta';
+  C.KeyFields := 'Cuenta';
+  C.LookupDataSet := dmEC.a2CCuentas;
+  C.LookupKeyFields := 'Codigo';
+  C.LookupResultField := 'Descripcion';
   C.FieldKind := fkLookup;
   C.Dataset := SPAAgrupacionesCuentas;
 
@@ -758,9 +717,50 @@ begin
   if SPAConfiguracionExportarContabilidad.RecordCount = 0 then
   begin
     SPAConfiguracionExportarContabilidad.Insert;
+    SPAConfiguracionExportarContabilidadRutaConsecutivos.Value := dmBasesDatos.dbA2.Directory;
+    SPAConfiguracionExportarContabilidadRutaExportacion.Value := ParamStr(0);
     SPAConfiguracionExportarContabilidad.Post;
   end;
 
+end;
+
+procedure TdmEC.AbrirSPAClasificacionCuentas;
+var
+  C: TStringField;
+begin
+  try
+    // Si no existe el erachivo debe crearlo
+    if Not FileExists(IncludeTrailingPathDelimiter(dmBasesDatos.dbA2.Directory)
+        + SPAClasificacionCuentas.TableName + '.dat') then
+      SPAClasificacionCuentas.CreateTable();
+
+    // NombreCuenta
+    C := TStringField.Create(SPAClasificacionCuentas);
+    C.Name := 'SPAClasificacionCuentasNombreCuenta';
+    C.FieldName := 'NombreCuenta';
+    C.KeyFields := 'Cuenta';
+    C.LookupDataSet := dmEC.a2CCuentas;
+    C.LookupKeyFields := 'Codigo';
+    C.LookupResultField := 'Descripcion';
+    C.FieldKind := fkLookup;
+    C.Dataset := SPAClasificacionCuentas;
+
+    // Origen Movimiento
+    C := TStringField.Create(SPAClasificacionCuentas);
+    C.Name := 'SPAClasificacionCuentasOrigenMonto';
+    C.FieldName := 'OrigenMonto';
+    C.KeyFields := 'IdOrigenMonto';
+    C.LookupDataSet := tbOrigenMonto;
+    C.LookupKeyFields := 'IdOrigenMonto';
+    C.LookupResultField := 'OrigenMonto';
+    C.FieldKind := fkLookup;
+    C.Dataset := SPAClasificacionCuentas;
+
+    // Abre el archivo
+    SPAClasificacionCuentas.Open;
+  except  on E: Exception do
+    ShowMessage('Acurrió un error abriendo la tabla SPAClasificacionCuentas. \n' + E.Message);
+  end;
 end;
 
 procedure TdmEC.AbrirSPAConfiguracionContable;
@@ -777,23 +777,35 @@ begin
 
     // Tipo Comprobante
     C := TStringField.Create(SPAConfiguracionContable);
-    C.Name := 'SPAConfiguracionContableTipoComprobante';
-    C.FieldName := 'TipoComprobante';
-    C.KeyFields := 'IdTipoComprobante';
-    C.LookupDataSet := tbTiposComprobantes;
-    C.LookupKeyFields := 'IdTipoComprobante';
-    C.LookupResultField := 'TipoComprobante';
+    C.Name := 'SPAConfiguracionContableTipoOperacion';
+    C.FieldName := 'TipoOperacion';
+    C.KeyFields := 'IdTipoOperacion';
+    C.LookupDataSet := tbTipoOperacion;
+    C.LookupKeyFields := 'IdTipoOperacion';
+    C.LookupResultField := 'TipoOperacion';
     C.FieldKind := fkLookup;
     C.Dataset := SPAConfiguracionContable;
 
-    // Tipo Transaccion
+
+    // Clasificacion
     C := TStringField.Create(SPAConfiguracionContable);
-    C.Name := 'SPAConfiguracionContableTipoTransaccion';
-    C.FieldName := 'TipoTransaccion';
-    C.KeyFields := 'IdTipoTransaccion';
-    C.LookupDataSet := tbTipoTransaccion;
-    C.LookupKeyFields := 'IdTipoTransaccion';
-    C.LookupResultField := 'TipoTransaccion';
+    C.Name := 'SPAConfiguracionContableClasificacion';
+    C.FieldName := 'Clasificacion';
+    C.KeyFields := 'IdClasificacion';
+    C.LookupDataSet := Sclasificacion;
+    C.LookupKeyFields := 'FCL_CODIGO';
+    C.LookupResultField := 'FCL_NOMBRE';
+    C.FieldKind := fkLookup;
+    C.Dataset := SPAConfiguracionContable;
+
+    // id Consecutivos
+    C := TStringField.Create(SPAConfiguracionContable);
+    C.Name := 'SPAConfiguracionContableConsecutivo';
+    C.FieldName := 'Consecutivo';
+    C.KeyFields := 'IdConsecutivo';
+    C.LookupDataSet := SPAConsecutivos;
+    C.LookupKeyFields := 'IdConsecutivo';
+    C.LookupResultField := 'Descripcion';
     C.FieldKind := fkLookup;
     C.Dataset := SPAConfiguracionContable;
 
@@ -817,16 +829,6 @@ begin
 
     // Adiciona manualmente los campos lookup
 
-    // Tipo Comprobante
-    C := TStringField.Create(SPAConfiguracionContableMov);
-    C.Name := 'SPAConfiguracionContableMovTipoOperacion';
-    C.FieldName := 'TipoOperacion';
-    C.KeyFields := 'IdTipoOperacion';
-    C.LookupDataSet := tbTipoOperacion;
-    C.LookupKeyFields := 'IdTipoOperacion';
-    C.LookupResultField := 'TipoOperacion';
-    C.FieldKind := fkLookup;
-    C.Dataset := SPAConfiguracionContableMov;
 
     // Origen Movimiento
     C := TStringField.Create(SPAConfiguracionContableMov);
@@ -852,14 +854,78 @@ begin
 
     // Abre el archivo
     SPAConfiguracionContableMov.Open;
-  except
-    ShowMessage('Acurrió un error abriendo la tabla SPAConfiguracionContable.');
+  except  on E: Exception do
+    ShowMessage('Acurrió un error abriendo la tabla SPAConfiguracionContable. \n' + E.Message);
+  end;
+end;
+
+procedure TdmEC.AbrirSPAConsecutivos;
+var
+  Ruta: String;
+begin
+  try
+    // Busca la ruta en la configuracion, si no esta configurada asigan la de la base de datos
+    if SPAConfiguracionExportarContabilidadRutaConsecutivos.Value <> '' then
+      Ruta := SPAConfiguracionExportarContabilidadRutaConsecutivos.Value
+    else
+      Ruta := dmBasesDatos.dbA2.Directory;
+
+    dbConsecutivos.Connected := False;
+    dbConsecutivos.Directory := Ruta;
+    dbConsecutivos.Connected := true;
+
+    // Si no existe el erachivo debe crearlo
+    if Not FileExists(IncludeTrailingPathDelimiter(dbConsecutivos.Directory)
+        + SPAConsecutivos.TableName + '.dat') then
+      SPAConsecutivos.CreateTable();
+
+    SPAConsecutivos.Open;
+  except on E: Exception do
+    ShowMessage('Ocurrio un error abriendo SPAConsecutivos. \n' + E.Message);
+  end;
+end;
+
+procedure TdmEC.AbrirSPACuentasCentros;
+var
+  C: TStringField;
+begin
+  try
+    // Si no existe el erachivo debe crearlo
+    if Not FileExists(IncludeTrailingPathDelimiter(dmBasesDatos.dbA2.Directory)
+        + SPACuentasxCentro.TableName + '.dat') then
+      SPACuentasxCentro.CreateTable();
+
+
+    // Origen Movimiento
+    C := TStringField.Create(SPACuentasxCentro);
+    C.Name := 'SPACuentasxCentroOrigenMonto';
+    C.FieldName := 'OrigenMonto';
+    C.KeyFields := 'IdOrigenMonto';
+    C.LookupDataSet := tbOrigenMonto;
+    C.LookupKeyFields := 'IdOrigenMonto';
+    C.LookupResultField := 'OrigenMonto';
+    C.FieldKind := fkLookup;
+    C.Dataset := SPACuentasxCentro;
+
+    // NombreCuenta
+    C := TStringField.Create(SPACuentasxCentro);
+    C.Name := 'SPACuentasxCentroNombreCuenta';
+    C.FieldName := 'NombreCuenta';
+    C.KeyFields := 'Cuenta';
+    C.LookupDataSet := dmEC.a2CCuentas;
+    C.LookupKeyFields := 'Codigo';
+    C.LookupResultField := 'Descripcion';
+    C.FieldKind := fkLookup;
+    C.Dataset := SPACuentasxCentro;
+
+    // Abre el archivo
+    SPACuentasxCentro.Open;
+  except  on E: Exception do
+    ShowMessage('Acurrió un error abriendo la tabla SPACuentasxCentro. \n' + E.Message);
   end;
 end;
 
 procedure TdmEC.AbrirSPAMovimientoGenerado;
-var
-  C: TStringField;
 begin
   try
     // Si no existe el erachivo debe crearlo
@@ -876,7 +942,7 @@ begin
     SPAMovimientoTemp.Open;
   except
   end;
-
+                                                           
 end;
 
 procedure TdmEC.AbrirUsuarios;
@@ -888,7 +954,7 @@ begin
   end;
 end;
 
-procedure TdmEC.EjecutarConsulta(IdTipoConsulta: tTipoConsultas);
+procedure TdmEC.EjecutarConsulta(IdTipoConsulta: tTipoConsultas; IdConfiguracionContable, IdDocumento : integer);
 var
   SQL: string;
 begin
@@ -896,49 +962,30 @@ begin
 
   case IdTipoConsulta of
     tcMovimientoTemporal:
-      SQL := 'SELECT                                    ' +
-        '   SPAMovimientoTemp.IdTipoComprobante,   ' +
-        '   SPAMovimientoTemp.IdTipoTransaccion,   ' +
-        '   SPAMovimientoTemp.IdTipoOperacion,     ' +
-        '   SPAMovimientoTemp.IdOrigenMonto,       ' +
-        '   SPAMovimientoTemp.Cuenta,              ' +
-        '   SPAMovimientoTemp.Comprobante,         ' +
-        '   SPAMovimientoTemp.Fecha,               ' +
-        '   SPAMovimientoTemp.Documento,           ' +
-        '   SPAMovimientoTemp.DocumentoRef,        ' +
-        '   SPAMovimientoTemp.Nit,                 ' +
-        '   SPAMovimientoTemp.Detalle,             ' +
-        '   SPAMovimientoTemp.Tipo,                ' +
-        '   SPAMovimientoTemp.CCosto,              ' +
-        '   SUM(SPAMovimientoTemp.Valor) AS Valor, ' +
-        '   SUM(SPAMovimientoTemp.Base) AS Base    ' +
-        ' FROM                                     ' +
-        '  SPAMovimientoTemp                       ' +
-        ' GROUP BY                                 ' +
-        '   SPAMovimientoTemp.IdTipoComprobante,   ' +
-        '   SPAMovimientoTemp.IdTipoTransaccion,   ' +
-        '   SPAMovimientoTemp.IdTipoOperacion,     ' +
-        '   SPAMovimientoTemp.IdOrigenMonto,       ' +
-        '   SPAMovimientoTemp.Cuenta,              ' +
-        '   SPAMovimientoTemp.Comprobante,         ' +
-        '   SPAMovimientoTemp.Fecha,               ' +
-        '   SPAMovimientoTemp.Documento,           ' +
-        '   SPAMovimientoTemp.DocumentoRef,        ' +
-        '   SPAMovimientoTemp.Nit,                 ' +
-        '   SPAMovimientoTemp.Detalle,             ' +
-        '   SPAMovimientoTemp.Tipo,                ' +
-        '   SPAMovimientoTemp.CCosto';
+      begin
+        qrConsulta.SQL.Text := qrMovimientoTemporal.SQL.Text;
+        qrConsulta.ParamByName('IdConfiguracionContable').Value := IdConfiguracionContable;
+        qrConsulta.ParamByName('IdDocumento').Value := IdDocumento;
+        qrConsulta.Open;
+      end;
     tcBorrarMovimientoTemporal:
-      SQL := 'delete from SPAMovimientoTemp';
+      begin
+        SQL := 'delete from SPAMovimientoTemp where IdConfiguracionContable = :IdConfiguracionContable ' +
+                ' and IdDocumento = :IdDocumento' ;
+        qrConsulta.SQL.Text := SQL;
+        qrConsulta.ParamByName('IdConfiguracionContable').Value := IdConfiguracionContable;
+        qrConsulta.ParamByName('IdDocumento').Value := IdDocumento;
+        qrConsulta.ExecSQL
+      end;
     tcBorrarCuentas:
-      SQL := 'delete from a2Cuentas';
+      begin
+        SQL := 'delete from a2Cuentas';
+        qrConsulta.SQL.Text := SQL;
+        qrConsulta.ParamByName('IdConfiguracionContable').Value := IdConfiguracionContable;
+        qrConsulta.ParamByName('IdDocumento').Value := IdDocumento;
+        qrConsulta.ExecSQL
+      end;
   end;
-
-  qrConsulta.SQL.Text := SQL;
-  if IdTipoConsulta in [tcBorrarMovimientoTemporal, tcBorrarCuentas] then
-    qrConsulta.ExecSQL
-  else
-    qrConsulta.Open;
 end;
 
 procedure TdmEC.AbrirInventario;
@@ -963,153 +1010,144 @@ begin
 end;
 
 function TdmEC.BuscarCuentaAgrupacion(IdAgrupacion, IdOrigenMonto: integer;
-  Cuenta: string): string;
+  Cuenta: string; var SubCentroCosto : string): string;
 begin
   Result := Cuenta;
   if SPAAgrupacionesCuentas.Locate('IdAgrupacion;IdOrigenMonto',
     VarArrayOf([IdAgrupacion, IdOrigenMonto]), []) then
   begin
     Result := SPAAgrupacionesCuentasCuenta.Value;
-  end;
+    SubCentroCosto := VarToStr( SPAAgrupacionesCuentasSubCentroCostos.Value);
+  end;        
 
 end;
 
-procedure TdmEC.CargarCodifcacionGeneral(IdTipoComprobante, IdTipoTransaccion,
-  IdTipoOperacion: integer);
+procedure TdmEC.CargarCodifcacionGeneral(IdConfiguracionContable : integer);
 begin
   qrCodificacionGeneral.Close;
-  qrCodificacionGeneral.ParamByName('IdTipoComprobante').Value := IdTipoComprobante;
-  qrCodificacionGeneral.ParamByName('IdTipoTransaccion').Value := IdTipoTransaccion;
-  qrCodificacionGeneral.ParamByName('IdTipoOperacion').Value   := IdTipoOperacion;
+  qrCodificacionGeneral.ParamByName('IdConfiguracionContable').Value := IdConfiguracionContable;
   qrCodificacionGeneral.Open;
 end;
 
-procedure TdmEC.CargarConsultaOperacionsInv(IdTipoComprobante, IdTipoTransaccion,
-  IdTipoOperacion: integer);
+
+// Busca los movimiento de inventario     
+function TdmEC.CargarConsecutivo(IdConsecutivo: integer): string;
+var
+  Consecutivo : LongInt;
+begin
+  Result := '';
+  if SPAConsecutivos.Locate('IdConsecutivo', IdConsecutivo, []) then
+  begin  
+    SPAConsecutivos.Edit;
+    Consecutivo := SPAConsecutivosUltimoNumero.Value +  1;
+    SPAConsecutivosUltimoNumero.Value := Consecutivo;
+    SPAConsecutivos.Post;
+
+    Result := IntToStr( Consecutivo);
+  end;
+end;
+
+procedure TdmEC.CargarConsultaOperacionsInv(IdTipoOperacion, IdClasificacion: integer; FechaCorte : string);
 var
   SQL: string;
+  P : integer;
 begin
-  case tTiposComprobantes(IdTipoComprobante) of
-    tcCompras:
+  qrDocumentosInventario.Close;
+  case tTransaccionesOperacionesInv(IdTipoOperacion) of
+    toiCompras, toiDevoluciónCompras:
       begin
-          SQL := 'SELECT ' +
-            '  SOperacionInv.FTI_DOCUMENTO AS Documento,                                               '         +
-            '  SOperacionInv.FTI_FECHAEMISION AS Fecha,                                                '         +
-            '  SOperacionInv.FTI_TOTALCOSTO AS TotalCosto,                                             '         +
-            '  SOperacionInv.FTI_TOTALCOSTOREAL AS TotalCostoReal,                                     '         +
-            '  SOperacionInv.FTI_TOTALBRUTO AS TotalBruto,                                             '         +
-            '  SOperacionInv.FTI_DESCUENTO1MONTO AS Descuento1,                                        '         +
-            '  SOperacionInv.FTI_DESCUENTO2MONTO AS Descuento2,                                        '         +
-            '  SOperacionInv.FTI_BASEIMPONIBLE AS BaseImpuesto,                                        '         +
-            '  SOperacionInv.FTI_IMPUESTO1MONTO AS Impuesto,                                           '         +
-            '  SOperacionInv.FTI_TOTALNETO AS TotalNeto,                                               '         +
-            '  SOperacionInv.FTI_RESPONSABLE AS Nit,                                                    '         +
-            '  SOperacionInv.FTI_PERSONACONTACTO AS Contacto,                                          '         +
-            '  SOperacionInv.FTI_TELEFONOCONTACTO AS Telefono,                                         '         +
-            '  SOperacionInv.FTI_SALDOOPERACION AS SaldoOperacion,                                     '        +
-            '  SOperacionInv.FTI_FORMADEPAGO AS FormaPago,                                             '        +
-            '  SOperacionInv.FTI_FLETEMONEDA AS Flete,                                                 ' +
-            '  SOperacionInv.FTI_MONTOPAGADO AS MontoPagado,                                           ' +
-            SPAConfiguracionExportarContabilidadCampoAgruapacionInventario.Value + ' AS IdAgrupacion,  ' +
-            '  SDetalleCompra.FDI_CANTIDAD AS Cantidad,                                                ' +
-            '  SDetalleCompra.FDI_COSTOOPERACION AS Costo,                                                      ' +
-            '  SDetalleCompra.FDI_CANTIDAD * SDetalleCompra.FDI_COSTOOPERACION AS TotalItem,                    ' +
-            '  SOperacionInv.FTI_CTOCOSTO AS CCosto,                                                   ' +
-            '  SDetalleCompra.FDI_MONTOIMPUESTO1 AS Impuesto1,                                         ' +
-            '  SDetalleCompra.FDI_CANTIDAD * SDetalleCompra.FDI_MONTOIMPUESTO1 AS TotalImpuestoItem    ' +
-            'FROM                                                                                      ' +
-            ' SOperacionInv                                                                            ' +
-            ' INNER JOIN SDetalleCompra ON (SOperacionInv.FTI_TIPO=SDetalleCompra.FDI_TIPOOPERACION)   ' +
-            '  AND (SOperacionInv.FTI_DOCUMENTO=SDetalleCompra.FDI_DOCUMENTO)                          ' +
-            ' INNER JOIN Sinventario ON (SDetalleCompra.FDI_CODIGO=Sinventario.FI_CODIGO)              ' +
-            'WHERE                                                                                     ' +
-            '  FTI_DOCUMENTO = ''3139''  And ' +
-            '  (SOperacionInv.FTI_TIPO = ' + IntToStr(IdTipoOperacion) + ')';
-        case tTiposTransaccion( IdTipoTransaccion) of
-          ttContado : SQL := SQL + 'and FTI_SALDOOPERACION = 0';
-          ttCredito : SQL := SQL + 'and FTI_SALDOOPERACION <> 0';
-        end;
+        SQL := qrCompras.SQL.Text;
 
+        P := Pos(':IdAgrupacion', SQL);
+        Delete( SQL, P, Length( ':IdAgrupacion'));
+        Insert( 'Sinventario.' + SPAConfiguracionExportarContabilidadCampoAgruapacionInventario.Value , SQL, P);
+
+        qrDocumentosInventario.SQL.Text := SQL;
+
+        qrDocumentosInventario.ParamByName('IdTipoOperacion').Value := IdTipoOperacion;
+        qrDocumentosInventario.ParamByName('IdClasificacion').Value := IdClasificacion;
+        qrDocumentosInventario.ParamByName('FechaCorte').Value := FechaCorte;
       end;
   end;
-
-  qrDocumentosInventario.Close;
-  qrDocumentosInventario.SQL.Text := SQL;
   qrDocumentosInventario.Open;
 
 end;
 
-procedure TdmEC.ProcesarCompras(P: TJvProgressBar;
-  IdTipoComprobante, IdTipoTransaccion, IdTipoOperacion: SmallInt);
+procedure TdmEC.ProcesarCompras(IdConfiguracionContable, IdTipoOperacion, IdClasificacion, IdConsecutivo: SmallInt; FechaCorte : String);
 var
-  Documento: string;
-  TotalDocumento: Double;
-  Cuenta: string;
-  ProcesarSaldo,
-  ProcesarTotal : boolean;
+  IdDocumento : LongInt;
+  Cuenta, Documento, Consecutivo : string;
+  ProcesarSaldo, ProcesarTotal: boolean;
+  SubCentroCosto : string;
 begin
   PonerMensaje('Iniciando consulta compras...');
 
   // Hace la consulta de los documentos por la transacción
-  CargarConsultaOperacionsInv(IdTipoComprobante, IdTipoTransaccion, IdTipoOperacion);
-
-  //Borra el temporal
-  EjecutarConsulta( tcBorrarMovimientoTemporal);
-
+  CargarConsultaOperacionsInv(IdTipoOperacion, IdClasificacion, FechaCorte);
+  
+  // Busca la codificación del comprobante
+  CargarCodifcacionGeneral(IdConfiguracionContable);
+  
   PonerMensaje('Iniciando lectura compras...');
 
   // Recorre el resultado de la consulta
   qrDocumentosInventario.First;
-  P.Min := 0;
-  P.Position := 0;
-  P.Max := qrDocumentosInventario.RecordCount;
+  FProgreso.Min := 0;
+  FProgreso.Position := 0;
+  FProgreso.Max := qrDocumentosInventario.RecordCount;
   while not qrDocumentosInventario.Eof do
   begin
+
+    // Borra el temporal
+    EjecutarConsulta(tcBorrarMovimientoTemporal, IdConfiguracionContable, qrDocumentosInventario.FieldByName('IdDocumento').Value);
+    
     // Procesa el documento
-    TotalDocumento := 0;
     ProcesarTotal := true;
     ProcesarSaldo := true;
+    IdDocumento := qrDocumentosInventario.FieldByName('IdDocumento').Value;
     Documento := qrDocumentosInventario.FieldByName('Documento').Value;
     PonerMensaje('Documento ' + Documento);
-    while not qrDocumentosInventario.Eof and
-      (Documento = qrDocumentosInventario.FieldByName
-        ('Documento').Value) do
-    begin
-      // Busca la codificación del comprobante
-      CargarCodifcacionGeneral(IdTipoComprobante, IdTipoTransaccion,
-        IdTipoOperacion);
 
+    // Si se maneja consecutivo debe buscar el numero 
+    if IdConsecutivo <> 0 then
+      Consecutivo := CargarConsecutivo( IdConsecutivo)
+    else
+      Consecutivo := Documento; 
+
+    while not qrDocumentosInventario.Eof and
+      (IdDocumento = qrDocumentosInventario.FieldByName('IdDocumento').Value) do
+    begin
       // Procesa la codificacion general
       qrCodificacionGeneral.First;
       while not qrCodificacionGeneral.Eof do
       begin
-        // Busca la cuenta
+        // Busca la cuenta en agrupacion
         Cuenta := BuscarCuentaAgrupacion(qrDocumentosInventario.FieldByName
             ('IdAgrupacion').Value, qrCodificacionGeneralIdOrigenMonto.Value,
-          qrCodificacionGeneralCuentaGeneral.Value);
+          qrCodificacionGeneralCuentaGeneral.Value, SubCentroCosto);
 
         // Inserta el detalles
         case tOrigenMonto(qrCodificacionGeneralIdOrigenMonto.Value) of
-          omMontoBruto:
-            InsertarRegistroTemporal(IdTipoComprobante, IdTipoTransaccion,
-              IdTipoOperacion, qrCodificacionGeneralIdOrigenMonto.Value,
+          omValorBruto:
+            InsertarRegistroTemporal(False, IdConfiguracionContable, IdTipoOperacion,
+              IdClasificacion, IdDocumento, qrCodificacionGeneralIdOrigenMonto.Value,
               Cuenta, qrCodificacionGeneralComprobante.Value,
               qrDocumentosInventario.FieldByName('Fecha').Value,
-              qrDocumentosInventario.FieldByName('Documento').Value,
+              Consecutivo,
               qrDocumentosInventario.FieldByName('Documento').Value,
               qrDocumentosInventario.FieldByName('Nit').Value,
               qrCodificacionGeneralDetalle.Value + ' ' +
                 qrDocumentosInventario.FieldByName('Documento').Value,
               qrCodificacionGeneralTipoAsiento.Value,
               qrDocumentosInventario.FieldByName('TotalItem').Value, 0,
-              VarToStr( qrDocumentosInventario.FieldByName('CCosto').Value));
+              VarToStr(qrDocumentosInventario.FieldByName('CCosto').Value) + SubCentroCosto);
 
           omIva1:
-            InsertarRegistroTemporal(IdTipoComprobante, IdTipoTransaccion,
-              IdTipoOperacion, qrCodificacionGeneralIdOrigenMonto.Value,
+            InsertarRegistroTemporal(False, IdConfiguracionContable, IdTipoOperacion,
+              IdClasificacion, IdDocumento, qrCodificacionGeneralIdOrigenMonto.Value,
               Cuenta, qrCodificacionGeneralComprobante.Value,
               qrDocumentosInventario.FieldByName('Fecha').Value,
-              qrDocumentosInventario.FieldByName('Documento').Value,
+              Consecutivo,
               qrDocumentosInventario.FieldByName('Documento').Value,
               qrDocumentosInventario.FieldByName('Nit').Value,
               qrCodificacionGeneralDetalle.Value + ' ' +
@@ -1117,113 +1155,168 @@ begin
               qrCodificacionGeneralTipoAsiento.Value,
               qrDocumentosInventario.FieldByName('TotalImpuestoItem').Value,
               qrDocumentosInventario.FieldByName('TotalItem').Value,
-              VarToStr( qrDocumentosInventario.FieldByName('CCosto').Value));
+              VarToStr(qrDocumentosInventario.FieldByName('CCosto').Value) + SubCentroCosto);
 
-          omComprasGravadas, omComprasExentas :
-            InsertarRegistroTemporal(IdTipoComprobante, IdTipoTransaccion,
-              IdTipoOperacion, qrCodificacionGeneralIdOrigenMonto.Value,
+          omIva2:
+            InsertarRegistroTemporal(False, IdConfiguracionContable, IdTipoOperacion,
+              IdClasificacion, IdDocumento, qrCodificacionGeneralIdOrigenMonto.Value,
               Cuenta, qrCodificacionGeneralComprobante.Value,
               qrDocumentosInventario.FieldByName('Fecha').Value,
-              qrDocumentosInventario.FieldByName('Documento').Value,
+              Consecutivo,
               qrDocumentosInventario.FieldByName('Documento').Value,
               qrDocumentosInventario.FieldByName('Nit').Value,
               qrCodificacionGeneralDetalle.Value + ' ' +
                 qrDocumentosInventario.FieldByName('Documento').Value,
               qrCodificacionGeneralTipoAsiento.Value,
-              qrDocumentosInventario.FieldByName('TotalItem').Value +
-                qrDocumentosInventario.FieldByName('TotalImpuestoItem').Value, 0,
-              VarToStr( qrDocumentosInventario.FieldByName('CCosto').Value));
-          omSaldoOperacion :
+              qrDocumentosInventario.FieldByName('TotalImpuesto2Item').Value,
+              qrDocumentosInventario.FieldByName('TotalItem').Value,
+              VarToStr(qrDocumentosInventario.FieldByName('CCosto').Value) + SubCentroCosto);
+
+              
+         omSaldoOperacion:
             if ProcesarSaldo then
             begin
               ProcesarSaldo := False;
 
               // Guarda saldo operacion
-              if qrDocumentosInventario.FieldByName('SaldoOperacion').Value <> 0 then
+              if qrDocumentosInventario.FieldByName('SaldoOperacion')
+                .Value <> 0 then
               begin
-                InsertarRegistroTemporal(IdTipoComprobante, IdTipoTransaccion,
-                  IdTipoOperacion, qrCodificacionGeneralIdOrigenMonto.Value,
+                InsertarRegistroTemporal(True, IdConfiguracionContable, IdTipoOperacion,
+                  IdClasificacion, IdDocumento, qrCodificacionGeneralIdOrigenMonto.Value,
                   Cuenta, qrCodificacionGeneralComprobante.Value,
                   qrDocumentosInventario.FieldByName('Fecha').Value,
-                  qrDocumentosInventario.FieldByName('Documento').Value,
+                  Consecutivo,
                   qrDocumentosInventario.FieldByName('Documento').Value,
                   qrDocumentosInventario.FieldByName('Nit').Value,
                   qrCodificacionGeneralDetalle.Value + ' ' +
-                  qrDocumentosInventario.FieldByName('Documento').Value,
+                    qrDocumentosInventario.FieldByName('Documento').Value,
                   qrCodificacionGeneralTipoAsiento.Value,
-                  qrDocumentosInventario.FieldByName('SaldoOperacion').Value,
-                  0,
-                  VarToStr( qrDocumentosInventario.FieldByName('CCosto').Value));
+                  qrDocumentosInventario.FieldByName
+                    ('SaldoOperacion').Value, 0,
+                  VarToStr(qrDocumentosInventario.FieldByName('CCosto').Value) + SubCentroCosto
+                  );
               end;
             end;
-          omTotalCancelado :
+          omValorCancelado:
             if ProcesarTotal then
             begin
               ProcesarTotal := False;
 
               // Guarda el total de la operacion
-              if qrDocumentosInventario.FieldByName('TotalNeto').Value -
-                 qrDocumentosInventario.FieldByName('SaldoOperacion').Value > 0 then
+              if qrDocumentosInventario.FieldByName('TotalNeto')
+                .Value - qrDocumentosInventario.FieldByName('SaldoOperacion')
+                .Value > 0 then
               begin
 
                 // Carga las formas de pago
-                dmAdministrativo.CargarTablaFormasPago( SPAConfiguracionContable,
-                      qrDocumentosInventario.FieldByName('FormaPago') as TBlobField);
+                dmAdministrativo.CargarTablaFormasPago
+                  (SPAConfiguracionContable,
+                  qrDocumentosInventario.FieldByName('FormaPago')
+                    as TBlobField);
 
                 dmAdministrativo.tbFormaPago.First;
-                while not dmAdministrativo.tbFormaPago.EOF do
+                while not dmAdministrativo.tbFormaPago.Eof do
                 begin
-                  case tFormasPago(dmAdministrativo.tbFormaPagoTipoPago.Value) of
-                    fpEfectivo :
-                      InsertarRegistroTemporal(IdTipoComprobante, IdTipoTransaccion,
-                        IdTipoOperacion, qrCodificacionGeneralIdOrigenMonto.Value,
-                        Cuenta, qrCodificacionGeneralComprobante.Value,
+                  case tFormasPago(dmAdministrativo.tbFormaPagoTipoPago.Value)
+                    of
+                    fpEfectivo:
+                      InsertarRegistroTemporal(True, IdConfiguracionContable, IdTipoOperacion,
+                        IdClasificacion, IdDocumento, 
+                        qrCodificacionGeneralIdOrigenMonto.Value, Cuenta,
+                        qrCodificacionGeneralComprobante.Value,
                         qrDocumentosInventario.FieldByName('Fecha').Value,
-                        qrDocumentosInventario.FieldByName('Documento').Value,
+                        Consecutivo,
                         qrDocumentosInventario.FieldByName('Documento').Value,
                         qrDocumentosInventario.FieldByName('Nit').Value,
                         qrCodificacionGeneralDetalle.Value + ' ' +
-                        qrDocumentosInventario.FieldByName('Documento').Value,
-                        qrCodificacionGeneralTipoAsiento.Value,
-                        qrDocumentosInventario.FieldByName('TotalNeto').Value -
-                        qrDocumentosInventario.FieldByName('SaldoOperacion').Value,
-                        0,
-                        VarToStr( qrDocumentosInventario.FieldByName('CCosto').Value));
+                          qrDocumentosInventario.FieldByName('Documento')
+                          .Value, qrCodificacionGeneralTipoAsiento.Value,
+                        qrDocumentosInventario.FieldByName('TotalNeto')
+                          .Value - qrDocumentosInventario.FieldByName
+                          ('SaldoOperacion').Value, 0,
+                        VarToStr(qrDocumentosInventario.FieldByName('CCosto')
+                            .Value)  + SubCentroCosto);
 
-                    fpCheque :
+                    fpCheque:
                       begin
                         Cuenta := 'Cheque';
-                        InsertarRegistroTemporal(IdTipoComprobante, IdTipoTransaccion,
-                          IdTipoOperacion, qrCodificacionGeneralIdOrigenMonto.Value,
-                          Cuenta, qrCodificacionGeneralComprobante.Value,
+                        InsertarRegistroTemporal(True, IdConfiguracionContable, IdTipoOperacion,
+                          IdClasificacion, IdDocumento, 
+                          qrCodificacionGeneralIdOrigenMonto.Value, Cuenta,
+                          qrCodificacionGeneralComprobante.Value,
                           qrDocumentosInventario.FieldByName('Fecha').Value,
-                          qrDocumentosInventario.FieldByName('Documento').Value,
-                          qrDocumentosInventario.FieldByName('Documento').Value,
+                          Consecutivo,
+                          qrDocumentosInventario.FieldByName('Documento')
+                            .Value,
                           qrDocumentosInventario.FieldByName('Nit').Value,
                           qrCodificacionGeneralDetalle.Value + ' ' +
-                          qrDocumentosInventario.FieldByName('Documento').Value,
-                          qrCodificacionGeneralTipoAsiento.Value,
-                          qrDocumentosInventario.FieldByName('TotalNeto').Value -
-                          qrDocumentosInventario.FieldByName('SaldoOperacion').Value,
-                          0,
-                          VarToStr( qrDocumentosInventario.FieldByName('CCosto').Value));
+                            qrDocumentosInventario.FieldByName('Documento')
+                            .Value, qrCodificacionGeneralTipoAsiento.Value,
+                          qrDocumentosInventario.FieldByName('TotalNeto')
+                            .Value - qrDocumentosInventario.FieldByName
+                            ('SaldoOperacion').Value, 0,
+                          VarToStr(qrDocumentosInventario.FieldByName('CCosto')
+                              .Value)  + SubCentroCosto);
                       end;
+                    fpTarjetaDebito:
+                      begin
+                        Cuenta := 'TD';
+                        InsertarRegistroTemporal(True, IdConfiguracionContable, IdTipoOperacion,
+                          IdClasificacion, IdDocumento, 
+                          qrCodificacionGeneralIdOrigenMonto.Value, Cuenta,
+                          qrCodificacionGeneralComprobante.Value,
+                          qrDocumentosInventario.FieldByName('Fecha').Value,
+                          Consecutivo,
+                          qrDocumentosInventario.FieldByName('Documento')
+                            .Value,
+                          qrDocumentosInventario.FieldByName('Nit').Value,
+                          qrCodificacionGeneralDetalle.Value + ' ' +
+                            qrDocumentosInventario.FieldByName('Documento')
+                            .Value, qrCodificacionGeneralTipoAsiento.Value,
+                          qrDocumentosInventario.FieldByName('TotalNeto')
+                            .Value - qrDocumentosInventario.FieldByName
+                            ('SaldoOperacion').Value, 0,
+                          VarToStr(qrDocumentosInventario.FieldByName('CCosto')
+                              .Value)  + SubCentroCosto);
+                      end;
+                    fpTarjetaCredito:
+                      begin
+                        Cuenta := 'TC';
+                        InsertarRegistroTemporal(True, IdConfiguracionContable, IdTipoOperacion,
+                          IdClasificacion, IdDocumento, 
+                          qrCodificacionGeneralIdOrigenMonto.Value, Cuenta,
+                          qrCodificacionGeneralComprobante.Value,
+                          qrDocumentosInventario.FieldByName('Fecha').Value,
+                          Consecutivo,
+                          qrDocumentosInventario.FieldByName('Documento')
+                            .Value,
+                          qrDocumentosInventario.FieldByName('Nit').Value,
+                          qrCodificacionGeneralDetalle.Value + ' ' +
+                            qrDocumentosInventario.FieldByName('Documento')
+                            .Value, qrCodificacionGeneralTipoAsiento.Value,
+                          qrDocumentosInventario.FieldByName('TotalNeto')
+                            .Value - qrDocumentosInventario.FieldByName
+                            ('SaldoOperacion').Value, 0,
+                          VarToStr(qrDocumentosInventario.FieldByName('CCosto')
+                              .Value)  + SubCentroCosto);
+                      end;
+
                   end;
                   dmAdministrativo.tbFormaPago.Next;
                 end;
 
               end;
 
-
             end;
         end;
         qrCodificacionGeneral.Next;
       end;
-      P.Position := P.Position + 1;
+      FProgreso.Position := FProgreso.Position + 1;
       qrDocumentosInventario.Next;
     end;
 
-    MoverTemporalAGenerado;
+    MoverTemporalAGenerado(IdConfiguracionContable, IdDocumento);
   end;
   PonerMensaje('Finalizado');
 

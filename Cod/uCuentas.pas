@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, JvComponentBase, JvEnterTab, DBCtrls, ExtCtrls,
-  StdCtrls, Grids, DBGrids, ComCtrls, Buttons, Mask, MantenimientoSPA;
+  StdCtrls, Grids, DBGrids, ComCtrls, Buttons, Mask, MantenimientoSPA,
+  JvExStdCtrls, JvEdit, JvDBSearchEdit;
 
 type
   TfrCuentas = class(TfmBaseMantenimiento)

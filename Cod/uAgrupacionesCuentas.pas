@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, MantenimientoSPA, Buttons, DBCtrls, Mask, DB, JvComponentBase,
-  JvEnterTab, ExtCtrls, StdCtrls, Grids, DBGrids, ComCtrls, dbisamtb;
+  JvEnterTab, ExtCtrls, StdCtrls, Grids, DBGrids, ComCtrls, dbisamtb,
+  JvExStdCtrls, JvEdit, JvDBSearchEdit;
 
 type
   TfrAgrupacionesCuentas = class(TfmBaseMantenimiento)
@@ -17,6 +18,12 @@ type
     DBText1: TDBText;
     dsMaestro: TDataSource;
     eIdAgrupacion: TDBEdit;
+    Label5: TLabel;
+    Label6: TLabel;
+    eTipoOperacion: TDBLookupComboBox;
+    eClasificacion: TDBLookupComboBox;
+    eSubCentroCostos: TDBEdit;
+    Label3: TLabel;
     procedure SpeedButton1Click(Sender: TObject);
     procedure OcultarCamposGrid; override;
     procedure ConectarMaestroDetalle; override;
@@ -51,6 +58,8 @@ begin
   dgGrid.Columns[0].Visible := false;
   dgGrid.Columns[1].Visible := false;
   dgGrid.Columns[2].Visible := false;
+  dgGrid.Columns[3].Visible := false;
+  dgGrid.Columns[4].Visible := false;
 end;
 
 procedure TfrAgrupacionesCuentas.btAceptarClick(Sender: TObject);
@@ -66,11 +75,9 @@ end;
 procedure TfrAgrupacionesCuentas.ConectarMaestroDetalle;
 begin
   inherited;
-  //TDBISAMTable(dsDataSource.DataSet).MasterSource := dsMaestro;
-  //TDBISAMTable(dsDataSource.DataSet).MasterFields := 'IdAgrupacion';
   TDBISAMTable(dsDataSource.DataSet).Filtered := false;
   TDBISAMTable(dsDataSource.DataSet).Filter := 'IdAgrupacion = ' + IntToStr( dmEC.SPAAgrupacionesIdAgrupacion.Value);
-
+  TDBISAMTable(dsDataSource.DataSet).Filtered := True;
 end;
 
 

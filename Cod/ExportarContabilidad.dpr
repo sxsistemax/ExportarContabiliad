@@ -14,7 +14,10 @@ uses
   uAgrupaciones in 'uAgrupaciones.pas' {frAgrupaciones},
   uAgrupacionesCuentas in 'uAgrupacionesCuentas.pas' {frAgrupacionesCuentas},
   uDatosExportacion in 'uDatosExportacion.pas' {dmEC: TDataModule},
-  uGenerarMovimientoContable in 'uGenerarMovimientoContable.pas' {frGenerarMovimientoContable};
+  uGenerarMovimientoContable in 'uGenerarMovimientoContable.pas' {frGenerarMovimientoContable},
+  uConsecutivos in 'uConsecutivos.pas' {frConsecutivos},
+  uCentrosCuentas in 'uCentrosCuentas.pas' {frCentrosCuentas},
+  uCuentasClasificaciones in 'uCuentasClasificaciones.pas' {frCuentasClasifiaciones};
 
 {$R *.res}
 

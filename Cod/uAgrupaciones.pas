@@ -5,13 +5,16 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, MantenimientoSPA, DB, JvComponentBase, JvEnterTab, DBCtrls, ExtCtrls,
-  StdCtrls, Grids, DBGrids, ComCtrls, Buttons, Mask;
+  StdCtrls, Grids, DBGrids, ComCtrls, Buttons, Mask, JvExStdCtrls, JvEdit,
+  JvDBSearchEdit, Menus;
 
 type
   TfrAgrupaciones = class(TfmBaseMantenimiento)
     Label1: TLabel;
     DBEdit1: TDBEdit;
     bDetalles: TBitBtn;
+    PopupMenu1: TPopupMenu;
+    Cuentas1: TMenuItem;
     procedure OcultarCamposGrid; override;
     procedure bDetallesClick(Sender: TObject);
   private

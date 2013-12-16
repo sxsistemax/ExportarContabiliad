@@ -80,8 +80,36 @@
 			<DCCReference Include="uGenerarMovimientoContable.pas">
 				<Form>frGenerarMovimientoContable</Form>
 			</DCCReference>
+			<DCCReference Include="uConsecutivos.pas">
+				<Form>frConsecutivos</Form>
+			</DCCReference>
+			<DCCReference Include="uCentrosCuentas.pas">
+				<Form>frCentrosCuentas</Form>
+			</DCCReference>
+			<DCCReference Include="uCuentasClasificaciones.pas">
+				<Form>frCuentasClasifiaciones</Form>
+			</DCCReference>
 			<None Include="ModelSupport_ExportarContabilidad\default.txaPackage"/>
 			<None Include="SMenuTerceros.Cfg"/>
+			<None Include="ModelSupport_ExportarContabilidad\uDatosExportacion\default.txvpck"/>
+			<None Include="ModelSupport_ExportarContabilidad\uPrincipal\default.txvpck"/>
+			<None Include="ModelSupport_ExportarContabilidad\uDatosExportacion\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\ExportarContabilidad\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\uPrincipal\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\uConsecutivos\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\ExportarContabilidad\default.txvpck"/>
+			<None Include="ModelSupport_ExportarContabilidad\uAgrupacionesCuentas\default.txvpck"/>
+			<None Include="ModelSupport_ExportarContabilidad\uConfiguracionContable\default.txvpck"/>
+			<None Include="ModelSupport_ExportarContabilidad\uConfiguracionContableMov\default.txvpck"/>
+			<None Include="ModelSupport_ExportarContabilidad\uCuentasClasificaciones\default.txvpck"/>
+			<None Include="ModelSupport_ExportarContabilidad\uCentrosCuentas\default.txvpck"/>
+			<None Include="ModelSupport_ExportarContabilidad\uAgrupacionesCuentas\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\uCentrosCuentas\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\uGenerarMovimientoContable\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\MantenimientoSPA\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\uConfiguracionContableMov\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\uCuentasClasificaciones\default.txaPackage"/>
+			<None Include="ModelSupport_ExportarContabilidad\uConfiguracionContable\default.txaPackage"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

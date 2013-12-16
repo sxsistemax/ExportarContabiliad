@@ -20,7 +20,6 @@ inherited frCuentas: TfrCuentas
   inherited PageControl1: TPageControl
     Width = 763
     Height = 407
-    ActivePage = tsRegistro
     ExplicitWidth = 763
     ExplicitHeight = 407
     inherited tsListado: TTabSheet
@@ -348,18 +347,21 @@ inherited frCuentas: TfrCuentas
             Visible = False
           end>
       end
-      inherited Panel3: TPanel
+      inherited pBusqueda: TPanel
         Width = 755
         ExplicitWidth = 755
         inherited Panel4: TPanel
-          Left = 568
-          ExplicitLeft = 568
+          Left = 566
+          ExplicitLeft = 565
+          inherited cbCampoBusqueda: TComboBox
+            Items.Strings = (
+              'Codigo'
+              'Descripcion')
+          end
         end
       end
     end
     inherited tsRegistro: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 27
       ExplicitWidth = 755
       ExplicitHeight = 376
       inherited Bevel1: TBevel

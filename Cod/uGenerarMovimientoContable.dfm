@@ -4,8 +4,8 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Generar Movimiento Contable'
-  ClientHeight = 185
-  ClientWidth = 333
+  ClientHeight = 172
+  ClientWidth = 507
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,88 +14,97 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 333
-    Height = 150
+    Width = 507
+    Height = 137
     Align = alClient
     BevelInner = bvLowered
     TabOrder = 0
-    ExplicitHeight = 197
+    object lMensaje: TLabel
+      Left = 16
+      Top = 77
+      Width = 481
+      Height = 13
+      Alignment = taCenter
+      AutoSize = False
+    end
     object Label1: TLabel
       Left = 16
-      Top = 16
-      Width = 88
+      Top = 15
+      Width = 78
       Height = 13
-      Caption = 'Tipo Comprobante'
+      Caption = 'Fecha de Corte:'
     end
-    object Label2: TLabel
+    object Progreso: TJvProgressBar
       Left = 16
-      Top = 64
-      Width = 80
-      Height = 13
-      Caption = 'Tipo Transacci'#243'n'
-    end
-    object eTipoComprobante: TDBLookupComboBox
-      Left = 16
-      Top = 35
-      Width = 297
-      Height = 21
-      KeyField = 'IdTipoComprobante'
-      ListField = 'TipoComprobante'
-      ListSource = dsTiposComprobantes
+      Top = 96
+      Width = 481
+      Height = 27
       TabOrder = 0
     end
-    object eTipoTransaccion: TDBLookupComboBox
-      Left = 16
-      Top = 83
-      Width = 297
-      Height = 21
-      KeyField = 'IdTipoTransaccion'
-      ListField = 'TipoTransaccion'
-      ListSource = dsTipoTransaccion
+    object bSeleccionarTransacciones: TBitBtn
+      Left = 207
+      Top = 30
+      Width = 209
+      Height = 25
+      Caption = 'Seleccionar Transacciones'
+      DoubleBuffered = True
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000AE7C53AE7C53
+        AE7C53AE7C53AE7C53AE7C53AE7C53AE7C53AE7C53AE7C53AE7C53AE7C53AE7C
+        53AE7C53FFFFFFFFFFFFB07E54FFFFFCFFFCF5FFFCF5FFFCF5FFFCF5FFFCF5FF
+        FCF5FFFCF5FFFCF53D45B56062B9FFFCF5AE7C53FFFFFFFFFFFFB28055FFFCF6
+        FFFCF5FFFCF5FFFFF2FFFEEFFFFCECFFFBEAFFFFE9FFFCF5313EBBA2A7EB5059
+        C2AE7C53FFFFFFFFFFFFB58256FFFFF8FFFCF56A70C86066C26469C26569C264
+        69C1646AC14F56BB656ECFA2A7EBA2A7EB434AB7D1CEE3FFFFFFB78557FFFFF8
+        FFFCF53B48BF9BA1ED545FDF5963E0606AE16871E36F78E4777FE67E86E78B92
+        EAAEBAEC414DBFB6BAEFBA8758FFFFF8FFFCF54E59C79BA1ED868DE8979EEB9B
+        A3EB9FA7EBA2ACEBA6B0EBAAB5EBA6B1ECAEBAEC3F4BC0B6BAEFBC8959FFFFF8
+        FFFCF5323EBA323EBA323EBA323EBA323EBA323EBA323EBA4F57C0B6BAEFB6BA
+        EF3B45B9FFFFFFFFFFFFBE8B5AFEFAF6FFFCF5FEF6F0FEF6F0FEF6F0FEF6F0FE
+        F6F0FEF6F0FFFCF5323EBAB6BAEF3D48BEAE7C53FFFFFFFFFFFFC18E5CFEF9F6
+        FFF7F0FFFEF2FFFFF3FFFEF2FFFEF2FFFEF1FFFFF1FFFCF52E3BB84F57C0E2DF
+        E7AE7C53FFFFFFFFFFFFC3905DFEF9F6FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FE
+        F6F0FEF6EFFFFCF5FFF6EFFFF3E8FFFBF0AE7C53FFFFFFFFFFFFC8925EFEF9F6
+        FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FFF6EFFFFBEFFFF4EBFFF8
+        F2AE7C53FFFFFFFFFFFFCA945FFEFAF8FFF7F3FFF8F4FFF8F4FFF9F5FFF9F5FF
+        F9F5FFF9F6FFF9F6FFF9F5FFF8F3FEF6F0AE7C53FFFFFFFFFFFFCC9760FEF6F0
+        F4DFB7F3DBB3F1D5ACF0CEA5EEC89DECC197EBBD93EBBD92EBBD92EBBD91FEF6
+        F0AE7C53FFFFFFFFFFFFCF9961FEF6F0EFD49DEECE97EBC48DE9BA82E6B177E4
+        A96FE3A468E3A467E3A467E3A467FEF6F0AE7C53FFFFFFFFFFFFD19B62FEF6F0
+        FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FEF6F0FEF6
+        F0AE7C53FFFFFFFFFFFFD49F66D19B62CE9861CB9660C8935EC4905DC18E5CBE
+        8B5ABB8959B98658B68356B38155B07E54AE7C53FFFFFFFFFFFF}
+      ParentDoubleBuffered = False
       TabOrder = 1
+      OnClick = bSeleccionarTransaccionesClick
     end
-    object pProgreso: TPanel
-      Left = 2
-      Top = 107
-      Width = 329
-      Height = 41
-      Align = alBottom
-      BevelOuter = bvNone
+    object dpFechaCorte: TDateTimePicker
+      Left = 16
+      Top = 34
+      Width = 97
+      Height = 21
+      Date = 0.749300393516023200
+      Time = 0.749300393516023200
       TabOrder = 2
-      ExplicitTop = 154
-      object lMensaje: TLabel
-        Left = 16
-        Top = -3
-        Width = 295
-        Height = 13
-        Alignment = taCenter
-        AutoSize = False
-      end
-      object Progreso: TJvProgressBar
-        Left = 16
-        Top = 16
-        Width = 297
-        Height = 19
-        TabOrder = 0
-      end
     end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 150
-    Width = 333
+    Top = 137
+    Width = 507
     Height = 35
     Align = alBottom
     BevelInner = bvLowered
     TabOrder = 1
-    ExplicitTop = 197
     object BitBtn1: TBitBtn
-      Left = 238
+      Left = 422
       Top = 6
       Width = 75
       Height = 25
@@ -103,10 +112,10 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
       DoubleBuffered = True
       Kind = bkClose
       ParentDoubleBuffered = False
-      TabOrder = 0
+      TabOrder = 1
     end
     object bProcesar: TBitBtn
-      Left = 157
+      Left = 341
       Top = 6
       Width = 75
       Height = 25
@@ -152,20 +161,27 @@ object frGenerarMovimientoContable: TfrGenerarMovimientoContable
         FFFFFFFFFFFFFFFFFFFFFFFFFFC3BFBDC3BFBDC9B9B1FFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       ParentDoubleBuffered = False
-      TabOrder = 1
+      TabOrder = 0
       OnClick = bProcesarClick
     end
   end
-  object dsTiposComprobantes: TDataSource
+  object dsConfiguracionContable: TDataSource
     AutoEdit = False
-    DataSet = dmEC.tbTiposComprobantes
-    Left = 200
-    Top = 16
+    DataSet = dmEC.SPAConfiguracionContable
+    Left = 144
+    Top = 8
   end
-  object dsTipoTransaccion: TDataSource
-    AutoEdit = False
-    DataSet = dmEC.tbTipoTransaccion
-    Left = 248
-    Top = 32
+  object dgListadoComprobantes: TJvDualListDialog
+    Sorted = False
+    Title = 'Seleccione comprobantes a generar'
+    Label1Caption = '&Disponibles'
+    Label2Caption = '&Seleccionado'
+    OkBtnCaption = 'Aceptar'
+    CancelBtnCaption = 'Cancelar'
+    HelpBtnCaption = '&Ayuda'
+    HelpContext = 0
+    ScrollBars = ssVertical
+    Left = 376
+    Top = 40
   end
 end
