@@ -311,6 +311,8 @@ object frPrincipal: TfrPrincipal
         Orientation = boTopToBottom
         ParentFont = False
         Spacing = 0
+        ExplicitLeft = 10
+        ExplicitTop = 4
       end
     end
     object Panel3: TPanel
@@ -403,8 +405,8 @@ object frPrincipal: TfrPrincipal
           end>
         ActionBar = ActionToolBar2
       end>
-    Left = 512
-    Top = 10
+    Left = 320
+    Top = 66
     StyleName = 'Platform Default'
     object aImportarCuentas: TAction
       Caption = 'Importar Cuentas'
