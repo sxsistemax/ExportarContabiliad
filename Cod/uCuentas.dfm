@@ -27,7 +27,7 @@ inherited frCuentas: TfrCuentas
       ExplicitHeight = 376
       inherited dgGrid: TDBGrid
         Width = 755
-        Height = 350
+        Height = 307
         Columns = <
           item
             Expanded = False
@@ -347,18 +347,11 @@ inherited frCuentas: TfrCuentas
             Visible = False
           end>
       end
-      inherited pBusqueda: TPanel
+      inherited pBuscar: TPanel
         Width = 755
-        ExplicitWidth = 755
-        inherited Panel4: TPanel
-          Left = 566
-          ExplicitLeft = 565
-          inherited cbCampoBusqueda: TComboBox
-            Items.Strings = (
-              'Codigo'
-              'Descripcion')
-          end
-        end
+      end
+      inherited pFiltro: TPanel
+        Width = 755
       end
     end
     inherited tsRegistro: TTabSheet
@@ -467,12 +460,6 @@ inherited frCuentas: TfrCuentas
         ValueUnchecked = 'False'
       end
     end
-  end
-  inherited cbFiltroConsulta: TComboBox
-    Left = 321
-    Top = 4
-    ExplicitLeft = 321
-    ExplicitTop = 4
   end
   inherited dsDataSource: TDataSource
     DataSet = dmEC.a2CCuentas

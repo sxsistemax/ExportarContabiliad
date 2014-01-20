@@ -14,7 +14,6 @@ type
     eComprobante: TDBEdit;
     Label3: TLabel;
     eDescripcion: TDBEdit;
-    Label5: TLabel;
     eTipoOperacion: TDBLookupComboBox;
     eClasificacion: TDBLookupComboBox;
     Label6: TLabel;
@@ -29,6 +28,7 @@ type
     Cuentas1: TMenuItem;
     Centros1: TMenuItem;
     CuentasClasificaciones1: TMenuItem;
+    Label1: TLabel;
     procedure OcultarCamposGrid; override;
     procedure bCuentasClick(Sender: TObject);
     function Validar: boolean; override;

@@ -20,10 +20,11 @@ object frPrincipal: TfrPrincipal
     Left = 0
     Top = 0
     Width = 615
-    Height = 349
+    Height = 360
     Align = alClient
     BevelInner = bvLowered
     TabOrder = 0
+    ExplicitHeight = 349
     object Label1: TLabel
       Left = 24
       Top = 40
@@ -275,27 +276,28 @@ object frPrincipal: TfrPrincipal
   end
   object Panel2: TPanel
     Left = 0
-    Top = 349
+    Top = 360
     Width = 615
-    Height = 68
+    Height = 57
     Align = alBottom
     BevelInner = bvLowered
     TabOrder = 1
     object pAcciones: TPanel
       Left = 2
       Top = 2
-      Width = 446
-      Height = 64
+      Width = 375
+      Height = 53
       Align = alLeft
       BevelOuter = bvNone
       Caption = '`'
       TabOrder = 0
+      ExplicitHeight = 49
       object ActionToolBar2: TActionToolBar
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 440
-        Height = 58
+        Width = 369
+        Height = 47
         ActionManager = amAcciones
         Align = alClient
         Caption = 'ActionToolBar2'
@@ -311,17 +313,20 @@ object frPrincipal: TfrPrincipal
         Orientation = boTopToBottom
         ParentFont = False
         Spacing = 0
-        ExplicitLeft = 10
-        ExplicitTop = 4
+        ExplicitWidth = 440
+        ExplicitHeight = 58
       end
     end
     object Panel3: TPanel
-      Left = 376
-      Top = 16
-      Width = 345
-      Height = 50
+      Left = 377
+      Top = 2
+      Width = 465
+      Height = 53
+      Align = alLeft
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitLeft = 328
+      ExplicitHeight = 64
       object btCancelar: TBitBtn
         Left = 82
         Top = 6

@@ -27,15 +27,13 @@ inherited frCentrosCuentas: TfrCentrosCuentas
       ExplicitHeight = 239
       inherited dgGrid: TDBGrid
         Width = 592
-        Height = 213
+        Height = 170
       end
-      inherited pBusqueda: TPanel
+      inherited pBuscar: TPanel
         Width = 592
-        ExplicitWidth = 592
-        inherited Panel4: TPanel
-          Left = 403
-          ExplicitLeft = 403
-        end
+      end
+      inherited pFiltro: TPanel
+        Width = 592
       end
     end
     inherited tsRegistro: TTabSheet

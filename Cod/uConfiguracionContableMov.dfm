@@ -27,15 +27,13 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
       ExplicitHeight = 270
       inherited dgGrid: TDBGrid
         Width = 589
-        Height = 244
+        Height = 201
       end
-      inherited pBusqueda: TPanel
+      inherited pBuscar: TPanel
         Width = 589
-        ExplicitWidth = 589
-        inherited Panel4: TPanel
-          Left = 400
-          ExplicitLeft = 400
-        end
+      end
+      inherited pFiltro: TPanel
+        Width = 589
       end
     end
     inherited tsRegistro: TTabSheet

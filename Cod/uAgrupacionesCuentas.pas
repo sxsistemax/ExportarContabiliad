@@ -18,7 +18,6 @@ type
     DBText1: TDBText;
     dsMaestro: TDataSource;
     eIdAgrupacion: TDBEdit;
-    Label5: TLabel;
     Label6: TLabel;
     eTipoOperacion: TDBLookupComboBox;
     eClasificacion: TDBLookupComboBox;

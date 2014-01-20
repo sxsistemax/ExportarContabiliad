@@ -16,7 +16,7 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
     inherited tsListado: TTabSheet
       ExplicitHeight = 263
       inherited dgGrid: TDBGrid
-        Height = 237
+        Height = 194
       end
     end
     inherited tsRegistro: TTabSheet
@@ -92,13 +92,6 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
         Height = 17
         DataField = 'NombreCuenta'
         DataSource = dsDataSource
-      end
-      object Label5: TLabel
-        Left = 8
-        Top = 54
-        Width = 73
-        Height = 13
-        Caption = 'Tipo Operacion'
       end
       object Label6: TLabel
         Left = 8

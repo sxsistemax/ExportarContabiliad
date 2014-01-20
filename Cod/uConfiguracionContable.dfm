@@ -27,20 +27,20 @@ inherited frConfiguracionContable: TfrConfiguracionContable
       ExplicitHeight = 312
       inherited dgGrid: TDBGrid
         Width = 721
-        Height = 286
+        Height = 243
         PopupMenu = pMenuAcciones
       end
-      inherited pBusqueda: TPanel
+      inherited pBuscar: TPanel
         Width = 721
         ExplicitWidth = 721
-        inherited Panel4: TPanel
-          Left = 532
-          ExplicitLeft = 532
-        end
+      end
+      inherited pFiltro: TPanel
+        Width = 721
+        ExplicitWidth = 721
       end
     end
     inherited tsRegistro: TTabSheet
-      ExplicitLeft = 4
+      ExplicitLeft = 3
       ExplicitTop = 27
       ExplicitWidth = 721
       ExplicitHeight = 312
@@ -80,13 +80,6 @@ inherited frConfiguracionContable: TfrConfiguracionContable
         Caption = 'Descripcion'
         FocusControl = eDescripcion
       end
-      object Label5: TLabel
-        Left = 24
-        Top = 102
-        Width = 73
-        Height = 13
-        Caption = 'Tipo Operacion'
-      end
       object Label6: TLabel
         Left = 24
         Top = 150
@@ -100,6 +93,13 @@ inherited frConfiguracionContable: TfrConfiguracionContable
         Width = 59
         Height = 13
         Caption = 'Consecutivo'
+      end
+      object Label1: TLabel
+        Left = 24
+        Top = 102
+        Width = 76
+        Height = 13
+        Caption = 'Tipo Operacion:'
       end
       object eComprobante: TDBEdit
         Left = 24

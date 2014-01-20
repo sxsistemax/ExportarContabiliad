@@ -27,7 +27,7 @@ inherited frConsecutivos: TfrConsecutivos
       ExplicitHeight = 237
       inherited dgGrid: TDBGrid
         Width = 518
-        Height = 211
+        Height = 168
         Columns = <
           item
             Expanded = False
@@ -45,13 +45,11 @@ inherited frConsecutivos: TfrConsecutivos
             Visible = True
           end>
       end
-      inherited pBusqueda: TPanel
+      inherited pBuscar: TPanel
         Width = 518
-        ExplicitWidth = 518
-        inherited Panel4: TPanel
-          Left = 329
-          ExplicitLeft = 329
-        end
+      end
+      inherited pFiltro: TPanel
+        Width = 518
       end
     end
     inherited tsRegistro: TTabSheet

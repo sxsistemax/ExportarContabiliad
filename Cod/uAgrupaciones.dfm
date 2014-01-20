@@ -28,16 +28,14 @@ inherited frAgrupaciones: TfrAgrupaciones
       ExplicitHeight = 246
       inherited dgGrid: TDBGrid
         Width = 578
-        Height = 220
+        Height = 177
         PopupMenu = PopupMenu1
       end
-      inherited pBusqueda: TPanel
+      inherited pBuscar: TPanel
         Width = 578
-        ExplicitWidth = 578
-        inherited Panel4: TPanel
-          Left = 389
-          ExplicitLeft = 389
-        end
+      end
+      inherited pFiltro: TPanel
+        Width = 578
       end
     end
     inherited tsRegistro: TTabSheet
