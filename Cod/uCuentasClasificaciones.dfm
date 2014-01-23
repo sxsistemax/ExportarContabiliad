@@ -1,7 +1,7 @@
 inherited frCuentasClasifiaciones: TfrCuentasClasifiaciones
   Caption = 'Cuentas x Clasifiaciones'
   ClientHeight = 258
-  ExplicitWidth = 592
+  ExplicitWidth = 633
   ExplicitHeight = 297
   PixelsPerInch = 96
   TextHeight = 13
@@ -16,13 +16,13 @@ inherited frCuentasClasifiaciones: TfrCuentasClasifiaciones
     inherited tsListado: TTabSheet
       ExplicitHeight = 195
       inherited dgGrid: TDBGrid
-        Height = 169
+        Height = 126
       end
     end
     inherited tsRegistro: TTabSheet
-      ExplicitLeft = 4
+      ExplicitLeft = 3
       ExplicitTop = 27
-      ExplicitWidth = 568
+      ExplicitWidth = 609
       ExplicitHeight = 195
       inherited Bevel2: TBevel
         Height = 191
@@ -100,6 +100,14 @@ inherited frCuentasClasifiaciones: TfrCuentasClasifiaciones
         Height = 13
         Caption = 'Clasificaci'#243'n'
       end
+      object Label2: TLabel
+        Left = 12
+        Top = 134
+        Width = 50
+        Height = 13
+        Caption = 'SubCentro'
+        FocusControl = eSubCentro
+      end
       object eCuenta: TDBEdit
         Left = 12
         Top = 107
@@ -136,6 +144,15 @@ inherited frCuentasClasifiaciones: TfrCuentasClasifiaciones
         DataField = 'Clasificacion'
         DataSource = dsDataSource
         TabOrder = 3
+      end
+      object eSubCentro: TDBEdit
+        Left = 12
+        Top = 150
+        Width = 199
+        Height = 21
+        DataField = 'SubCentro'
+        DataSource = dsDataSource
+        TabOrder = 4
       end
     end
   end

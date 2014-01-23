@@ -1,7 +1,7 @@
 inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
   Caption = 'Cuentas para las agrupaciones'
   ClientHeight = 326
-  ExplicitWidth = 592
+  ExplicitWidth = 633
   ExplicitHeight = 365
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,7 +22,7 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
     inherited tsRegistro: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 27
-      ExplicitWidth = 568
+      ExplicitWidth = 609
       ExplicitHeight = 263
       inherited Bevel2: TBevel
         Height = 259
@@ -45,7 +45,7 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
       end
       object Label2: TLabel
         Left = 8
-        Top = 150
+        Top = 102
         Width = 34
         Height = 13
         Caption = 'Cuenta'
@@ -53,7 +53,7 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
       end
       object SpeedButton1: TSpeedButton
         Left = 215
-        Top = 166
+        Top = 117
         Width = 23
         Height = 22
         Glyph.Data = {
@@ -87,30 +87,31 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
       end
       object DBText1: TDBText
         Left = 244
-        Top = 169
+        Top = 120
         Width = 316
         Height = 17
         DataField = 'NombreCuenta'
         DataSource = dsDataSource
       end
-      object Label6: TLabel
+      object Label4: TLabel
         Left = 8
-        Top = 102
-        Width = 59
+        Top = 56
+        Width = 76
         Height = 13
-        Caption = 'Clasificaci'#243'n'
+        Caption = 'Tipo Operaci'#243'n:'
+        FocusControl = eCuenta
       end
       object Label3: TLabel
         Left = 8
-        Top = 195
-        Width = 88
+        Top = 150
+        Width = 50
         Height = 13
-        Caption = 'Sub Centro Costos'
-        FocusControl = btAceptar
+        Caption = 'SubCentro'
+        FocusControl = eSubCentro
       end
       object eCuenta: TDBEdit
         Left = 8
-        Top = 166
+        Top = 118
         Width = 199
         Height = 21
         DataField = 'Cuenta'
@@ -145,23 +146,14 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
         DataSource = dsDataSource
         TabOrder = 3
       end
-      object eClasificacion: TDBLookupComboBox
+      object eSubCentro: TDBEdit
         Left = 8
-        Top = 121
-        Width = 241
+        Top = 166
+        Width = 199
         Height = 21
-        DataField = 'Clasificacion'
+        DataField = 'SubCentro'
         DataSource = dsDataSource
         TabOrder = 4
-      end
-      object eSubCentroCostos: TDBEdit
-        Left = 8
-        Top = 214
-        Width = 177
-        Height = 21
-        DataField = 'SubCentroCostos'
-        DataSource = dsDataSource
-        TabOrder = 5
       end
     end
   end

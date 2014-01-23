@@ -288,36 +288,52 @@ object dmEC: TdmEC
     DatabaseName = 'dbA2'
     EngineVersion = '4.29 Build 1'
     TableName = 'SPAMovimientoGenerado'
-    Left = 200
-    Top = 80
+    Left = 504
+    Top = 16
     object SPAMovimientoGeneradoIdMovimientoGenerado: TAutoIncField
       FieldName = 'IdMovimientoGenerado'
+      Visible = False
     end
     object SPAMovimientoGeneradoIdConfiguracionContable: TIntegerField
       FieldName = 'IdConfiguracionContable'
+      Visible = False
     end
     object SPAMovimientoGeneradoIdTipoOperacion: TIntegerField
       FieldName = 'IdTipoOperacion'
+      Visible = False
     end
     object SPAMovimientoGeneradoIdClasificacion: TIntegerField
       FieldName = 'IdClasificacion'
+      Visible = False
     end
     object SPAMovimientoGeneradoIdDocumento: TIntegerField
       FieldName = 'IdDocumento'
+      Visible = False
     end
     object SPAMovimientoGeneradoIdOrigenMonto: TSmallintField
       FieldName = 'IdOrigenMonto'
+      Visible = False
+    end
+    object SPAMovimientoGeneradoFecha: TDateField
+      FieldName = 'Fecha'
     end
     object SPAMovimientoGeneradoCuenta: TStringField
       FieldName = 'Cuenta'
       Size = 10
     end
+    object SPAMovimientoGeneradoNombreCuenta: TStringField
+      FieldKind = fkLookup
+      FieldName = 'NombreCuenta'
+      LookupDataSet = a2CCuentas
+      LookupKeyFields = 'CODIGO'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'Cuenta'
+      Size = 30
+      Lookup = True
+    end
     object SPAMovimientoGeneradoComprobante: TStringField
       FieldName = 'Comprobante'
       Size = 5
-    end
-    object SPAMovimientoGeneradoFecha: TDateField
-      FieldName = 'Fecha'
     end
     object SPAMovimientoGeneradoDocumento: TStringField
       FieldName = 'Documento'
@@ -350,6 +366,11 @@ object dmEC: TdmEC
     end
     object SPAMovimientoGeneradoExportado: TBooleanField
       FieldName = 'Exportado'
+      Visible = False
+    end
+    object SPAMovimientoGeneradoNitNombre: TStringField
+      FieldName = 'NitNombre'
+      Size = 50
     end
   end
   object SPAConfiguracionContableMov: TDBISAMTable
@@ -400,8 +421,8 @@ object dmEC: TdmEC
     IndexName = 'SPAConfiguracionContableMovIdx'
     TableName = 'SPAConfiguracionContableMov'
     StoreDefs = True
-    Left = 384
-    Top = 72
+    Left = 400
+    Top = 344
     object SPAConfiguracionContableMovIdConfiguracionContableMov: TAutoIncField
       AutoGenerateValue = arAutoInc
       FieldName = 'IdConfiguracionContableMov'
@@ -423,10 +444,6 @@ object dmEC: TdmEC
     end
     object SPAConfiguracionContableMovTipoAsiento: TSmallintField
       FieldName = 'TipoAsiento'
-    end
-    object SPAConfiguracionContableMovSubCentroCostos: TStringField
-      FieldName = 'SubCentroCostos'
-      Size = 6
     end
   end
   object tbOrigenMonto: TJvMemoryData
@@ -475,8 +492,8 @@ object dmEC: TdmEC
       end>
     TableName = 'SPAAgrupaciones'
     StoreDefs = True
-    Left = 488
-    Top = 96
+    Left = 504
+    Top = 72
     object SPAAgrupacionesIdAgrupacion: TAutoIncField
       AutoGenerateValue = arAutoInc
       FieldName = 'IdAgrupacion'
@@ -501,8 +518,8 @@ object dmEC: TdmEC
       end>
     TableName = 'SPAAgrupacionesCuentas'
     StoreDefs = True
-    Left = 576
-    Top = 72
+    Left = 320
+    Top = 296
     object SPAAgrupacionesCuentasIdAgrupacionCuenta: TAutoIncField
       AutoGenerateValue = arAutoInc
       FieldName = 'IdAgrupacionCuenta'
@@ -513,9 +530,6 @@ object dmEC: TdmEC
     object SPAAgrupacionesCuentasIdTipoOperacion: TIntegerField
       FieldName = 'IdTipoOperacion'
     end
-    object SPAAgrupacionesCuentasIdClasificacion: TIntegerField
-      FieldName = 'IdClasificacion'
-    end
     object SPAAgrupacionesCuentasIdOrigenMonto: TIntegerField
       FieldName = 'IdOrigenMonto'
     end
@@ -523,9 +537,10 @@ object dmEC: TdmEC
       FieldName = 'Cuenta'
       Size = 30
     end
-    object SPAAgrupacionesCuentasSubCentroCostos: TStringField
-      FieldName = 'SubCentroCostos'
-      Size = 6
+    object SPAAgrupacionesCuentasSubCentro: TStringField
+      DisplayWidth = 4
+      FieldName = 'SubCentro'
+      Size = 4
     end
   end
   object Susuarios: TDBISAMTable
@@ -769,8 +784,8 @@ object dmEC: TdmEC
     DatabaseName = 'dbA2'
     EngineVersion = '4.29 Build 1'
     TableName = 'SPAConfiguracionContable'
-    Left = 288
-    Top = 96
+    Left = 304
+    Top = 368
     object SPAConfiguracionContableIdConfiguracionContable: TAutoIncField
       FieldName = 'IdConfiguracionContable'
     end
@@ -785,11 +800,12 @@ object dmEC: TdmEC
     object SPAConfiguracionContableIdTipoOperacion: TIntegerField
       FieldName = 'IdTipoOperacion'
     end
-    object SPAConfiguracionContableIdClasificacion: TIntegerField
-      FieldName = 'IdClasificacion'
-    end
     object SPAConfiguracionContableIdConsecutivo: TIntegerField
       FieldName = 'IdConsecutivo'
+    end
+    object SPAConfiguracionContableSubCentro: TStringField
+      FieldName = 'SubCentro'
+      Size = 4
     end
   end
   object qrDocumentosInventario: TDBISAMQuery
@@ -815,6 +831,7 @@ object dmEC: TdmEC
       '  SOperacionInv.FTI_FORMADEPAGO AS FormaPago,'
       '  SOperacionInv.FTI_FLETEMONEDA AS Flete,'
       '  SOperacionInv.FTI_MONTOPAGADO AS MontoPagado,'
+      '  SOperacionInv.FTI_CLASIFICACION as IdClasificacion,'
       '  :CampoAgrupacionInventario AS Agrupacion,'
       '  SDetalleCompra.FDI_CANTIDAD AS Cantidad,'
       '  SDetalleCompra.FDI_COSTO AS Costo,'
@@ -1096,8 +1113,8 @@ object dmEC: TdmEC
     DatabaseName = 'dbA2'
     EngineVersion = '4.29 Build 1'
     TableName = 'SPAMovimientoTemp'
-    Left = 160
-    Top = 280
+    Left = 504
+    Top = 152
     object SPAMovimientoTempIdMovimientoGenerado: TAutoIncField
       FieldName = 'IdMovimientoGenerado'
       Origin = 'SPAMovimientoTemp.IdMovimientoGenerado'
@@ -1107,9 +1124,6 @@ object dmEC: TdmEC
     end
     object SPAMovimientoTempIdTipoOperacion: TIntegerField
       FieldName = 'IdTipoOperacion'
-    end
-    object SPAMovimientoTempIdClasificacion: TIntegerField
-      FieldName = 'IdClasificacion'
     end
     object SPAMovimientoTempIdDocumento: TIntegerField
       FieldName = 'IdDocumento'
@@ -1169,6 +1183,10 @@ object dmEC: TdmEC
       Origin = 'SPAMovimientoTemp.CCosto'
       Size = 6
     end
+    object SPAMovimientoTempNitNombre: TStringField
+      FieldName = 'NitNombre'
+      Size = 50
+    end
   end
   object qrCodificacionGeneral: TDBISAMQuery
     DatabaseName = 'dbA2'
@@ -1180,7 +1198,7 @@ object dmEC: TdmEC
       '  SPAConfiguracionContableMov.Detalle,'
       '  SPAConfiguracionContableMov.CuentaGeneral,'
       '  SPAConfiguracionContableMov.TipoAsiento,'
-      '  SPAConfiguracionContableMov.SubCentroCostos'
+      '  SPAConfiguracionContable.SubCentro'
       'FROM'
       ' SPAConfiguracionContable'
       
@@ -1226,10 +1244,6 @@ object dmEC: TdmEC
       FieldName = 'TipoAsiento'
       Origin = 'SPAConfiguracionContableMov.TipoAsiento'
     end
-    object qrCodificacionGeneralSubCentroCostos: TStringField
-      FieldName = 'SubCentroCostos'
-      Size = 6
-    end
   end
   object qrConsulta: TDBISAMQuery
     DatabaseName = 'dbA2'
@@ -1245,15 +1259,15 @@ object dmEC: TdmEC
     Connected = True
     DatabaseName = 'dbConsecutivos'
     SessionName = 'Default'
-    Left = 392
-    Top = 176
+    Left = 368
+    Top = 104
   end
   object SPAConsecutivos: TDBISAMTable
     DatabaseName = 'dbConsecutivos'
     EngineVersion = '4.29 Build 1'
     TableName = 'SPAConsecutivos'
-    Left = 360
-    Top = 280
+    Left = 368
+    Top = 160
     object SPAConsecutivosIdConsecutivo: TAutoIncField
       FieldName = 'IdConsecutivo'
     end
@@ -1317,8 +1331,8 @@ object dmEC: TdmEC
     DatabaseName = 'dbA2'
     EngineVersion = '4.29 Build 1'
     TableName = 'SPACuentasxCentro'
-    Left = 256
-    Top = 256
+    Left = 512
+    Top = 360
     object SPACuentasxCentroIdCuentasxCentro: TAutoIncField
       FieldName = 'IdCuentasxCentro'
     end
@@ -1351,8 +1365,8 @@ object dmEC: TdmEC
     DatabaseName = 'dbA2'
     EngineVersion = '4.29 Build 1'
     TableName = 'SPAClasificacionCuentas'
-    Left = 456
-    Top = 264
+    Left = 504
+    Top = 296
     object SPAClasificacionCuentasIdClasificacionCuenta: TAutoIncField
       FieldName = 'IdClasificacionCuenta'
     end
@@ -1380,6 +1394,10 @@ object dmEC: TdmEC
     object SPAClasificacionCuentasCuenta: TStringField
       FieldName = 'Cuenta'
       Size = 30
+    end
+    object SPAClasificacionCuentasSubCentro: TStringField
+      FieldName = 'SubCentro'
+      Size = 4
     end
   end
   object Sclasificacion: TDBISAMTable
@@ -1418,13 +1436,15 @@ object dmEC: TdmEC
       '  SOperacionInv.FTI_BASEIMPONIBLE AS BaseImpuesto,'
       '  SOperacionInv.FTI_IMPUESTO1MONTO AS Impuesto,'
       '  SOperacionInv.FTI_TOTALNETO AS TotalNeto,'
-      '  SOperacionInv.FTI_RESPONSABLE AS Nit,'
+      '  SOperacionInv.FTI_NITCLIENTE AS Nit,'
       '  SOperacionInv.FTI_PERSONACONTACTO AS Contacto,'
       '  SOperacionInv.FTI_TELEFONOCONTACTO AS Telefono,'
       '  SOperacionInv.FTI_SALDOOPERACION AS SaldoOperacion,'
       '  SOperacionInv.FTI_FORMADEPAGO AS FormaPago,'
       '  SOperacionInv.FTI_FLETEMONEDA AS Flete,'
       '  SOperacionInv.FTI_MONTOPAGADO AS MontoPagado,'
+      '  SOperacionInv.FTI_DESCUENTO1MONTO as Descuento1,'
+      '  SOperacionInv.FTI_DESCUENTO2MONTO as Descuento2,'
       '  SDetalleCompra.FDI_CANTIDAD AS Cantidad,'
       '  SDetalleCompra.FDI_PRECIOCONDESCUENTO AS Costo,'
       
@@ -1440,6 +1460,7 @@ object dmEC: TdmEC
         '  SDetalleCompra.FDI_CANTIDAD * SDetalleCompra.FDI_MONTOIMPUESTO' +
         '2 AS TotalImpuesto2Item,'
       '  :IdAgrupacion AS IdAgrupacion,'
+      '  SOperacionInv.FTI_CLASIFICACION as IdClasificacion,'
       '  SOperacionInv.FTI_AUTOINCREMENT AS IdDocumento'
       'FROM'
       ' SDetalleCompra'
@@ -1455,14 +1476,10 @@ object dmEC: TdmEC
       
         '  AND (SOperacionInv.FTI_TIPO=SPAMovimientoGenerado.IdTipoOperac' +
         'ion)'
-      
-        '  AND (SOperacionInv.FTI_CLASIFICACION=SPAMovimientoGenerado.IdC' +
-        'lasificacion)'
       'WHERE'
       '  (SOperacionInv.FTI_STATUS = 1) AND'
       '  (SPAMovimientoGenerado.IdMovimientoGenerado IS NULL) AND'
-      '  (SOperacionInv.FTI_TIPO = :IdTipoOperacion) AND'
-      '  (SOperacionInv.FTI_CLASIFICACION = :IdClasificacion)   AND'
+      '  (SOperacionInv.FTI_TIPO = :IdTipoOperacion)    AND'
       '  (SOperacionInv.FTI_FECHAEMISION <= :FechaCorte)')
     Params = <
       item
@@ -1473,10 +1490,6 @@ object dmEC: TdmEC
       item
         DataType = ftUnknown
         Name = 'IdTipoOperacion'
-      end
-      item
-        DataType = ftUnknown
-        Name = 'IdClasificacion'
       end
       item
         DataType = ftUnknown
@@ -1496,10 +1509,6 @@ object dmEC: TdmEC
       end
       item
         DataType = ftUnknown
-        Name = 'IdClasificacion'
-      end
-      item
-        DataType = ftUnknown
         Name = 'FechaCorte'
       end>
   end
@@ -1510,7 +1519,6 @@ object dmEC: TdmEC
       'SELECT'
       '  SPAMovimientoTemp.IdConfiguracionContable,'
       '  SPAMovimientoTemp.IdTipoOperacion,'
-      '  SPAMovimientoTemp.IdClasificacion,'
       '  SPAMovimientoTemp.IdDocumento,'
       '  SPAMovimientoTemp.IdOrigenMonto,'
       '  SPAMovimientoTemp.Cuenta,'
@@ -1521,8 +1529,9 @@ object dmEC: TdmEC
       '  SPAMovimientoTemp.Nit,'
       '  SPAMovimientoTemp.Detalle,'
       '  SPAMovimientoTemp.Tipo,'
-      '  SUM(SPAMovimientoTemp.Valor) AS Valor,'
       '  SPAMovimientoTemp.CCosto,'
+      '  SPAMovimientoTemp.NitNombre,'
+      '  SUM(SPAMovimientoTemp.Valor) AS Valor,'
       '  SUM(SPAMovimientoTemp.Base) AS Base'
       'FROM'
       ' SPAMovimientoTemp'
@@ -1533,9 +1542,6 @@ object dmEC: TdmEC
       
         '  AND (SPAMovimientoTemp.IdTipoOperacion=SPAConfiguracionContabl' +
         'e.IdTipoOperacion)'
-      
-        '  AND (SPAConfiguracionContable.IdClasificacion=SPAMovimientoTem' +
-        'p.IdClasificacion)'
       'WHERE'
       
         '  (SPAMovimientoTemp.IdConfiguracionContable = :IdConfiguracionC' +
@@ -1544,7 +1550,6 @@ object dmEC: TdmEC
       'GROUP BY'
       '  SPAMovimientoTemp.IdConfiguracionContable,'
       '  SPAMovimientoTemp.IdTipoOperacion,'
-      '  SPAMovimientoTemp.IdClasificacion,'
       '  SPAMovimientoTemp.IdDocumento,'
       '  SPAMovimientoTemp.IdOrigenMonto,'
       '  SPAMovimientoTemp.Cuenta,'
@@ -1555,7 +1560,8 @@ object dmEC: TdmEC
       '  SPAMovimientoTemp.Nit,'
       '  SPAMovimientoTemp.Detalle,'
       '  SPAMovimientoTemp.Tipo,'
-      '  SPAMovimientoTemp.CCosto')
+      '  SPAMovimientoTemp.CCosto,'
+      '  SPAMovimientoTemp.NitNombre')
     Params = <
       item
         DataType = ftUnknown
@@ -1576,5 +1582,24 @@ object dmEC: TdmEC
         DataType = ftUnknown
         Name = 'IdDocumento'
       end>
+  end
+  object tbNits: TJvMemoryData
+    FieldDefs = <>
+    Left = 608
+    Top = 216
+    object tbNitsNit: TStringField
+      FieldName = 'Nit'
+    end
+    object tbNitsNombre: TStringField
+      FieldName = 'Nombre'
+      Size = 40
+    end
+  end
+  object pdProceso: TJvProgressDialog
+    Caption = 'Procesando'
+    Interval = 1
+    ScreenPosition = poOwnerFormCenter
+    Left = 600
+    Top = 72
   end
 end

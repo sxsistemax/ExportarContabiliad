@@ -21,6 +21,7 @@ inherited frAgrupaciones: TfrAgrupaciones
   inherited PageControl1: TPageControl
     Width = 586
     Height = 277
+    ActivePage = tsRegistro
     ExplicitWidth = 586
     ExplicitHeight = 277
     inherited tsListado: TTabSheet
@@ -33,9 +34,11 @@ inherited frAgrupaciones: TfrAgrupaciones
       end
       inherited pBuscar: TPanel
         Width = 578
+        ExplicitWidth = 578
       end
       inherited pFiltro: TPanel
         Width = 578
+        ExplicitWidth = 578
       end
     end
     inherited tsRegistro: TTabSheet

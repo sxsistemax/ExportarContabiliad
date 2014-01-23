@@ -15,8 +15,6 @@ type
     Label3: TLabel;
     eDescripcion: TDBEdit;
     eTipoOperacion: TDBLookupComboBox;
-    eClasificacion: TDBLookupComboBox;
-    Label6: TLabel;
     eConsecutivo: TDBLookupComboBox;
     Label7: TLabel;
     bCuentas: TBitBtn;
@@ -29,6 +27,8 @@ type
     Centros1: TMenuItem;
     CuentasClasificaciones1: TMenuItem;
     Label1: TLabel;
+    Label4: TLabel;
+    eSubCentro: TDBEdit;
     procedure OcultarCamposGrid; override;
     procedure bCuentasClick(Sender: TObject);
     function Validar: boolean; override;
@@ -104,7 +104,6 @@ begin
       SPAConfiguracionContable.Append;
       SPAConfiguracionContableComprobante.Value := qrConsulta.FieldByName('Comprobante').Value;
       SPAConfiguracionContableDescripcion.Value := qrConsulta.FieldByName('Descripcion').Value + ' Copia';
-      SPAConfiguracionContableIdClasificacion.Value := qrConsulta.FieldByName('IdClasificacion').Value;
       SPAConfiguracionContableIdConsecutivo.Value := qrConsulta.FieldByName('IdConsecutivo').Value;
       SPAConfiguracionContableIdTipoOperacion.Value := qrConsulta.FieldByName('IdTipoOperacion').Value;
       SPAConfiguracionContable.Post;
@@ -168,7 +167,8 @@ begin
         
         qrConsulta.Next;
       end;
-      
+
+      ShowMessage('Registro duplicado.');
     except on E: Exception do
       ShowMessage( 'Ocurrio un error duplicando registro. \n' + E.Message);
 
@@ -201,8 +201,6 @@ end;
 function TfrConfiguracionContable.Validar: boolean;
 begin
   Result := inherited;
-
-  Result := false;
 
   if eComprobante.Text = '' then
   Begin

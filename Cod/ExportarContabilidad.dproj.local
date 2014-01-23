@@ -36,6 +36,8 @@
     <Transaction>2013/12/09 17:47:07.498.dfm,C:\Prj\ExportarContabiliad\Cod\Unit1.dfm=C:\Prj\ExportarContabiliad\Cod\uCuentasAgrupaciones.dfm</Transaction>
     <Transaction>2013/12/09 17:47:45.771.pas,C:\Prj\ExportarContabiliad\Cod\uCuentasAgrupaciones.pas=C:\Prj\ExportarContabiliad\Cod\uCuentasClasificaciones.pas</Transaction>
     <Transaction>2013/12/09 17:47:45.771.dfm,C:\Prj\ExportarContabiliad\Cod\uCuentasAgrupaciones.dfm=C:\Prj\ExportarContabiliad\Cod\uCuentasClasificaciones.dfm</Transaction>
+    <Transaction>2014/01/22 07:56:29.596.pas,C:\Prj\ExportarContabiliad\Cod\Unit1.pas=C:\Prj\ExportarContabiliad\Cod\uPendientesDeExportar.pas</Transaction>
+    <Transaction>2014/01/22 07:56:29.596.dfm,C:\Prj\ExportarContabiliad\Cod\Unit1.dfm=C:\Prj\ExportarContabiliad\Cod\uPendientesDeExportar.dfm</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="C:\Prj"/>
@@ -57,22 +59,22 @@
     <File Path="ModelSupport_ExportarContabilidad\MantenimientoSPA"/>
     <File Path="ModelSupport_ExportarContabilidad\MantenimientoSPA\default.txaPackage"/>
     <File Path="ModelSupport_ExportarContabilidad\uAgrupacionesCuentas"/>
-    <File Path="ModelSupport_ExportarContabilidad\uAgrupacionesCuentas\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uAgrupacionesCuentas\default.txaPackage"/>
+    <File Path="ModelSupport_ExportarContabilidad\uAgrupacionesCuentas\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uCentrosCuentas"/>
-    <File Path="ModelSupport_ExportarContabilidad\uCentrosCuentas\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uCentrosCuentas\default.txaPackage"/>
+    <File Path="ModelSupport_ExportarContabilidad\uCentrosCuentas\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uConfiguracionContable"/>
-    <File Path="ModelSupport_ExportarContabilidad\uConfiguracionContable\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uConfiguracionContable\default.txaPackage"/>
+    <File Path="ModelSupport_ExportarContabilidad\uConfiguracionContable\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uConfiguracionContableMov"/>
-    <File Path="ModelSupport_ExportarContabilidad\uConfiguracionContableMov\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uConfiguracionContableMov\default.txaPackage"/>
+    <File Path="ModelSupport_ExportarContabilidad\uConfiguracionContableMov\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uConsecutivos"/>
     <File Path="ModelSupport_ExportarContabilidad\uConsecutivos\default.txaPackage"/>
     <File Path="ModelSupport_ExportarContabilidad\uCuentasClasificaciones"/>
-    <File Path="ModelSupport_ExportarContabilidad\uCuentasClasificaciones\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uCuentasClasificaciones\default.txaPackage"/>
+    <File Path="ModelSupport_ExportarContabilidad\uCuentasClasificaciones\default.txvpck"/>
     <File Path="ModelSupport_ExportarContabilidad\uDatosExportacion"/>
     <File Path="ModelSupport_ExportarContabilidad\uDatosExportacion\default.txaPackage"/>
     <File Path="ModelSupport_ExportarContabilidad\uDatosExportacion\default.txvpck"/>
@@ -107,5 +109,7 @@
     <File Path="uImportarCuentas.dfm"/>
     <File Path="uPrincipal.pas"/>
     <File Path="uPrincipal.dfm"/>
+    <File Path="uPendientesDeExportar.pas"/>
+    <File Path="uPendientesDeExportar.dfm"/>
   </ProjectSortOrder>
 </BorlandProject>

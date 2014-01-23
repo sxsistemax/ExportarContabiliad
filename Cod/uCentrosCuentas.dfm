@@ -31,9 +31,11 @@ inherited frCentrosCuentas: TfrCentrosCuentas
       end
       inherited pBuscar: TPanel
         Width = 592
+        ExplicitWidth = 592
       end
       inherited pFiltro: TPanel
         Width = 592
+        ExplicitWidth = 592
       end
     end
     inherited tsRegistro: TTabSheet

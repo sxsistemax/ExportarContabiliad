@@ -24,7 +24,6 @@ object frPrincipal: TfrPrincipal
     Align = alClient
     BevelInner = bvLowered
     TabOrder = 0
-    ExplicitHeight = 349
     object Label1: TLabel
       Left = 24
       Top = 40
@@ -291,7 +290,6 @@ object frPrincipal: TfrPrincipal
       BevelOuter = bvNone
       Caption = '`'
       TabOrder = 0
-      ExplicitHeight = 49
       object ActionToolBar2: TActionToolBar
         AlignWithMargins = True
         Left = 3
@@ -313,8 +311,6 @@ object frPrincipal: TfrPrincipal
         Orientation = boTopToBottom
         ParentFont = False
         Spacing = 0
-        ExplicitWidth = 440
-        ExplicitHeight = 58
       end
     end
     object Panel3: TPanel
@@ -325,8 +321,6 @@ object frPrincipal: TfrPrincipal
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 328
-      ExplicitHeight = 64
       object btCancelar: TBitBtn
         Left = 82
         Top = 6
@@ -334,6 +328,7 @@ object frPrincipal: TfrPrincipal
         Height = 25
         Caption = 'Cancelar'
         DoubleBuffered = True
+        Enabled = False
         Kind = bkCancel
         ParentDoubleBuffered = False
         TabOrder = 0
@@ -346,6 +341,7 @@ object frPrincipal: TfrPrincipal
         Height = 25
         Caption = 'Guardar'
         DoubleBuffered = True
+        Enabled = False
         Kind = bkOK
         ParentDoubleBuffered = False
         TabOrder = 1
@@ -367,6 +363,7 @@ object frPrincipal: TfrPrincipal
   end
   object dsConfiguracion: TDataSource
     DataSet = dmEC.SPAConfiguracionExportarContabilidad
+    OnStateChange = dsConfiguracionStateChange
     Left = 576
     Top = 8
   end
@@ -395,6 +392,10 @@ object frPrincipal: TfrPrincipal
           item
             Action = aGenerarMovimientoContable
             Caption = '&Generar'
+          end
+          item
+            Action = aPendientesDeExportar
+            Caption = '&Pendientes De Exportar'
           end
           item
             Action = aConsecutivos
@@ -432,6 +433,10 @@ object frPrincipal: TfrPrincipal
     object aConsecutivos: TAction
       Caption = 'Consecutivos'
       OnExecute = aConsecutivosExecute
+    end
+    object aPendientesDeExportar: TAction
+      Caption = 'Pendientes De Exportar'
+      OnExecute = aPendientesDeExportarExecute
     end
   end
 end

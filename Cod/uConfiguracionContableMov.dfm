@@ -31,14 +31,16 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
       end
       inherited pBuscar: TPanel
         Width = 589
+        ExplicitWidth = 589
       end
       inherited pFiltro: TPanel
         Width = 589
+        ExplicitWidth = 589
       end
     end
     inherited tsRegistro: TTabSheet
-      ExplicitLeft = 3
-      ExplicitTop = 25
+      ExplicitLeft = 4
+      ExplicitTop = 27
       ExplicitWidth = 589
       ExplicitHeight = 270
       inherited Bevel1: TBevel
@@ -127,14 +129,6 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
         DataField = 'NombreCuenta'
         DataSource = dsDataSource
       end
-      object Label2: TLabel
-        Left = 16
-        Top = 195
-        Width = 88
-        Height = 13
-        Caption = 'Sub Centro Costos'
-        FocusControl = btAceptar
-      end
       object eCuenta: TDBEdit
         Left = 16
         Top = 110
@@ -190,15 +184,6 @@ inherited frConfiguracionContableMov: TfrConfiguracionContableMov
         DataSource = dsDataSource
         TabOrder = 4
         Visible = False
-      end
-      object eSubCentroCostos: TDBEdit
-        Left = 16
-        Top = 214
-        Width = 177
-        Height = 21
-        DataField = 'SubCentroCostos'
-        DataSource = dsDataSource
-        TabOrder = 5
       end
     end
   end

@@ -58,12 +58,14 @@ begin
   if dgListadoComprobantes.List2.Count > 0 then
   begin
     FechaCorte := FormatDateTime('yyyy-MM-dd', dpFechaCorte.Date);
-      for i := 0 to dgListadoComprobantes.List2.Count - 1 do
-      begin
-        P := Pos( '. ', dgListadoComprobantes.List2[i]);
-        IdConfiguracion := StrToInt( Copy( dgListadoComprobantes.List2[i], P + 2, Length( dgListadoComprobantes.List2[i]) - P + 2));
-        dmEC.ProcesarComprobante(Progreso, lMensaje, IdConfiguracion, FechaCorte);
-      end;
+    for i := 0 to dgListadoComprobantes.List2.Count - 1 do
+    begin
+      P := Pos( '. ', dgListadoComprobantes.List2[i]);
+      IdConfiguracion := StrToInt( Copy( dgListadoComprobantes.List2[i], P + 2, Length( dgListadoComprobantes.List2[i]) - P + 2));
+      dmEC.ProcesarComprobante(Progreso, lMensaje, IdConfiguracion, FechaCorte);
+    end;
+
+    ShowMessage('El proceso finalizó.');
   end
   else
   begin
@@ -84,9 +86,9 @@ begin
   dmEC.SPAConfiguracionContable.First;
   while not dmEC.SPAConfiguracionContable.EOF do
   begin
-    dgListadoComprobantes.List1.Add(dmEC.SPAConfiguracionContableDescripcion.Value + ' - ' +
-                    dmEC.SPAConfiguracionContableComprobante.Value + ' . ' +
-                    IntToStr(dmEC.SPAConfiguracionContableIdConfiguracionContable.Value));
+    dgListadoComprobantes.List1.Add(dmEC.SPAConfiguracionContableDescripcion.AsString + ' - ' +
+                    dmEC.SPAConfiguracionContableComprobante.AsString + ' . ' +
+                    dmEC.SPAConfiguracionContableIdConfiguracionContable.AsString);
     dmEC.SPAConfiguracionContable.Next;
   end;
 end;

@@ -49,6 +49,7 @@ type
     aConsecutivos: TAction;
     Label11: TLabel;
     PorcentajeCREE: TDBEdit;
+    aPendientesDeExportar: TAction;
     procedure SpeedButton1Click(Sender: TObject);
     procedure btGuardarClick(Sender: TObject);
     procedure btCancelarClick(Sender: TObject);
@@ -60,6 +61,8 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure aConsecutivosExecute(Sender: TObject);
+    procedure dsConfiguracionStateChange(Sender: TObject);
+    procedure aPendientesDeExportarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -78,7 +81,8 @@ implementation
 
 uses uDatosExportacion, uBaseDatosA2, uTablasConBlobAdministrativo, uUtilidadesSPA,
   uImportarCuentas, uCuentas, uConfiguracionContable, uAgrupaciones,
-  uGenerarMovimientoContable, uConsecutivos, uCentrosCuentas;
+  uGenerarMovimientoContable, uConsecutivos, uCentrosCuentas,
+  uPendientesDeExportar;
 
 {$R *.dfm}
 
@@ -110,6 +114,15 @@ end;
 procedure TfrPrincipal.aImportarCuentasExecute(Sender: TObject);
 begin
   ImportarCuentas;
+end;
+
+procedure TfrPrincipal.aPendientesDeExportarExecute(Sender: TObject);
+begin
+  dmEC.SPAMovimientoGenerado.Filter := 'Exportado = False';
+  dmEC.SPAMovimientoGenerado.Filtered := True;
+  TfrPendientesDeExportar.prMantenimiento(dmEC.SPAMovimientoGenerado, 'IdMovimientoGenerado');
+  dmEC.SPAMovimientoGenerado.Filter := '';
+  dmEC.SPAMovimientoGenerado.Filtered := False;
 end;
 
 procedure TfrPrincipal.BitBtn1Click(Sender: TObject);
@@ -148,6 +161,12 @@ end;
 procedure TfrPrincipal.Consecutivos;
 begin
   TfrConsecutivos.prMantenimiento(dmEC.SPAConsecutivos, 'IdConsecutivo');
+end;
+
+procedure TfrPrincipal.dsConfiguracionStateChange(Sender: TObject);
+begin
+  btGuardar.Enabled := dsConfiguracion.State in [dsEdit];
+  btCancelar.Enabled := dsConfiguracion.State in [dsEdit];
 end;
 
 procedure TfrPrincipal.FormCreate(Sender: TObject);
@@ -191,7 +210,7 @@ begin
     dmEC.AbrirConfiguracion;
 
     // pone en edicion la configuracion
-    dmEC.SPAConfiguracionExportarContabilidad.Edit;
+    //dmEC.SPAConfiguracionExportarContabilidad.Edit;
 
     // Crea las tablas del sistema
     dmEC.AbrirSPAConsecutivos;

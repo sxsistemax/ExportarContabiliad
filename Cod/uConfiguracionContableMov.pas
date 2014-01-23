@@ -21,8 +21,6 @@ type
     DBEdit1: TDBEdit;
     DBText1: TDBText;
     eIdConfiguracionContable: TDBEdit;
-    Label2: TLabel;
-    eSubCentroCostos: TDBEdit;
     procedure OcultarCamposGrid; override;
     procedure ConectarMaestroDetalle; override;
     function Validar : boolean; override;

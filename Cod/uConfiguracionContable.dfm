@@ -40,7 +40,7 @@ inherited frConfiguracionContable: TfrConfiguracionContable
       end
     end
     inherited tsRegistro: TTabSheet
-      ExplicitLeft = 3
+      ExplicitLeft = 4
       ExplicitTop = 27
       ExplicitWidth = 721
       ExplicitHeight = 312
@@ -80,16 +80,9 @@ inherited frConfiguracionContable: TfrConfiguracionContable
         Caption = 'Descripcion'
         FocusControl = eDescripcion
       end
-      object Label6: TLabel
-        Left = 24
-        Top = 150
-        Width = 59
-        Height = 13
-        Caption = 'Clasificaci'#243'n'
-      end
       object Label7: TLabel
         Left = 24
-        Top = 198
+        Top = 148
         Width = 59
         Height = 13
         Caption = 'Consecutivo'
@@ -100,6 +93,14 @@ inherited frConfiguracionContable: TfrConfiguracionContable
         Width = 76
         Height = 13
         Caption = 'Tipo Operacion:'
+      end
+      object Label4: TLabel
+        Left = 24
+        Top = 194
+        Width = 50
+        Height = 13
+        Caption = 'SubCentro'
+        FocusControl = eSubCentro
       end
       object eComprobante: TDBEdit
         Left = 24
@@ -128,30 +129,59 @@ inherited frConfiguracionContable: TfrConfiguracionContable
         DataSource = dsDataSource
         TabOrder = 2
       end
-      object eClasificacion: TDBLookupComboBox
-        Left = 24
-        Top = 169
-        Width = 241
-        Height = 21
-        DataField = 'Clasificacion'
-        DataSource = dsDataSource
-        TabOrder = 3
-      end
       object eConsecutivo: TDBLookupComboBox
         Left = 24
-        Top = 217
+        Top = 167
         Width = 241
         Height = 21
         DataField = 'Consecutivo'
         DataSource = dsDataSource
-        TabOrder = 4
+        TabOrder = 3
       end
       object bCuentas: TBitBtn
         Left = 24
-        Top = 270
-        Width = 105
+        Top = 267
+        Width = 223
         Height = 25
-        Caption = 'Cuentas'
+        Caption = 'Configuraci'#243'n Cuentas'
+        DoubleBuffered = True
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000C40E0000C40E00000000000000000000DBDBDBCCCCCC
+          CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+          CCCCCCCCCCCCCCDBDBDBBC9444B67E0EB57C09B57C09B57C09B57B08B47B08B5
+          7B08B57B08B47B08B57B08B57B08B57B08B57C09B67E0EBC9444B67E0EFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFB67E0EB57C09FFFFFFA09D9E8F8F8F939291D2D1D2FFFFFFC1
+          C2C3C1C2C4FFFFFFC1C2C4C3C4C6C3C4C6C2C4C7FFFFFFB57B09B57B08FFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFB47B08B57B08FFFFFF9996968B88868F8C8ACAC9C8FCFCFBBB
+          BBBBBBBBBBFCFCFBBBBBBBBDBDBDBDBDBDBBBCBEFFFFFFB57B08B57B08FFFFFF
+          FCFDFEFFFFFFFFFFFEFAFAF9F7F7F6F8F8F7F8F8F7F7F7F6F8F9F7FAFAF9FAFA
+          F9F8F9F9FFFFFFB57B08B57B08FFFFFF92908F868381888684C4C1BFF3F2F1B3
+          B2B2B3B2B2F4F2F1B3B2B2B5B4B4B5B4B4B2B2B4FFFFFFB57B08B57B08FFFFFF
+          F2F1F2F6F5F5F5F4F4F0F0EFEEEDECEFEEEDEFEEEDEEEDECEFEEEDF1F0EFF1F0
+          EFEEEEEEFFFFFFB57B08B57C09FFFFFF8B8988807E7C83817FBABAB7E9E8E7AC
+          ABAAADACABE9E8E7ADACABAFAEADAEADACABABABFFFFFFB57B08B57B09FFFFFF
+          E6E6E5EBEAE8EAE9E7E5E4E2E2E1DFE4E3E1E4E3E1E3E2DFE4E3E1E6E5E2E5E4
+          E2E2E2E1FFFFFFB57B08B57C09FFFFFF807E7D767372797776AEADACDADAD9A1
+          A09FA1A09FDADADAA1A1A0A2A2A1A2A2A19F9FA0FFFFFFB57B09B57C0BFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFB57C0BB67F10F5DDB7DC9D37DC9E39DC9F3ADB9E39DB9E39DB
+          9E39DB9E39DB9E39DB9E39DC9E39DB9E39DB9D37F5DDB7B67F10B88216EFD09E
+          ECCD99ECCD99ECCD9AECCD9AECCD9AECCD9AECCD9AECCD9AECCD9AECCD9AECCD
+          99ECCD99EFD09EB88216CBA353B88217B78115B68114B68115B68115B68115B6
+          8115B68115B68115B68115B68115B68114B78115B88217CBA353}
+        ParentDoubleBuffered = False
+        TabOrder = 4
+        OnClick = bCuentasClick
+      end
+      object bCentros: TBitBtn
+        Left = 253
+        Top = 267
+        Width = 223
+        Height = 25
+        Caption = 'Configurar Cuentas x Centros'
         DoubleBuffered = True
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
@@ -182,14 +212,14 @@ inherited frConfiguracionContable: TfrConfiguracionContable
           8115B68115B68115B68115B68115B68114B78115B88217CBA353}
         ParentDoubleBuffered = False
         TabOrder = 5
-        OnClick = bCuentasClick
+        OnClick = bCentrosClick
       end
-      object bCentros: TBitBtn
-        Left = 135
-        Top = 270
-        Width = 104
+      object bClasifiaciones: TBitBtn
+        Left = 482
+        Top = 267
+        Width = 223
         Height = 25
-        Caption = 'Centros'
+        Caption = 'Configuraci'#243'n Cuentas x Clasificaciones'
         DoubleBuffered = True
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
@@ -220,45 +250,16 @@ inherited frConfiguracionContable: TfrConfiguracionContable
           8115B68115B68115B68115B68115B68114B78115B88217CBA353}
         ParentDoubleBuffered = False
         TabOrder = 6
-        OnClick = bCentrosClick
-      end
-      object bClasifiaciones: TBitBtn
-        Left = 245
-        Top = 270
-        Width = 103
-        Height = 25
-        Caption = 'Clasificaciones'
-        DoubleBuffered = True
-        Glyph.Data = {
-          36030000424D3603000000000000360000002800000010000000100000000100
-          18000000000000030000C40E0000C40E00000000000000000000DBDBDBCCCCCC
-          CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-          CCCCCCCCCCCCCCDBDBDBBC9444B67E0EB57C09B57C09B57C09B57B08B47B08B5
-          7B08B57B08B47B08B57B08B57B08B57B08B57C09B67E0EBC9444B67E0EFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFB67E0EB57C09FFFFFFA09D9E8F8F8F939291D2D1D2FFFFFFC1
-          C2C3C1C2C4FFFFFFC1C2C4C3C4C6C3C4C6C2C4C7FFFFFFB57B09B57B08FFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFB47B08B57B08FFFFFF9996968B88868F8C8ACAC9C8FCFCFBBB
-          BBBBBBBBBBFCFCFBBBBBBBBDBDBDBDBDBDBBBCBEFFFFFFB57B08B57B08FFFFFF
-          FCFDFEFFFFFFFFFFFEFAFAF9F7F7F6F8F8F7F8F8F7F7F7F6F8F9F7FAFAF9FAFA
-          F9F8F9F9FFFFFFB57B08B57B08FFFFFF92908F868381888684C4C1BFF3F2F1B3
-          B2B2B3B2B2F4F2F1B3B2B2B5B4B4B5B4B4B2B2B4FFFFFFB57B08B57B08FFFFFF
-          F2F1F2F6F5F5F5F4F4F0F0EFEEEDECEFEEEDEFEEEDEEEDECEFEEEDF1F0EFF1F0
-          EFEEEEEEFFFFFFB57B08B57C09FFFFFF8B8988807E7C83817FBABAB7E9E8E7AC
-          ABAAADACABE9E8E7ADACABAFAEADAEADACABABABFFFFFFB57B08B57B09FFFFFF
-          E6E6E5EBEAE8EAE9E7E5E4E2E2E1DFE4E3E1E4E3E1E3E2DFE4E3E1E6E5E2E5E4
-          E2E2E2E1FFFFFFB57B08B57C09FFFFFF807E7D767372797776AEADACDADAD9A1
-          A09FA1A09FDADADAA1A1A0A2A2A1A2A2A19F9FA0FFFFFFB57B09B57C0BFFFFFF
-          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-          FFFFFFFFFFFFFFB57C0BB67F10F5DDB7DC9D37DC9E39DC9F3ADB9E39DB9E39DB
-          9E39DB9E39DB9E39DB9E39DC9E39DB9E39DB9D37F5DDB7B67F10B88216EFD09E
-          ECCD99ECCD99ECCD9AECCD9AECCD9AECCD9AECCD9AECCD9AECCD9AECCD9AECCD
-          99ECCD99EFD09EB88216CBA353B88217B78115B68114B68115B68115B68115B6
-          8115B68115B68115B68115B68115B68114B78115B88217CBA353}
-        ParentDoubleBuffered = False
-        TabOrder = 7
         OnClick = bClasifiacionesClick
+      end
+      object eSubCentro: TDBEdit
+        Left = 24
+        Top = 210
+        Width = 199
+        Height = 21
+        DataField = 'SubCentro'
+        DataSource = dsDataSource
+        TabOrder = 7
       end
     end
   end
@@ -279,15 +280,15 @@ inherited frConfiguracionContable: TfrConfiguracionContable
       Caption = '-'
     end
     object Cuentas1: TMenuItem
-      Caption = 'Cuentas'
+      Caption = 'Configurar Cuentas'
       OnClick = bCuentasClick
     end
     object Centros1: TMenuItem
-      Caption = 'Cuentas Centros'
+      Caption = 'Configurar Cuentas x Centros'
       OnClick = bCentrosClick
     end
     object CuentasClasificaciones1: TMenuItem
-      Caption = 'Cuentas Clasificaci'#243'n'
+      Caption = 'Configurar Cuentas x Clasificaci'#243'n'
       OnClick = bClasifiacionesClick
     end
   end

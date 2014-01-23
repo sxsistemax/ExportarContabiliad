@@ -18,11 +18,10 @@ type
     DBText1: TDBText;
     dsMaestro: TDataSource;
     eIdAgrupacion: TDBEdit;
-    Label6: TLabel;
     eTipoOperacion: TDBLookupComboBox;
-    eClasificacion: TDBLookupComboBox;
-    eSubCentroCostos: TDBEdit;
+    Label4: TLabel;
     Label3: TLabel;
+    eSubCentro: TDBEdit;
     procedure SpeedButton1Click(Sender: TObject);
     procedure OcultarCamposGrid; override;
     procedure ConectarMaestroDetalle; override;

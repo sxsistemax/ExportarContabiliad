@@ -19,6 +19,8 @@ type
     eOrigenMonto: TDBLookupComboBox;
     eIdConfiguracionContable: TDBEdit;
     eClasificacion: TDBLookupComboBox;
+    Label2: TLabel;
+    eSubCentro: TDBEdit;
     procedure SpeedButton1Click(Sender: TObject);
     procedure btAceptarClick(Sender: TObject);
     procedure OcultarCamposGrid; override;

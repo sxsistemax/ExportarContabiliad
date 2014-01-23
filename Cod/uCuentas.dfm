@@ -349,12 +349,23 @@ inherited frCuentas: TfrCuentas
       end
       inherited pBuscar: TPanel
         Width = 755
+        ExplicitWidth = 755
       end
       inherited pFiltro: TPanel
         Width = 755
+        ExplicitWidth = 755
+      end
+      inherited pCampos: TPanel
+        inherited cbCampoBusqueda: TComboBox
+          Items.Strings = (
+            'CODIGO'
+            'DESCRIPCION')
+        end
       end
     end
     inherited tsRegistro: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 27
       ExplicitWidth = 755
       ExplicitHeight = 376
       inherited Bevel1: TBevel

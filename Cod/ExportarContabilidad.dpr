@@ -7,7 +7,6 @@ uses
   uUtilidadesSPA in '..\..\CompartidosA2\uUtilidadesSPA.pas',
   uTablasConBlobAdministrativo in '..\..\CompartidosA2\uTablasConBlobAdministrativo.pas' {dmAdministrativo: TDataModule},
   uImportarCuentas in 'uImportarCuentas.pas' {frImportarCuentas},
-  MantenimientoSPA in 'C:\Vcl\Comun\MantenimientoSPA.pas' {fmBaseMantenimiento},
   uConfiguracionContable in 'uConfiguracionContable.pas' {frConfiguracionContable},
   uCuentas in 'uCuentas.pas' {frCuentas},
   uConfiguracionContableMov in 'uConfiguracionContableMov.pas' {frConfiguracionContableMov},
@@ -17,7 +16,9 @@ uses
   uGenerarMovimientoContable in 'uGenerarMovimientoContable.pas' {frGenerarMovimientoContable},
   uConsecutivos in 'uConsecutivos.pas' {frConsecutivos},
   uCentrosCuentas in 'uCentrosCuentas.pas' {frCentrosCuentas},
-  uCuentasClasificaciones in 'uCuentasClasificaciones.pas' {frCuentasClasifiaciones};
+  uCuentasClasificaciones in 'uCuentasClasificaciones.pas' {frCuentasClasifiaciones},
+  MantenimientoSPA in 'C:\Vcl\Comun\MantenimientoSPA.pas' {fmBaseMantenimiento},
+  uPendientesDeExportar in 'uPendientesDeExportar.pas' {frPendientesDeExportar};
 
 {$R *.res}
 
