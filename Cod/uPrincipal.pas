@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, DB, ExtCtrls, Buttons, JvBaseDlg, JvSelectDirectory,
   StdCtrls, DBCtrls, Mask, dbisamtb, JvDialogs, ActnList, ToolWin, ActnMan,
-  ActnCtrls, PlatformDefaultStyleActnCtrls;
+  ActnCtrls, PlatformDefaultStyleActnCtrls, uSeguridad, OnGuard,
+  JvComponentBase, JvFormPlacement, JvAppStorage, JvAppRegistryStorage;
 
 type
   TfrPrincipal = class(TForm)
@@ -50,6 +51,7 @@ type
     Label11: TLabel;
     PorcentajeCREE: TDBEdit;
     aPendientesDeExportar: TAction;
+    bRegistro: TBitBtn;
     procedure SpeedButton1Click(Sender: TObject);
     procedure btGuardarClick(Sender: TObject);
     procedure btCancelarClick(Sender: TObject);
@@ -63,6 +65,7 @@ type
     procedure aConsecutivosExecute(Sender: TObject);
     procedure dsConfiguracionStateChange(Sender: TObject);
     procedure aPendientesDeExportarExecute(Sender: TObject);
+    procedure bRegistroClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -72,6 +75,8 @@ type
     procedure Agrupaciones;
     procedure ProcesoGenerar;
     procedure Consecutivos;
+    procedure PendienteDeExportar;
+    procedure CargarDatosAplicaion;
   end;
 
 var
@@ -84,7 +89,20 @@ uses uDatosExportacion, uBaseDatosA2, uTablasConBlobAdministrativo, uUtilidadesS
   uGenerarMovimientoContable, uConsecutivos, uCentrosCuentas,
   uPendientesDeExportar;
 
+Const
+  IdentificadorAplicacion : TKey = ($8D,$B9,$9C,$9F,$3C,$91,$19,$55,$C3,$4D,$D5,$3E,$FD,$08,$2A,$DD);
+
+
 {$R *.dfm}
+
+procedure TfrPrincipal.CargarDatosAplicaion;
+begin
+  // Se debe sobre escribir para llenar los datos necesaros de la aplicación
+
+  // Ejemplo el identificador para validar el registro.
+  Key := IdentificadorAplicacion;
+end;
+
 
 procedure TfrPrincipal.aAgrupacionesExecute(Sender: TObject);
 begin
@@ -118,16 +136,17 @@ end;
 
 procedure TfrPrincipal.aPendientesDeExportarExecute(Sender: TObject);
 begin
-  dmEC.SPAMovimientoGenerado.Filter := 'Exportado = False';
-  dmEC.SPAMovimientoGenerado.Filtered := True;
-  TfrPendientesDeExportar.prMantenimiento(dmEC.SPAMovimientoGenerado, 'IdMovimientoGenerado');
-  dmEC.SPAMovimientoGenerado.Filter := '';
-  dmEC.SPAMovimientoGenerado.Filtered := False;
+  PendienteDeExportar;
 end;
 
 procedure TfrPrincipal.BitBtn1Click(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrPrincipal.bRegistroClick(Sender: TObject);
+begin
+  MostrarRegistrado;
 end;
 
 procedure TfrPrincipal.btCancelarClick(Sender: TObject);
@@ -171,6 +190,12 @@ end;
 
 procedure TfrPrincipal.FormCreate(Sender: TObject);
 begin
+  CargarDatosAplicaion;
+
+  ModoDemo := True;
+
+  ValidarRegistro( ModoDemo) ;
+
   OpcionParametro;
 
   // Hace la verificación de sEmpresa.Dat
@@ -265,11 +290,26 @@ begin
             if not ModoPruebas then
               Halt(1);
           end;
+      7 : begin
+            Self.Visible := false;
+            PendienteDeExportar;
+            if not ModoPruebas then
+              Halt(1);
+          end;
     else  begin
             ShowMessage('La opción no esta implementada.');
             halt(1);
           end;
   End;
+end;
+
+procedure TfrPrincipal.PendienteDeExportar;
+begin
+  dmEC.SPAMovimientoGenerado.Filter := 'Exportado = False';
+  dmEC.SPAMovimientoGenerado.Filtered := True;
+  TfrPendientesDeExportar.prMantenimiento(dmEC.SPAMovimientoGenerado, 'IdMovimientoGenerado');
+  dmEC.SPAMovimientoGenerado.Filter := '';
+  dmEC.SPAMovimientoGenerado.Filtered := False;
 end;
 
 procedure TfrPrincipal.ProcesoGenerar;

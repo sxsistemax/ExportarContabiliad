@@ -412,6 +412,7 @@ type
     procedure ExportarContai;
     Function NombreMovimiento : string;
     Function NombreNit : string;
+    function ValidarDemo : boolean;
   end;
 
 var
@@ -644,13 +645,30 @@ begin
     IdConsecutivo   := SPAConfiguracionContableIdConsecutivo.Value;
 
     case tTransaccionesOperacionesInv(IdTipoOperacion) of
-      toiCompras, toiDevoluciónCompras :
+      toiCompras, toiDevoluciónCompras, toiFacturas, toiDevoluciónVentas, toiCargos, 
+      toiDescargos, toiAjustes, toiTraslados:
         begin
           ProcesarCompras(IdConfiguracionContable, IdTipoOperacion, IdConsecutivo, FechaCorte);
         end;
     end;
       
   end;
+end;
+
+
+function TdmEC.ValidarDemo: boolean;
+begin
+  Result := False;
+  if ModoDemo then
+  begin
+    if SPAMovimientoGenerado.RecordCount >= 20 then
+      ShowMessage('Esta en modo demo y solo se pueden generar 20 registros contables')
+    else
+      Result := true;
+  end
+  else
+    Result := true;
+  
 end;
 
 procedure TdmEC.AbrirSPAAgrupaciones;
@@ -1149,7 +1167,8 @@ begin
     VarArrayOf([IdAgrupacion, IdTipoOperacion, IdOrigenMonto]), []) then
   begin
     Result := SPAAgrupacionesCuentasCuenta.Value;
-    SubCentroCosto := VarToStr( SPAAgrupacionesCuentasSubCentro.Value);
+    if VarToStr( SPAAgrupacionesCuentasSubCentro.Value) <> '' then
+      SubCentroCosto := VarToStr( SPAAgrupacionesCuentasSubCentro.Value);
   end;
 end;
 
@@ -1172,7 +1191,8 @@ begin
     VarArrayOf([IdConfiguracionContable, IdClasificacion, IdOrigenMonto]), []) then
   begin
     Result := SPAClasificacionCuentasCuenta.Value;
-    SubCentroCosto := VarToStr( SPAClasificacionCuentasSubCentro.Value);
+    if VarToStr( SPAClasificacionCuentasSubCentro.Value) <> '' then
+      SubCentroCosto := VarToStr( SPAClasificacionCuentasSubCentro.Value);
   end;
 end;
 
@@ -1290,6 +1310,9 @@ begin
     FProgreso.Max := qrDocumentosInventario.RecordCount;
     while not qrDocumentosInventario.Eof do
     begin
+      if not ValidarDemo then
+        Exit;
+      
 
       // Borra el temporal
       EjecutarConsulta(tcBorrarMovimientoTemporal, IdConfiguracionContable, qrDocumentosInventario.FieldByName('IdDocumento').Value);
@@ -1337,7 +1360,7 @@ begin
                       qrCodificacionGeneralIdOrigenMonto.Value, Cuenta);
 
           // Busca la cuenta en agrupacion
-          Cuenta := BuscarCuentaAgrupacion(qrDocumentosInventario.FieldByName('IdAgrupacion').Value,
+          Cuenta := BuscarCuentaAgrupacion( StrToInt( '0' + qrDocumentosInventario.FieldByName('IdAgrupacion').AsString),
                       IdTipoOperacion, qrCodificacionGeneralIdOrigenMonto.Value,
                       Cuenta, SubCentroCosto);
 
