@@ -20,6 +20,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vclx;vcl;vclimg;dbrtl;Rave77VCL;bdertl;rtl;vclactnband;vcldb;vcldbx;vcltouch;xmlrtl;dsnap;dsnapcon;TeeUI;TeeDB;Tee;vclib;ibxpress;adortl;IndyCore;IndySystem;IndyProtocols;inet;intrawebdb_100_140;Intraweb_100_140;VclSmp;vclie;websnap;webdsnap;inetdb;inetdbbde;inetdbxpress;soaprtl;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DbxClientDriver;DataSnapServer;DBXInterBaseDriver;DBXMySQLDriver;dbxcds;DBXFirebirdDriver;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;dbisam429r2010r;frx14;frxADO14;frxBDE14;frxcs14;frxDB14;frxDBX14;frxe14;frxIBX14;frxTee14;fs14;fsADO14;fsBDE14;fsDB14;fsIBX14;fsTee14;JclDeveloperTools;Jcl;JclVcl;JclContainers;JvCore;JvSystem;JvStdCtrls;JvAppFrm;JvBands;JvDB;JvDlgs;JvBDE;JvControls;JvCmp;JvCrypt;JvCustom;JvDocking;JvDotNetCtrls;JvGlobus;JvHMI;JvJans;JvManagedThreads;JvMM;JvNet;JvPageComps;JvPascalInterpreter;JvPluginSystem;JvPrintPreview;JvRuntimeDesign;JvTimeFramework;JvWizards;JvXPCtrls</DCC_UsePackage>
 			<DCC_ExeOutput>..\Exe\</DCC_ExeOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
 			<DCC_DependencyCheckOutputName>..\Exe\ExportarContabilidad.exe</DCC_DependencyCheckOutputName>
@@ -86,11 +87,14 @@
 			<DCCReference Include="uCuentasClasificaciones.pas">
 				<Form>frCuentasClasifiaciones</Form>
 			</DCCReference>
+			<DCCReference Include="uPendientesDeExportar.pas">
+				<Form>frPendientesDeExportar</Form>
+			</DCCReference>
 			<DCCReference Include="C:\Vcl\Comun\MantenimientoSPA.pas">
 				<Form>fmBaseMantenimiento</Form>
 			</DCCReference>
-			<DCCReference Include="uPendientesDeExportar.pas">
-				<Form>frPendientesDeExportar</Form>
+			<DCCReference Include="uClasificaciones.pas">
+				<Form>fmClasificaciones</Form>
 			</DCCReference>
 			<None Include="ModelSupport_ExportarContabilidad\default.txaPackage"/>
 			<None Include="SMenuTerceros.Cfg"/>
@@ -146,7 +150,7 @@
 						<VersionInfo Name="MajorVer">1</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>
 						<VersionInfo Name="Release">1</VersionInfo>
-						<VersionInfo Name="Build">12</VersionInfo>
+						<VersionInfo Name="Build">22</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -158,7 +162,7 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">Serfaty Pacheco Asesosres S.A.S</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">Permite enlazar los datos del administrativo a otras contabilidades</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">1.0.1.12</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.0.1.22</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName"/>
 						<VersionInfoKeys Name="LegalCopyright"/>
 						<VersionInfoKeys Name="LegalTrademarks"/>
@@ -167,10 +171,7 @@
 						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
-					<Excluded_Packages>
-						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k140.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-						<Excluded_Packages Name="$(BDS)\bin\dclofficexp140.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-					</Excluded_Packages>
+					<Excluded_Packages/>
 				</Delphi.Personality>
 				<ModelSupport>True</ModelSupport>
 			</BorlandProject>

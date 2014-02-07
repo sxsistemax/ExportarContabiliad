@@ -52,6 +52,7 @@ type
     PorcentajeCREE: TDBEdit;
     aPendientesDeExportar: TAction;
     bRegistro: TBitBtn;
+    aClasificaciones: TAction;
     procedure SpeedButton1Click(Sender: TObject);
     procedure btGuardarClick(Sender: TObject);
     procedure btCancelarClick(Sender: TObject);
@@ -66,6 +67,7 @@ type
     procedure dsConfiguracionStateChange(Sender: TObject);
     procedure aPendientesDeExportarExecute(Sender: TObject);
     procedure bRegistroClick(Sender: TObject);
+    procedure aClasificacionesExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -75,6 +77,7 @@ type
     procedure Agrupaciones;
     procedure ProcesoGenerar;
     procedure Consecutivos;
+    procedure Clasificaciones;
     procedure PendienteDeExportar;
     procedure CargarDatosAplicaion;
   end;
@@ -87,7 +90,7 @@ implementation
 uses uDatosExportacion, uBaseDatosA2, uTablasConBlobAdministrativo, uUtilidadesSPA,
   uImportarCuentas, uCuentas, uConfiguracionContable, uAgrupaciones,
   uGenerarMovimientoContable, uConsecutivos, uCentrosCuentas,
-  uPendientesDeExportar;
+  uPendientesDeExportar, uClasificaciones;
 
 Const
   IdentificadorAplicacion : TKey = ($8D,$B9,$9C,$9F,$3C,$91,$19,$55,$C3,$4D,$D5,$3E,$FD,$08,$2A,$DD);
@@ -109,6 +112,11 @@ begin
   Agrupaciones;
 end;
 
+procedure TfrPrincipal.aClasificacionesExecute(Sender: TObject);
+begin
+  Clasificaciones;
+end;
+
 procedure TfrPrincipal.aConfiguracionContableExecute(Sender: TObject);
 begin
   ConfiguracionContable;
@@ -122,6 +130,10 @@ end;
 procedure TfrPrincipal.aGenerarMovimientoContableExecute(Sender: TObject);
 begin
   ProcesoGenerar;
+end;
+procedure TfrPrincipal.Clasificaciones;
+begin
+  TfmClasificaciones.prMantenimiento(dmEC.SClasificacion, 'FCL_Codigo');
 end;
 
 procedure TfrPrincipal.Agrupaciones;
@@ -293,6 +305,12 @@ begin
       7 : begin
             Self.Visible := false;
             PendienteDeExportar;
+            if not ModoPruebas then
+              Halt(1);
+          end;
+      8 : begin
+            Self.Visible := false;
+            Clasificaciones;
             if not ModoPruebas then
               Halt(1);
           end;

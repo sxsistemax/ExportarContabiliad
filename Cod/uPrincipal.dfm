@@ -3,7 +3,7 @@ object frPrincipal: TfrPrincipal
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Exportar a Contabilidad'
-  ClientHeight = 417
+  ClientHeight = 426
   ClientWidth = 615
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object frPrincipal: TfrPrincipal
     Left = 0
     Top = 0
     Width = 615
-    Height = 360
+    Height = 357
     Align = alClient
     BevelInner = bvLowered
     TabOrder = 0
@@ -275,9 +275,9 @@ object frPrincipal: TfrPrincipal
   end
   object Panel2: TPanel
     Left = 0
-    Top = 360
+    Top = 357
     Width = 615
-    Height = 57
+    Height = 69
     Align = alBottom
     BevelInner = bvLowered
     TabOrder = 1
@@ -285,7 +285,7 @@ object frPrincipal: TfrPrincipal
       Left = 2
       Top = 2
       Width = 303
-      Height = 53
+      Height = 65
       Align = alLeft
       BevelOuter = bvNone
       Caption = '`'
@@ -294,7 +294,7 @@ object frPrincipal: TfrPrincipal
         Left = 0
         Top = 0
         Width = 303
-        Height = 53
+        Height = 65
         ActionManager = amAcciones
         Align = alClient
         Caption = 'ActionToolBar2'
@@ -317,7 +317,7 @@ object frPrincipal: TfrPrincipal
       Left = 305
       Top = 2
       Width = 537
-      Height = 53
+      Height = 65
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 1
@@ -446,6 +446,10 @@ object frPrincipal: TfrPrincipal
             CommandProperties.Font.Name = 'Tahoma'
             CommandProperties.Font.Style = []
             CommandProperties.Height = 0
+          end
+          item
+            Action = aClasificaciones
+            Caption = 'C&lasificaciones'
           end>
         ActionBar = ActionToolBar2
       end>
@@ -475,6 +479,10 @@ object frPrincipal: TfrPrincipal
     object aPendientesDeExportar: TAction
       Caption = 'Pendientes De Exportar'
       OnExecute = aPendientesDeExportarExecute
+    end
+    object aClasificaciones: TAction
+      Caption = 'Clasificaciones'
+      OnExecute = aClasificacionesExecute
     end
   end
 end

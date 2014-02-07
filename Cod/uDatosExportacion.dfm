@@ -336,8 +336,8 @@ object dmEC: TdmEC
       Size = 5
     end
     object SPAMovimientoGeneradoDocumento: TStringField
+      DisplayWidth = 20
       FieldName = 'Documento'
-      Size = 9
     end
     object SPAMovimientoGeneradoDocumentoRef: TStringField
       FieldName = 'DocumentoRef'
@@ -371,6 +371,13 @@ object dmEC: TdmEC
     object SPAMovimientoGeneradoNitNombre: TStringField
       FieldName = 'NitNombre'
       Size = 50
+    end
+    object SPAMovimientoGeneradoPlazo: TIntegerField
+      FieldName = 'Plazo'
+    end
+    object SPAMovimientoGeneradoTransaccionBancaria: TStringField
+      FieldName = 'TransaccionBancaria'
+      Size = 3
     end
   end
   object SPAConfiguracionContableMov: TDBISAMTable
@@ -867,247 +874,6 @@ object dmEC: TdmEC
     TableName = 'Sinventario'
     Left = 224
     Top = 16
-    object SinventarioFI_CODIGO: TStringField
-      FieldName = 'FI_CODIGO'
-      Required = True
-      Size = 30
-    end
-    object SinventarioFI_DESCRIPCION: TStringField
-      FieldName = 'FI_DESCRIPCION'
-      Required = True
-      Size = 40
-    end
-    object SinventarioFI_CATEGORIA: TStringField
-      FieldName = 'FI_CATEGORIA'
-      Required = True
-      Size = 30
-    end
-    object SinventarioFI_DESCRIPCIONDETALLADA: TMemoField
-      FieldName = 'FI_DESCRIPCIONDETALLADA'
-      BlobType = ftMemo
-    end
-    object SinventarioFI_VENDEDOR: TStringField
-      FieldName = 'FI_VENDEDOR'
-      Size = 30
-    end
-    object SinventarioFI_STATUS: TBooleanField
-      FieldName = 'FI_STATUS'
-    end
-    object SinventarioFI_UNIDAD: TStringField
-      FieldName = 'FI_UNIDAD'
-      Size = 30
-    end
-    object SinventarioFI_TIPOCODIGOBARRA: TSmallintField
-      FieldName = 'FI_TIPOCODIGOBARRA'
-    end
-    object SinventarioFI_IMAGEN: TGraphicField
-      FieldName = 'FI_IMAGEN'
-      BlobType = ftGraphic
-    end
-    object SinventarioFI_SUSTITUTO1: TStringField
-      FieldName = 'FI_SUSTITUTO1'
-      Size = 30
-    end
-    object SinventarioFI_SUSTITUTO2: TStringField
-      FieldName = 'FI_SUSTITUTO2'
-      Size = 30
-    end
-    object SinventarioFI_SUSTITUTO3: TStringField
-      FieldName = 'FI_SUSTITUTO3'
-      Size = 30
-    end
-    object SinventarioFI_REFERENCIA: TStringField
-      FieldName = 'FI_REFERENCIA'
-      Size = 30
-    end
-    object SinventarioFI_MARCA: TStringField
-      FieldName = 'FI_MARCA'
-      Size = 30
-    end
-    object SinventarioFI_MONEDA: TStringField
-      FieldName = 'FI_MONEDA'
-      Size = 30
-    end
-    object SinventarioFI_FACTORCONVERSION: TCurrencyField
-      FieldName = 'FI_FACTORCONVERSION'
-    end
-    object SinventarioFI_UNDEXISTENCIA2: TStringField
-      FieldName = 'FI_UNDEXISTENCIA2'
-      Size = 30
-    end
-    object SinventarioFI_PUESTO: TStringField
-      FieldName = 'FI_PUESTO'
-      Size = 30
-    end
-    object SinventarioFI_SUJETOACOMISION: TBooleanField
-      FieldName = 'FI_SUJETOACOMISION'
-    end
-    object SinventarioFI_MONTOCOMISION: TCurrencyField
-      FieldName = 'FI_MONTOCOMISION'
-    end
-    object SinventarioFI_CUENTASCONTABLES: TSmallintField
-      FieldName = 'FI_CUENTASCONTABLES'
-    end
-    object SinventarioFI_PESOPRODUCTO: TCurrencyField
-      FieldName = 'FI_PESOPRODUCTO'
-    end
-    object SinventarioFI_DIASDEREPOSICION: TSmallintField
-      FieldName = 'FI_DIASDEREPOSICION'
-    end
-    object SinventarioFI_PRESENTACION: TSmallintField
-      FieldName = 'FI_PRESENTACION'
-    end
-    object SinventarioFI_GARANTIA: TIntegerField
-      FieldName = 'FI_GARANTIA'
-    end
-    object SinventarioFI_SUSTITUTO4: TStringField
-      FieldName = 'FI_SUSTITUTO4'
-      Size = 30
-    end
-    object SinventarioFI_SUSTITUTO5: TStringField
-      FieldName = 'FI_SUSTITUTO5'
-      Size = 30
-    end
-    object SinventarioFI_MONTOCOMISIONP: TBooleanField
-      FieldName = 'FI_MONTOCOMISIONP'
-    end
-    object SinventarioFI_DEPOSITOS: TBooleanField
-      FieldName = 'FI_DEPOSITOS'
-    end
-    object SinventarioFI_OFERTAS: TBooleanField
-      FieldName = 'FI_OFERTAS'
-    end
-    object SinventarioFI_VENCIMIENTOS: TBooleanField
-      FieldName = 'FI_VENCIMIENTOS'
-    end
-    object SinventarioFI_CLASIFICACION: TIntegerField
-      FieldName = 'FI_CLASIFICACION'
-    end
-    object SinventarioFI_MANEJOINVENTARIO: TIntegerField
-      FieldName = 'FI_MANEJOINVENTARIO'
-    end
-    object SinventarioFI_SERIALES: TBooleanField
-      FieldName = 'FI_SERIALES'
-    end
-    object SinventarioFI_CREACION: TDateField
-      FieldName = 'FI_CREACION'
-    end
-    object SinventarioFI_INVENTARIOINICIALUNIDADES: TCurrencyField
-      FieldName = 'FI_INVENTARIOINICIALUNIDADES'
-    end
-    object SinventarioFI_INVENTARIOINICIALCOSTO: TCurrencyField
-      FieldName = 'FI_INVENTARIOINICIALCOSTO'
-    end
-    object SinventarioFI_CAPACIDAD: TCurrencyField
-      FieldName = 'FI_CAPACIDAD'
-    end
-    object SinventarioFI_EXISTDECIMAL: TBooleanField
-      FieldName = 'FI_EXISTDECIMAL'
-    end
-    object SinventarioFI_COMPUESTOSERIALES: TBooleanField
-      FieldName = 'FI_COMPUESTOSERIALES'
-    end
-    object SinventarioFI_VENDEDORFIJO: TStringField
-      FieldName = 'FI_VENDEDORFIJO'
-      Size = 30
-    end
-    object SinventarioFI_VENDEDORFIJOACTIVO: TBooleanField
-      FieldName = 'FI_VENDEDORFIJOACTIVO'
-    end
-    object SinventarioFI_MODELO: TStringField
-      FieldName = 'FI_MODELO'
-      Size = 50
-    end
-    object SinventarioFI_SUBCATEGORIA: TStringField
-      FieldName = 'FI_SUBCATEGORIA'
-      Size = 50
-    end
-    object SinventarioFI_PESOAFECTACOSTO: TBooleanField
-      FieldName = 'FI_PESOAFECTACOSTO'
-    end
-    object SinventarioFI_IMPRESORA: TStringField
-      FieldName = 'FI_IMPRESORA'
-      Size = 50
-    end
-    object SinventarioBASE_AUTOINCREMENT: TAutoIncField
-      FieldName = 'BASE_AUTOINCREMENT'
-    end
-    object SinventarioFI_ZEXTRA1: TCurrencyField
-      FieldName = 'FI_ZEXTRA1'
-    end
-    object SinventarioFI_ZEXTRA2: TCurrencyField
-      FieldName = 'FI_ZEXTRA2'
-    end
-    object SinventarioFI_ZEXTRA3: TCurrencyField
-      FieldName = 'FI_ZEXTRA3'
-    end
-    object SinventarioFI_ZEXTRA4: TCurrencyField
-      FieldName = 'FI_ZEXTRA4'
-    end
-    object SinventarioFI_ZEXTRA5: TCurrencyField
-      FieldName = 'FI_ZEXTRA5'
-    end
-    object SinventarioFI_ZEXTRA6: TCurrencyField
-      FieldName = 'FI_ZEXTRA6'
-    end
-    object SinventarioFI_ZEXTRA1VENTA: TBooleanField
-      FieldName = 'FI_ZEXTRA1VENTA'
-    end
-    object SinventarioFI_ZEXTRA2VENTA: TBooleanField
-      FieldName = 'FI_ZEXTRA2VENTA'
-    end
-    object SinventarioFI_ZEXTRA3VENTA: TBooleanField
-      FieldName = 'FI_ZEXTRA3VENTA'
-    end
-    object SinventarioFI_ZEXTRA4VENTA: TBooleanField
-      FieldName = 'FI_ZEXTRA4VENTA'
-    end
-    object SinventarioFI_ZEXTRA5VENTA: TBooleanField
-      FieldName = 'FI_ZEXTRA5VENTA'
-    end
-    object SinventarioFI_ZEXTRA6VENTA: TBooleanField
-      FieldName = 'FI_ZEXTRA6VENTA'
-    end
-    object SinventarioFI_ZEXTRA1VENTAMOD: TBooleanField
-      FieldName = 'FI_ZEXTRA1VENTAMOD'
-    end
-    object SinventarioFI_ZEXTRA2VENTAMOD: TBooleanField
-      FieldName = 'FI_ZEXTRA2VENTAMOD'
-    end
-    object SinventarioFI_ZEXTRA3VENTAMOD: TBooleanField
-      FieldName = 'FI_ZEXTRA3VENTAMOD'
-    end
-    object SinventarioFI_ZEXTRA4VENTAMOD: TBooleanField
-      FieldName = 'FI_ZEXTRA4VENTAMOD'
-    end
-    object SinventarioFI_ZEXTRA5VENTAMOD: TBooleanField
-      FieldName = 'FI_ZEXTRA5VENTAMOD'
-    end
-    object SinventarioFI_ZEXTRA6VENTAMOD: TBooleanField
-      FieldName = 'FI_ZEXTRA6VENTAMOD'
-    end
-    object SinventarioFI_INTERNET: TBooleanField
-      FieldName = 'FI_INTERNET'
-    end
-    object SinventarioFI_BALANZA: TBooleanField
-      FieldName = 'FI_BALANZA'
-    end
-    object SinventarioFI_CODIGOBARRA: TBooleanField
-      FieldName = 'FI_CODIGOBARRA'
-    end
-    object SinventarioFI_PRECIOLISTA: TBooleanField
-      FieldName = 'FI_PRECIOLISTA'
-    end
-    object SinventarioFI_APROVECHAPORC: TCurrencyField
-      FieldName = 'FI_APROVECHAPORC'
-    end
-    object SinventarioFI_ARANCEL: TStringField
-      FieldName = 'FI_ARANCEL'
-      Size = 30
-    end
-    object SinventarioFI_POSENTREGA: TBooleanField
-      FieldName = 'FI_POSENTREGA'
-    end
   end
   object SPAMovimientoTemp: TDBISAMTable
     DatabaseName = 'dbA2'
@@ -1147,14 +913,14 @@ object dmEC: TdmEC
       Origin = 'SPAMovimientoTemp.Fecha'
     end
     object SPAMovimientoTempDocumento: TStringField
+      DisplayWidth = 20
       FieldName = 'Documento'
       Origin = 'SPAMovimientoTemp.Documento'
-      Size = 9
     end
     object SPAMovimientoTempDocumentoRef: TStringField
+      DisplayWidth = 20
       FieldName = 'DocumentoRef'
       Origin = 'SPAMovimientoTemp.DocumentoRef'
-      Size = 9
     end
     object SPAMovimientoTempNit: TStringField
       FieldName = 'Nit'
@@ -1186,6 +952,13 @@ object dmEC: TdmEC
     object SPAMovimientoTempNitNombre: TStringField
       FieldName = 'NitNombre'
       Size = 50
+    end
+    object SPAMovimientoTempPlazo: TIntegerField
+      FieldName = 'Plazo'
+    end
+    object SPAMovimientoTempTransaccionBancaria: TStringField
+      FieldName = 'TransaccionBancaria'
+      Size = 3
     end
   end
   object qrCodificacionGeneral: TDBISAMQuery
@@ -1243,6 +1016,10 @@ object dmEC: TdmEC
     object qrCodificacionGeneralTipoAsiento: TSmallintField
       FieldName = 'TipoAsiento'
       Origin = 'SPAConfiguracionContableMov.TipoAsiento'
+    end
+    object qrCodificacionGeneralSubCentro: TStringField
+      FieldName = 'SubCentro'
+      Size = 10
     end
   end
   object qrConsulta: TDBISAMQuery
@@ -1415,10 +1192,18 @@ object dmEC: TdmEC
     end
     object SclasificacionFCL_DESCRIPCION: TMemoField
       FieldName = 'FCL_DESCRIPCION'
+      Visible = False
       BlobType = ftMemo
     end
     object SclasificacionFCL_TIPO: TIntegerField
       FieldName = 'FCL_TIPO'
+    end
+    object SclasificacionCuenta: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Cuenta'
+      OnGetText = SclasificacionCuentaGetText
+      Size = 40
+      Calculated = True
     end
   end
   object qrCompras: TDBISAMQuery
@@ -1445,6 +1230,7 @@ object dmEC: TdmEC
       '  SOperacionInv.FTI_MONTOPAGADO AS MontoPagado,'
       '  SOperacionInv.FTI_DESCUENTO1MONTO as Descuento1,'
       '  SOperacionInv.FTI_DESCUENTO2MONTO as Descuento2,'
+      '  SOperacionInv.FTI_DIASVENCIMIENTO Plazo,'
       '  SDetalleCompra.FDI_CANTIDAD AS Cantidad,'
       '  SDetalleCompra.FDI_PRECIOCONDESCUENTO AS Costo,'
       
@@ -1461,7 +1247,8 @@ object dmEC: TdmEC
         '2 AS TotalImpuesto2Item,'
       '  :IdAgrupacion AS IdAgrupacion,'
       '  SOperacionInv.FTI_CLASIFICACION as IdClasificacion,'
-      '  SOperacionInv.FTI_AUTOINCREMENT AS IdDocumento'
+      '  SOperacionInv.FTI_AUTOINCREMENT AS IdDocumento,'
+      '  0 CostoVenta'
       'FROM'
       ' SDetalleCompra'
       
@@ -1531,6 +1318,8 @@ object dmEC: TdmEC
       '  SPAMovimientoTemp.Tipo,'
       '  SPAMovimientoTemp.CCosto,'
       '  SPAMovimientoTemp.NitNombre,'
+      '  SPAMovimientoTemp.Plazo,'
+      '  SPAMovimientoTemp.TransaccionBancaria,'
       '  SUM(SPAMovimientoTemp.Valor) AS Valor,'
       '  SUM(SPAMovimientoTemp.Base) AS Base'
       'FROM'
@@ -1561,7 +1350,9 @@ object dmEC: TdmEC
       '  SPAMovimientoTemp.Detalle,'
       '  SPAMovimientoTemp.Tipo,'
       '  SPAMovimientoTemp.CCosto,'
-      '  SPAMovimientoTemp.NitNombre')
+      '  SPAMovimientoTemp.NitNombre,'
+      '  SPAMovimientoTemp.Plazo,'
+      '  SPAMovimientoTemp.TransaccionBancaria')
     Params = <
       item
         DataType = ftUnknown
@@ -1571,7 +1362,7 @@ object dmEC: TdmEC
         DataType = ftUnknown
         Name = 'IdDocumento'
       end>
-    Left = 120
+    Left = 224
     Top = 424
     ParamData = <
       item
@@ -1601,5 +1392,98 @@ object dmEC: TdmEC
     ScreenPosition = poOwnerFormCenter
     Left = 600
     Top = 72
+  end
+  object qrVentas: TDBISAMQuery
+    DatabaseName = 'dbA2'
+    EngineVersion = '4.29 Build 1'
+    SQL.Strings = (
+      'SELECT'
+      '  SOperacionInv.FTI_DOCUMENTO AS Documento,'
+      '  SOperacionInv.FTI_FECHAEMISION AS Fecha,'
+      '  SOperacionInv.FTI_TOTALCOSTO AS TotalCosto,'
+      '  SOperacionInv.FTI_TOTALCOSTOREAL AS TotalCostoReal,'
+      '  SOperacionInv.FTI_TOTALBRUTO AS TotalBruto,'
+      '  SOperacionInv.FTI_DESCUENTO1MONTO AS Descuento1,'
+      '  SOperacionInv.FTI_DESCUENTO2MONTO AS Descuento2,'
+      '  SOperacionInv.FTI_BASEIMPONIBLE AS BaseImpuesto,'
+      '  SOperacionInv.FTI_IMPUESTO1MONTO AS Impuesto,'
+      '  SOperacionInv.FTI_TOTALNETO AS TotalNeto,'
+      '  SOperacionInv.FTI_NITCLIENTE AS Nit,'
+      '  SOperacionInv.FTI_PERSONACONTACTO AS Contacto,'
+      '  SOperacionInv.FTI_TELEFONOCONTACTO AS Telefono,'
+      '  SOperacionInv.FTI_SALDOOPERACION AS SaldoOperacion,'
+      '  SOperacionInv.FTI_FORMADEPAGO AS FormaPago,'
+      '  SOperacionInv.FTI_FLETEMONEDA AS Flete,'
+      '  SOperacionInv.FTI_MONTOPAGADO AS MontoPagado,'
+      '  SOperacionInv.FTI_DESCUENTO1MONTO AS Descuento1,'
+      '  SOperacionInv.FTI_DESCUENTO2MONTO AS Descuento2,'
+      '  SOperacionInv.FTI_CLASIFICACION AS IdClasificacion,'
+      '  SOperacionInv.FTI_AUTOINCREMENT AS IdDocumento,'
+      '  SOperacionInv.FTI_CTOCOSTO AS CCosto,'
+      '  SOperacionInv.FTI_DIASVENCIMIENTO Plazo,'
+      '  :IdAgrupacion AS IdAgrupacion,'
+      '  SDetalleVenta.FDI_CANTIDAD AS Cantidad,'
+      '  SDetalleVenta.FDI_PRECIOCONDESCUENTO AS Costo,'
+      
+        '  SDetalleVenta.FDI_CANTIDAD * SDetalleVenta.FDI_PRECIOCONDESCUE' +
+        'NTO AS TotalItem,'
+      '  SDetalleVenta.FDI_MONTOIMPUESTO1 AS Impuesto1,'
+      
+        '  SDetalleVenta.FDI_CANTIDAD * SDetalleVenta.FDI_MONTOIMPUESTO1 ' +
+        'AS TotalImpuestoItem,'
+      '  SDetalleVenta.FDI_MONTOIMPUESTO2 AS Impuesto2,'
+      
+        '  SDetalleVenta.FDI_CANTIDAD * SDetalleVenta.FDI_MONTOIMPUESTO2 ' +
+        'AS TotalImpuesto2Item,'
+      '  SDetalleVenta.FDI_COSTODEVENTAS CostoVenta'
+      'FROM'
+      ' SOperacionInv'
+      
+        ' LEFT OUTER JOIN SPAMovimientoGenerado ON (SOperacionInv.FTI_AUT' +
+        'OINCREMENT=SPAMovimientoGenerado.IdDocumento)'
+      
+        '  AND (SOperacionInv.FTI_TIPO=SPAMovimientoGenerado.IdTipoOperac' +
+        'ion)'
+      
+        ' INNER JOIN SDetalleVenta ON (SOperacionInv.FTI_AUTOINCREMENT=SD' +
+        'etalleVenta.FDI_OPERACION_AUTOINCREMENT)'
+      
+        ' INNER JOIN Sinventario ON (Sinventario.FI_CODIGO=SDetalleVenta.' +
+        'FDI_CODIGO)'
+      'WHERE'
+      '  (SOperacionInv.FTI_STATUS = 1) AND'
+      '  (SPAMovimientoGenerado.IdMovimientoGenerado IS NULL) AND'
+      '  (SOperacionInv.FTI_TIPO = :IdTipoOperacion)    AND'
+      '  (SOperacionInv.FTI_FECHAEMISION <= :FechaCorte)')
+    Params = <
+      item
+        DataType = ftString
+        Name = 'IdAgrupacion'
+        Value = 'Sinventario.FI_SUSTITUTO4'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdTipoOperacion'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FechaCorte'
+      end>
+    Left = 104
+    Top = 424
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'IdAgrupacion'
+        Value = 'Sinventario.FI_SUSTITUTO4'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'IdTipoOperacion'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'FechaCorte'
+      end>
   end
 end

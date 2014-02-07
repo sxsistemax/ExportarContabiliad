@@ -56,13 +56,8 @@ begin
   begin
     eArchivo.Text := odArchivo.FileName;
 
-    Case dmEC.SPAConfiguracionExportarContabilidadModuloAExportar.Value of
-      1 : begin
-            ImportarCuentasContaI;
-          end;
-      2 : begin
-            ShowMessage('Imporatacioón no implementada para el modulo Sistema UNO');
-          end;
+    Case tModulos(dmEC.SPAConfiguracionExportarContabilidadModuloAExportar.Value) of
+      moContai : ImportarCuentasContaI;
       else ShowMessage('Importación no implementada para el módulo.');
     End;
 
@@ -153,12 +148,9 @@ begin
   begin
     eArchivo.Text := odArchivo.FileName;
 
-    Case dmEC.SPAConfiguracionExportarContabilidadModuloAExportar.Value of
-      1 : begin
+    Case tModulos(dmEC.SPAConfiguracionExportarContabilidadModuloAExportar.Value) of
+      moContai : begin
             CargarCuentasContaI;
-          end;
-      2 : begin
-            ShowMessage('Imporatacioón no implementada para el modulo Sistema UNO');
           end;
       else ShowMessage('Importación no implementada para el módulo.');
     End;

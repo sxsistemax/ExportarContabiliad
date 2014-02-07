@@ -17,8 +17,9 @@ uses
   uConsecutivos in 'uConsecutivos.pas' {frConsecutivos},
   uCentrosCuentas in 'uCentrosCuentas.pas' {frCentrosCuentas},
   uCuentasClasificaciones in 'uCuentasClasificaciones.pas' {frCuentasClasifiaciones},
+  uPendientesDeExportar in 'uPendientesDeExportar.pas' {frPendientesDeExportar},
   MantenimientoSPA in 'C:\Vcl\Comun\MantenimientoSPA.pas' {fmBaseMantenimiento},
-  uPendientesDeExportar in 'uPendientesDeExportar.pas' {frPendientesDeExportar};
+  uClasificaciones in 'uClasificaciones.pas' {fmClasificaciones};
 
 {$R *.res}
 

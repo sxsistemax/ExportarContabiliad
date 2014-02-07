@@ -11,7 +11,6 @@ inherited frAgrupacionesCuentas: TfrAgrupacionesCuentas
   end
   inherited PageControl1: TPageControl
     Height = 294
-    ActivePage = tsRegistro
     ExplicitHeight = 294
     inherited tsListado: TTabSheet
       ExplicitHeight = 263

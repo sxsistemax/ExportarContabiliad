@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, MantenimientoSPA, DBCtrls, Mask, Buttons, DB, JvComponentBase,
   JvEnterTab, ExtCtrls, StdCtrls, JvExStdCtrls, JvEdit, JvDBSearchEdit, Grids,
-  DBGrids, ComCtrls, dbisamtb;
+  DBGrids, ComCtrls, dbisamtb, JvFormPlacement, JvAppStorage,
+  JvAppRegistryStorage;
 
 type
   TfrCuentasClasifiaciones = class(TfmBaseMantenimiento)

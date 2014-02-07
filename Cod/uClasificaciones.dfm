@@ -1,59 +1,102 @@
-inherited frCuentasClasifiaciones: TfrCuentasClasifiaciones
-  Caption = 'Cuentas x Clasifiaciones'
-  ClientHeight = 258
-  ExplicitWidth = 633
-  ExplicitHeight = 297
+inherited fmClasificaciones: TfmClasificaciones
+  Caption = 'Clasifiaciones'
+  ClientHeight = 257
+  ClientWidth = 571
+  ExplicitWidth = 587
+  ExplicitHeight = 296
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Top = 226
-    ExplicitTop = 226
+    Top = 225
+    Width = 571
+    ExplicitTop = 225
+    ExplicitWidth = 571
+    inherited Panel2: TPanel
+      Left = 239
+      ExplicitLeft = 239
+    end
   end
   inherited PageControl1: TPageControl
-    Height = 226
+    Width = 571
+    Height = 225
     ActivePage = tsRegistro
-    ExplicitHeight = 226
+    ExplicitWidth = 571
+    ExplicitHeight = 225
     inherited tsListado: TTabSheet
-      ExplicitHeight = 195
+      ExplicitWidth = 563
+      ExplicitHeight = 194
       inherited dgGrid: TDBGrid
-        Height = 126
+        Width = 563
+        Height = 125
+      end
+      inherited pBuscar: TPanel
+        Width = 563
+        ExplicitWidth = 563
+      end
+      inherited pFiltro: TPanel
+        Width = 563
+        ExplicitWidth = 563
       end
     end
     inherited tsRegistro: TTabSheet
       ExplicitLeft = 4
       ExplicitTop = 27
-      ExplicitWidth = 609
-      ExplicitHeight = 195
+      ExplicitWidth = 563
+      ExplicitHeight = 194
+      inherited Bevel1: TBevel
+        Width = 563
+        ExplicitWidth = 563
+      end
       inherited Bevel2: TBevel
-        Height = 191
-        ExplicitHeight = 191
+        Height = 190
+        ExplicitHeight = 283
       end
       inherited Bevel3: TBevel
-        Top = 193
-        ExplicitTop = 193
+        Top = 192
+        Width = 563
+        ExplicitTop = 285
+        ExplicitWidth = 563
       end
       inherited Bevel4: TBevel
-        Height = 191
-        ExplicitHeight = 191
+        Left = 561
+        Height = 190
+        ExplicitLeft = 561
+        ExplicitHeight = 283
+      end
+      object Label1: TLabel
+        Left = 24
+        Top = 16
+        Width = 36
+        Height = 13
+        Caption = 'Codigo:'
+        FocusControl = DBEdit1
+      end
+      object Label2: TLabel
+        Left = 24
+        Top = 56
+        Width = 37
+        Height = 13
+        Caption = 'Nombre'
+        FocusControl = DBEdit2
       end
       object Label3: TLabel
-        Left = 12
-        Top = 8
-        Width = 64
+        Left = 24
+        Top = 96
+        Width = 34
         Height = 13
-        Caption = 'Origen Monto'
+        Caption = 'Cuenta'
       end
       object Label4: TLabel
-        Left = 12
-        Top = 88
-        Width = 74
+        Left = 24
+        Top = 139
+        Width = 21
         Height = 13
-        Caption = 'Cuenta General'
-        FocusControl = eCuenta
+        Caption = 'Tipo'
+        FocusControl = DBEdit3
       end
       object SpeedButton1: TSpeedButton
-        Left = 195
-        Top = 106
+        Left = 219
+        Top = 111
         Width = 23
         Height = 22
         Glyph.Data = {
@@ -85,74 +128,41 @@ inherited frCuentasClasifiaciones: TfrCuentasClasifiaciones
           FFFFFFFFFF7B797773716F6D6B6969666563605FFFFFFFFFFFFF}
         OnClick = SpeedButton1Click
       end
-      object DBText1: TDBText
-        Left = 224
-        Top = 110
-        Width = 333
-        Height = 17
-        DataField = 'NombreCuenta'
-        DataSource = dsDataSource
-      end
-      object Label1: TLabel
-        Left = 12
-        Top = 48
-        Width = 59
-        Height = 13
-        Caption = 'Clasificaci'#243'n'
-      end
-      object Label2: TLabel
-        Left = 12
-        Top = 134
-        Width = 50
-        Height = 13
-        Caption = 'SubCentro'
-        FocusControl = eSubCentro
-      end
-      object eCuenta: TDBEdit
-        Left = 12
-        Top = 107
-        Width = 177
+      object DBEdit1: TDBEdit
+        Left = 24
+        Top = 32
+        Width = 134
         Height = 21
-        DataField = 'Cuenta'
+        DataField = 'FCL_CODIGO'
         DataSource = dsDataSource
         TabOrder = 0
       end
-      object eOrigenMonto: TDBLookupComboBox
-        Left = 12
-        Top = 21
-        Width = 253
+      object DBEdit2: TDBEdit
+        Left = 24
+        Top = 72
+        Width = 524
         Height = 21
-        DataField = 'OrigenMonto'
+        DataField = 'FCL_NOMBRE'
         DataSource = dsDataSource
         TabOrder = 1
       end
-      object eIdConfiguracionContable: TDBEdit
-        Left = 349
-        Top = 21
-        Width = 121
+      object eCuenta: TDBEdit
+        Left = 24
+        Top = 112
+        Width = 185
         Height = 21
-        DataField = 'IdConfiguracionContable'
+        DataField = 'FCL_DESCRIPCION'
         DataSource = dsDataSource
         TabOrder = 2
-        Visible = False
       end
-      object eClasificacion: TDBLookupComboBox
-        Left = 12
-        Top = 61
-        Width = 253
+      object DBEdit3: TDBEdit
+        Left = 24
+        Top = 155
+        Width = 134
         Height = 21
-        DataField = 'Clasificacion'
+        DataField = 'FCL_TIPO'
         DataSource = dsDataSource
         TabOrder = 3
-      end
-      object eSubCentro: TDBEdit
-        Left = 12
-        Top = 150
-        Width = 199
-        Height = 21
-        DataField = 'SubCentro'
-        DataSource = dsDataSource
-        TabOrder = 4
       end
     end
   end

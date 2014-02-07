@@ -38,6 +38,10 @@
     <Transaction>2013/12/09 17:47:45.771.dfm,C:\Prj\ExportarContabiliad\Cod\uCuentasAgrupaciones.dfm=C:\Prj\ExportarContabiliad\Cod\uCuentasClasificaciones.dfm</Transaction>
     <Transaction>2014/01/22 07:56:29.596.pas,C:\Prj\ExportarContabiliad\Cod\Unit1.pas=C:\Prj\ExportarContabiliad\Cod\uPendientesDeExportar.pas</Transaction>
     <Transaction>2014/01/22 07:56:29.596.dfm,C:\Prj\ExportarContabiliad\Cod\Unit1.dfm=C:\Prj\ExportarContabiliad\Cod\uPendientesDeExportar.dfm</Transaction>
+    <Transaction>2014/02/02 18:54:19.759.pas,C:\Prj\ExportarContabiliad\Cod\Unit1.pas=C:\Prj\ExportarContabiliad\Cod\frClasificaciones.pas</Transaction>
+    <Transaction>2014/02/02 18:54:19.759.dfm,C:\Prj\ExportarContabiliad\Cod\Unit1.dfm=C:\Prj\ExportarContabiliad\Cod\frClasificaciones.dfm</Transaction>
+    <Transaction>2014/02/02 18:56:11.977.pas,C:\Prj\ExportarContabiliad\Cod\frClasificaciones.pas=C:\Prj\ExportarContabiliad\Cod\uClasificaciones.pas</Transaction>
+    <Transaction>2014/02/02 18:56:11.977.dfm,C:\Prj\ExportarContabiliad\Cod\frClasificaciones.dfm=C:\Prj\ExportarContabiliad\Cod\uClasificaciones.dfm</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="C:\Prj"/>
@@ -111,5 +115,7 @@
     <File Path="uPrincipal.dfm"/>
     <File Path="uPendientesDeExportar.pas"/>
     <File Path="uPendientesDeExportar.dfm"/>
+    <File Path="uClasificaciones.pas"/>
+    <File Path="uClasificaciones.dfm"/>
   </ProjectSortOrder>
 </BorlandProject>
