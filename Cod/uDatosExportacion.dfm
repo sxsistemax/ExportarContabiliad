@@ -1248,7 +1248,8 @@ object dmEC: TdmEC
       '  :IdAgrupacion AS IdAgrupacion,'
       '  SOperacionInv.FTI_CLASIFICACION as IdClasificacion,'
       '  SOperacionInv.FTI_AUTOINCREMENT AS IdDocumento,'
-      '  0 CostoVenta'
+      '  0 CostoVenta,'
+      '  0 Propina'
       'FROM'
       ' SDetalleCompra'
       
@@ -1435,7 +1436,8 @@ object dmEC: TdmEC
       
         '  SDetalleVenta.FDI_CANTIDAD * SDetalleVenta.FDI_MONTOIMPUESTO2 ' +
         'AS TotalImpuesto2Item,'
-      '  SDetalleVenta.FDI_COSTODEVENTAS CostoVenta'
+      '  SDetalleVenta.FDI_COSTODEVENTAS CostoVenta,'
+      '  SOperacionInv.FTI_FINICIAL Propina'
       'FROM'
       ' SOperacionInv'
       

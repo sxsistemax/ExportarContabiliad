@@ -13,11 +13,11 @@ type
   tTiposComprobantes = (tcNinguno, tcInventario, tcCompras, tcVentas,
     tcCuentasxPagar, tcCuentasxCobrar);
 
-  tOrigenMonto = (cmNinguno, omValorBruto, omValorGrabado, omValorExento,
+  tOrigenMonto = (omNinguno, omValorBruto, omValorGrabado, omValorExento,
     omDescuento1, omDescuento2, omFleteCompra, omIva1, omIva2,
     omSaldoOperacion, omValorCancelado, omDiferenciaAFavor,
     omDiferenciaEnContra, omCree, omRetencionEnFormasPago, omCreePorPagar,
-    omCMV, omInventario);
+    omCMV, omInventario, omPropina);
 
   tTipoConsultas = (tcBorrarCuentas, tcMovimientoTemporal,
     tcBorrarMovimientoTemporal);
@@ -461,6 +461,9 @@ begin
     tbOrigenMontoIdOrigenMonto.Value := Integer( omInventario);
     tbOrigenMontoOrigenMonto.Value := 'Inventario Mercancia';
 
+    tbOrigenMonto.Append;
+    tbOrigenMontoIdOrigenMonto.Value := Integer( omPropina);
+    tbOrigenMontoOrigenMonto.Value := 'Propina';
 
     tbOrigenMonto.Post;
 
@@ -1258,7 +1261,7 @@ var
   ProcesarSaldo, ProcesarTotal, ProcesarFlete, ProcesarDescuento1,
   ProcesarDescuento2, ProcesarCree, ProcesarAutoRetencionCree,
   ProcesarCreePorPagar, ProcesarRetenciones,
-  ProcesrSaldoAFavor, ProcesarSaldoEnContra : boolean;
+  ProcesrSaldoAFavor, ProcesarSaldoEnContra, ProcesarPropina : boolean;
   SubCentroCosto : string;
 begin
   PonerMensaje('Iniciando consulta ...');
@@ -1299,6 +1302,7 @@ begin
       ProcesarRetenciones := true;
       ProcesrSaldoAFavor := true;
       ProcesarSaldoEnContra := true;
+      ProcesarPropina := true;
       IdDocumento := qrDocumentosInventario.FieldByName('IdDocumento').AsInteger;
       Documento := qrDocumentosInventario.FieldByName('Documento').AsString;
       PonerMensaje('Documento ' + Documento);
@@ -1420,7 +1424,30 @@ begin
                     qrDocumentosInventario.FieldByName('SaldoOperacion').AsFloat, 0,
                     VarToStr(qrDocumentosInventario.FieldByName('CCosto').AsString) + SubCentroCosto,
                     qrDocumentosInventario.FieldByName('Contacto').AsString,
-                qrDocumentosInventario.FieldByName('Plazo').AsInteger);
+                  qrDocumentosInventario.FieldByName('Plazo').AsInteger);
+                end;
+              end;
+           omPropina:
+              if ProcesarPropina then
+              begin
+                ProcesarPropina := False;
+
+                // Guarda saldo operacion
+                if qrDocumentosInventario.FieldByName('Propina').AsFloat <> 0 then
+                begin
+                  InsertarRegistroTemporal(True, IdConfiguracionContable, IdTipoOperacion,
+                     IdDocumento, qrCodificacionGeneralIdOrigenMonto.AsInteger,
+                    Cuenta, qrCodificacionGeneralComprobante.AsString,
+                    qrDocumentosInventario.FieldByName('Fecha').AsDateTime,
+                    Consecutivo,
+                    qrDocumentosInventario.FieldByName('Documento').AsString,
+                    qrDocumentosInventario.FieldByName('Nit').AsString,
+                    qrCodificacionGeneralDetalle.AsString + ' ' + qrDocumentosInventario.FieldByName('Documento').AsString,
+                    qrCodificacionGeneralTipoAsiento.AsInteger,
+                    qrDocumentosInventario.FieldByName('Propina').AsFloat, 0,
+                    VarToStr(qrDocumentosInventario.FieldByName('CCosto').AsString) + SubCentroCosto,
+                    qrDocumentosInventario.FieldByName('Contacto').AsString,
+                  qrDocumentosInventario.FieldByName('Plazo').AsInteger);
                 end;
               end;
             omValorCancelado:
@@ -1442,12 +1469,13 @@ begin
                   begin
                     case tFormasPago(dmAdministrativo.tbFormaPagoTipoPago.AsInteger) of
                       fpEfectivo, fpCheque, fpTarjetaDebito, fpTarjetaCredito:
-                        if ( dmAdministrativo.tbFormaPagoMontoPago.ASFloat > 0) and
-                           (dmAdministrativo.tbFormaPagoBancoTarjeta.AsString <> '') then
-                        begin                          
+                        if ( dmAdministrativo.tbFormaPagoMontoPago.ASFloat > 0) then
+                        begin
                           // Busca la cuenta para la forma de pago
-                          Cuenta := BuscarCuentaFormaPago( tFormasPago(dmAdministrativo.tbFormaPagoTipoPago.AsInteger),
+                          if dmAdministrativo.tbFormaPagoBancoTarjeta.AsString <> '' then
+                            Cuenta := BuscarCuentaFormaPago( tFormasPago(dmAdministrativo.tbFormaPagoTipoPago.AsInteger),
                                       dmAdministrativo.tbFormaPagoBancoTarjeta.AsString, Cuenta);
+
                           InsertarRegistroTemporal(False, IdConfiguracionContable, IdTipoOperacion,
                              IdDocumento,
                             qrCodificacionGeneralIdOrigenMonto.AsInteger, Cuenta,
